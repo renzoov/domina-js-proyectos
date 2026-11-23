@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T14:00:00Z",
+  "title": "Design System: Generador de paletas",
+  "extensions": {
+    "colorMeta": {
+      "mesa": {
+        "role": "neutral",
+        "displayName": "Mesa grafito",
+        "canonical": "#1c1d20",
+        "tonalRamp": [
+          "#0a0a0c",
+          "#131416",
+          "#1c1d20",
+          "#26272b",
+          "#3d3e44",
+          "#6b6c74",
+          "#a3a29c",
+          "#ecebe6"
+        ]
+      },
+      "mesa-alta": {
+        "role": "neutral",
+        "displayName": "Mesa alta",
+        "canonical": "#26272b"
+      },
+      "linea": {
+        "role": "neutral",
+        "displayName": "Línea",
+        "canonical": "#3d3e44"
+      },
+      "papel": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#f4f2ec",
+        "tonalRamp": [
+          "#111111",
+          "#2e2d2a",
+          "#5b5a55",
+          "#87857f",
+          "#b1aea6",
+          "#d6d3cb",
+          "#e9e6df",
+          "#f4f2ec"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta negra",
+        "canonical": "#111111"
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Tinta suave",
+        "canonical": "#5b5a55"
+      },
+      "texto": {
+        "role": "neutral",
+        "displayName": "Texto",
+        "canonical": "#ecebe6"
+      },
+      "texto-suave": {
+        "role": "neutral",
+        "displayName": "Texto suave",
+        "canonical": "#a3a29c"
+      },
+      "magenta": {
+        "role": "primary",
+        "displayName": "Magenta de proceso",
+        "canonical": "#e4007c",
+        "tonalRamp": [
+          "#3d0021",
+          "#6b003a",
+          "#9a0054",
+          "#c8006d",
+          "#e4007c",
+          "#ff5fae",
+          "#ff9fcd",
+          "#ffd9ea"
+        ]
+      },
+      "magenta-hondo": {
+        "role": "primary",
+        "displayName": "Magenta hondo",
+        "canonical": "#c8006d"
+      },
+      "magenta-claro": {
+        "role": "primary",
+        "displayName": "Magenta claro (foco)",
+        "canonical": "#ff5fae"
+      }
+    },
+    "typographyMeta": {
+      "hex": {
+        "displayName": "Hex",
+        "purpose": "El código hexadecimal grande de cada chip, cifras tabulares."
+      },
+      "titulo": {
+        "displayName": "Título",
+        "purpose": "Título del diálogo, en mayúsculas."
+      },
+      "marca": {
+        "displayName": "Marca",
+        "purpose": "Nombre de la app en la barra, en mayúsculas."
+      },
+      "datos": {
+        "displayName": "Datos",
+        "purpose": "RGB y HSL en la ficha, cifras tabulares."
+      },
+      "rotulo": {
+        "displayName": "Rótulo",
+        "purpose": "HEX, RGB, HSL, N.º 01 y teclas; tracking 0.14em."
+      },
+      "cuerpo": {
+        "displayName": "Cuerpo",
+        "purpose": "Texto base de la página."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Botones, armonías y acciones."
+      }
+    },
+    "shadows": [
+      {
+        "name": "chip",
+        "value": "0 2px 4px rgba(0, 0, 0, 0.25), 0 12px 28px rgba(0, 0, 0, 0.35)",
+        "purpose": "Los chips de papel sobre la mesa."
+      },
+      {
+        "name": "aviso",
+        "value": "0 10px 30px rgba(0, 0, 0, 0.45)",
+        "purpose": "El aviso corto de «Copiado»."
+      },
+      {
+        "name": "dialogo",
+        "value": "0 24px 60px rgba(0, 0, 0, 0.5)",
+        "purpose": "El diálogo de exportar; fondo rgba(10, 10, 12, 0.7)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "salida",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Curva única de transiciones y del abanico."
+      },
+      {
+        "name": "hover",
+        "value": "150ms",
+        "purpose": "Bordes y fondos de botones, armonías y acciones."
+      },
+      {
+        "name": "color-tinta",
+        "value": "350ms",
+        "purpose": "Cambio de color de la tinta, solo bajo body.listo (no en la primera pintada)."
+      },
+      {
+        "name": "color-tiras",
+        "value": "300ms",
+        "purpose": "Las cinco tiras de la marca, solo bajo body.listo (no en la primera pintada)."
+      },
+      {
+        "name": "aviso",
+        "value": "opacity 200ms, translate 300ms",
+        "purpose": "El aviso entra subiendo 12px; se va a los 1800ms."
+      },
+      {
+        "name": "abanico",
+        "value": "560ms, escalonado 45ms; giro (i - 2) * 6deg (3deg el central y en filas), translateY 10px, opacidad 0.6 a 1; pivote 50% 130% (en filas -30% 50%)",
+        "purpose": "Al generar, solo los chips libres se abren desde la base. No corre con prefers-reduced-motion."
+      },
+      {
+        "name": "reducido",
+        "value": "transition-duration: 0.01ms",
+        "purpose": "prefers-reduced-motion: reduce anula toda transición."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "chip-angosto",
+        "value": "container max-width 250px"
+      },
+      {
+        "name": "compacto",
+        "value": "420px"
+      },
+      {
+        "name": "filas",
+        "value": "820px"
+      },
+      {
+        "name": "armonias-en-fila",
+        "value": "1360px"
+      },
+      {
+        "name": "escritorio-bajo",
+        "value": "min-width 821px and max-height 700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "boton-principal",
+      "description": "La acción principal de la superficie; uno por superficie.",
+      "html": "<button class=\"ds-boton ds-boton--principal\"><svg viewBox=\"0 0 24 24\"><path d=\"M4 12a8 8 0 0 1 14-5.3L20 9\"/><path d=\"M20 4v5h-5\"/><path d=\"M20 12a8 8 0 0 1-14 5.3L4 15\"/><path d=\"M4 20v-5h5\"/></svg><span>Generar</span></button>",
+      "css": ".ds-boton { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; font: 600 14px/1 \"Barlow\", system-ui, sans-serif; color: #ecebe6; background: #26272b; border: 1px solid #3d3e44; border-radius: 6px; cursor: pointer; transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1), background-color 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-boton svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-boton:focus-visible { outline: 3px solid #ff5fae; outline-offset: 2px; } .ds-boton--principal { background: #e4007c; border-color: #e4007c; color: #fff; } .ds-boton--principal:hover { background: #c8006d; border-color: #c8006d; }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "boton",
+      "description": "Herramientas sobre la mesa; deshacer y rehacer se desactivan sin historial. Deshacer y rehacer son solo ícono a todo ancho; hasta 820px, todas las herramientas salvo la principal muestran solo su ícono (9px 11px) con la etiqueta oculta a la vista pero legible para lectores de pantalla.",
+      "html": "<button class=\"ds-boton\"><svg viewBox=\"0 0 24 24\"><path d=\"M12 3v12M7 10l5 5 5-5M5 21h14\"/></svg><span>Exportar</span></button> <button class=\"ds-boton\" disabled aria-label=\"Deshacer\"><svg viewBox=\"0 0 24 24\"><path d=\"M9 14 4 9l5-5\"/><path d=\"M4 9h10a6 6 0 0 1 0 12h-3\"/></svg></button>",
+      "css": ".ds-boton { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; font: 600 14px/1 \"Barlow\", system-ui, sans-serif; color: #ecebe6; background: #26272b; border: 1px solid #3d3e44; border-radius: 6px; cursor: pointer; transition: border-color 150ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-boton svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-boton:hover { border-color: #6b6c74; } .ds-boton:focus-visible { outline: 3px solid #ff5fae; outline-offset: 2px; } .ds-boton:disabled { opacity: 0.45; cursor: not-allowed; border-color: #3d3e44; }"
+    },
+    {
+      "name": "Control segmentado",
+      "kind": "nav",
+      "refersTo": "armonia",
+      "description": "Las armonías: radios con aspecto segmentado; la elegida es papel lleno. Por debajo de 420px los segmentos usan 14px 4px y 13px para que «Complementaria» quepa a 360px.",
+      "html": "<fieldset class=\"ds-armonias\"><label><input type=\"radio\" name=\"ds-a\"><span>Aleatoria</span></label><label><input type=\"radio\" name=\"ds-a\" checked><span>Análoga</span></label><label><input type=\"radio\" name=\"ds-a\"><span>Triádica</span></label></fieldset>",
+      "css": ".ds-armonias { display: inline-flex; margin: 0; padding: 0; border: 1px solid #3d3e44; border-radius: 6px; overflow: hidden; background: #1c1d20; } .ds-armonias label { position: relative; } .ds-armonias input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; } .ds-armonias span { display: block; padding: 9px 14px; font: 600 14px/1 \"Barlow\", system-ui, sans-serif; color: #a3a29c; border-right: 1px solid #3d3e44; transition: color 150ms, background-color 150ms; } .ds-armonias label:last-child span { border-right: 0; } .ds-armonias label:hover span { color: #ecebe6; } .ds-armonias input:checked + span { background: #f4f2ec; color: #111; } .ds-armonias input:focus-visible + span { outline: 3px solid #ff5fae; outline-offset: -3px; }"
+    },
+    {
+      "name": "Chip de color",
+      "kind": "card",
+      "refersTo": "chip",
+      "description": "La pieza central: tinta arriba, ficha técnica impresa abajo, contraste con el mejor marcado y Fijar en estado lleno.",
+      "html": "<article class=\"ds-chip\"><div class=\"ds-tinta\" style=\"background:#2F7F7A\"><span class=\"ds-numero\">N.º 02 · fijado</span></div><div class=\"ds-ficha\"><p class=\"ds-hex\"><span>2F7F7A</span><small>HEX</small></p><dl class=\"ds-datos\"><dt>RGB</dt><dd>47, 127, 122</dd><dt>HSL</dt><dd>176°, 46 %, 34 %</dd></dl><p class=\"ds-contraste\"><span class=\"mejor\">Blanco <b>4,9</b></span><span>Negro <b>4,3</b></span></p><div class=\"ds-acciones\"><button class=\"ds-accion\" aria-pressed=\"true\">Fijar</button><button class=\"ds-accion\">Copiar</button></div></div></article>",
+      "css": ".ds-chip { display: flex; flex-direction: column; width: 240px; padding: 8px; background: #f4f2ec; color: #111; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 12px 28px rgba(0,0,0,0.35); } .ds-tinta { position: relative; min-height: 140px; border-radius: 2px; } .ds-numero { position: absolute; top: 12px; left: 14px; font: 600 13px/1 \"Barlow Condensed\", \"Arial Narrow\", sans-serif; letter-spacing: 0.14em; color: #fff; } .ds-ficha { padding: 14px 8px 4px; } .ds-hex { display: flex; justify-content: space-between; align-items: baseline; margin: 0; font: 700 34px/1 \"Barlow Condensed\", \"Arial Narrow\", sans-serif; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; } .ds-hex small { font: 600 12px/1 \"Barlow Condensed\", sans-serif; letter-spacing: 0.14em; color: #5b5a55; } .ds-datos { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 12px 0 14px; font: 500 15px/1.25 \"Barlow Condensed\", sans-serif; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; } .ds-datos dd { margin: 0; } .ds-datos dt { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; color: #5b5a55; } .ds-contraste { display: flex; flex-direction: column; gap: 4px; margin: 0; padding-top: 12px; border-top: 1px solid #111; } .ds-contraste span { display: flex; justify-content: space-between; padding: 6px 8px; font: 600 14px/1 \"Barlow Condensed\", sans-serif; letter-spacing: 0.05em; border: 1px solid #111; font-variant-numeric: tabular-nums; } .ds-contraste span.mejor { background: #111; color: #f4f2ec; } .ds-acciones { display: flex; gap: 8px; margin-top: 10px; } .ds-accion { flex: 1; padding: 9px 8px; font: 600 14px/1 \"Barlow\", system-ui, sans-serif; color: #111; background: transparent; border: 1px solid #111; border-radius: 2px; cursor: pointer; transition: background-color 150ms, color 150ms; } .ds-accion:hover { background: rgba(17,17,17,0.07); } .ds-accion[aria-pressed=\"true\"] { background: #111; color: #f4f2ec; } .ds-accion:focus-visible { outline: 3px solid #e4007c; outline-offset: 2px; }"
+    },
+    {
+      "name": "Botón claro",
+      "kind": "button",
+      "refersTo": "boton-claro",
+      "description": "Acción secundaria sobre papel (diálogo).",
+      "html": "<div style=\"background:#f4f2ec;padding:16px\"><button class=\"ds-claro\">Copiar el enlace a esta paleta</button></div>",
+      "css": ".ds-claro { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; font: 600 14px/1 \"Barlow\", system-ui, sans-serif; color: #111; background: transparent; border: 1px solid #111; border-radius: 6px; cursor: pointer; transition: background-color 150ms; } .ds-claro:hover { background: rgba(17,17,17,0.06); } .ds-claro:focus-visible { outline: 3px solid #ff5fae; outline-offset: 2px; }"
+    },
+    {
+      "name": "Aviso",
+      "kind": "custom",
+      "refersTo": "aviso",
+      "description": "Aviso corto de papel con muestra del color; se muda al diálogo mientras está abierto.",
+      "html": "<p class=\"ds-aviso\" role=\"status\"><span class=\"ds-muestra\" style=\"background:#E7C56A\"></span>Copiado E7C56A</p>",
+      "css": ".ds-aviso { display: inline-block; margin: 0; padding: 11px 16px; background: #f4f2ec; color: #111; font: 600 15px/1.4 \"Barlow\", system-ui, sans-serif; border-radius: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); } .ds-muestra { display: inline-block; width: 14px; height: 14px; margin-right: 8px; vertical-align: -2px; border: 1px solid #111; }"
+    },
+    {
+      "name": "Tecla",
+      "kind": "chip",
+      "description": "Atajos de teclado en el pie.",
+      "html": "<p class=\"ds-pie\"><kbd class=\"ds-kbd\">Espacio</kbd> nueva paleta</p>",
+      "css": ".ds-pie { margin: 0; color: #a3a29c; font: 500 14px/1.4 \"Barlow\", system-ui, sans-serif; } .ds-kbd { display: inline-block; padding: 3px 7px; margin-right: 4px; font: 600 12px/1 \"Barlow Condensed\", sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #ecebe6; border: 1px solid #3d3e44; border-radius: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El abanico de muestras de imprenta",
+    "overview": "Cada color es un chip de tinta plana arrancado de un muestrario de imprenta: arriba la tinta, abajo su ficha técnica impresa en negro sobre papel. Los cinco chips se apoyan sobre una mesa grafito y la llenan; todo lo demás (barra, pie, diálogo) es mobiliario discreto alrededor de ellos. La información está siempre a la vista, impresa, nunca escondida detrás de un hover.\n\nEl sistema es de dos materiales y un acento. La mesa (oscura) aloja la interfaz; el papel (claro) aloja los datos. El magenta de proceso es la única tinta de la interfaz: marca la acción principal y el foco, y nada más. La jerarquía la llevan el peso, la condensación y las mayúsculas, no una escala tipográfica amplia. Los estados se leen como marcas impresas: lleno es fijado o elegido, hueco es libre.\n\nEsta app no usa el mundo pizarra del sitio del curso: es un producto aparte con su propio mundo. Se abre con doble clic (file://), sin librerías, con las fuentes en la carpeta `fuentes/`.",
+    "keyCharacteristics": [
+      "Mesa grafito con chips de papel; el color del usuario es el único color abundante.",
+      "Un solo acento, magenta de proceso, para la acción principal y el foco.",
+      "Códigos en Barlow Condensed con cifras tabulares; interfaz en Barlow.",
+      "Reglas de 1 px y estados lleno/hueco en lugar de sombras o rellenos de color.",
+      "Movimiento propio: los chips libres se abren como un abanico al generar."
+    ],
+    "rules": [
+      {
+        "name": "The Una Sola Tinta Rule",
+        "body": "El magenta es el único color de la interfaz. Marca la acción principal de cada superficie (una por superficie) y el foco; nunca decora, nunca rellena paneles, nunca colorea datos.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dos Materiales Rule",
+        "body": "La interfaz vive en la mesa (texto claro, reglas `linea`); los datos viven en el papel (tinta negra, reglas `tinta`). Una superficie nueva elige uno de los dos materiales; no inventa un tercero.",
+        "section": "colors"
+      },
+      {
+        "name": "The Escala Corta Rule",
+        "body": "La escala va de 12 a 40px y no crece. La jerarquía se gana con peso, condensación, mayúsculas y tracking, no con tamaños nuevos.",
+        "section": "typography"
+      },
+      {
+        "name": "The Cifras Tabulares Rule",
+        "body": "Todo número que el usuario compara (hex, RGB, HSL, contraste) va en Barlow Condensed con `tabular-nums`, para que las columnas no bailen al generar.",
+        "section": "typography"
+      },
+      {
+        "name": "The La Ficha No Cede Rule",
+        "body": "Cuando falta espacio, se encoge la tinta, nunca los datos.",
+        "section": "layout"
+      },
+      {
+        "name": "The Solo El Papel Flota Rule",
+        "body": "Solo lo que es papel lleva sombra. Lo que está sobre la mesa es plano y se delimita con reglas `linea`.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do mostrar todos los datos de cada color impresos y a la vista: hex, RGB, HSL y contraste.",
+      "Do usar el magenta solo para la acción principal de la superficie y para el foco (anillo de 3px `magenta-claro`, `magenta` sobre papel).",
+      "Do marcar los estados como impresión: lleno en tinta es fijado o elegido, hueco con borde de 1px es libre.",
+      "Do poner todo número comparable en Barlow Condensed con cifras tabulares.",
+      "Do encoger la tinta antes que la ficha cuando falte espacio.",
+      "Do respetar `prefers-reduced-motion` y no animar la primera pintada."
+    ],
+    "donts": [
+      "Don't esconder los datos de un color detrás de un hover, como las columnas sin datos de Coolors.",
+      "Don't añadir un segundo color de acento ni usar el magenta como relleno decorativo.",
+      "Don't poner sombra a lo que está sobre la mesa; solo el papel flota.",
+      "Don't agrandar la escala tipográfica para crear jerarquía; usa peso, condensación y mayúsculas.",
+      "Don't mover los chips fijados al generar."
+    ]
+  }
+}
