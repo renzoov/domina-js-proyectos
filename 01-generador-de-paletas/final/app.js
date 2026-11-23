@@ -4,6 +4,8 @@
 //
 // El código va en el orden en que se construye en la guía.
 // Cada parte empieza con «PASO n» y termina con «FIN PASO n».
+// Una línea que termina en «// PASO n» se agrega más tarde, en ese paso,
+// dentro de código que ya estaba escrito.
 // ─────────────────────────────────────────────────────────────
 
 
@@ -168,7 +170,7 @@ function pintar() {
 
   const cuantos = estado.fijados.filter(Boolean).length;
   textoEstado.textContent = `${CANTIDAD} de ${CANTIDAD} ranuras · ${cuantos} ${cuantos === 1 ? 'fijada' : 'fijadas'}`;
-  pintarHistorial();
+  pintarHistorial(); // PASO 8
 }
 
 function pintarContraste(elemento, nombre, razon, esMejor) {
@@ -241,18 +243,18 @@ function generarColores(armonia) {
 // PASO 6: la barra espaciadora y el botón «Generar»
 
 function generar() {
-  guardarEnHistorial();
+  guardarEnHistorial(); // PASO 8
   const nuevos = generarColores(estado.armonia);
-  const cambiados = [];
+  const cambiados = []; // PASO 13
   estado.colores = estado.colores.map((hex, i) => {
     if (estado.fijados[i]) return hex;
-    cambiados.push(i);
+    cambiados.push(i); // PASO 13
     return nuevos[i];
   });
   estado.origen = 'armonia';
   pintar();
-  actualizarUrl();
-  abanico(cambiados);
+  actualizarUrl(); // PASO 10
+  abanico(cambiados); // PASO 13
 }
 
 botonGenerar.addEventListener('click', generar);
@@ -306,7 +308,7 @@ function deshacer() {
   historial.adelante.push([...estado.colores]);
   estado.colores = historial.atras.pop();
   pintar();
-  actualizarUrl();
+  actualizarUrl(); // PASO 10
 }
 
 function rehacer() {
@@ -314,7 +316,7 @@ function rehacer() {
   historial.atras.push([...estado.colores]);
   estado.colores = historial.adelante.pop();
   pintar();
-  actualizarUrl();
+  actualizarUrl(); // PASO 10
 }
 
 function pintarHistorial() {
@@ -487,7 +489,7 @@ async function paletaDeFoto(archivo) {
     estado.origen = 'foto';
     pintar();
     actualizarUrl();
-    abanico(libres);
+    abanico(libres); // PASO 13
     avisar(`Paleta sacada de ${archivo.name}`);
   } catch {
     avisar('No se pudo leer esa imagen');
@@ -597,13 +599,13 @@ function abanico(indices) {
 // FIN PASO 13
 
 
-// Arranque: si la dirección trae una paleta, la usamos; si no, generamos una
-if (leerDeUrl()) {
+// ARRANQUE (desde el PASO 4): lo primero que corre al abrir la página
+if (leerDeUrl()) { // PASO 10
+  pintar(); // PASO 10
+} else { // PASO 10
+  estado.colores = generarColores(estado.armonia); // PASO 5
   pintar();
-} else {
-  estado.colores = generarColores(estado.armonia);
-  pintar();
-  actualizarUrl();
-}
-// Desde la segunda pintada en adelante, los colores cambian con una transición
-requestAnimationFrame(() => document.body.classList.add('listo'));
+  actualizarUrl(); // PASO 10
+} // PASO 10
+// Desde la segunda pintada, los colores cambian con una transición // PASO 6
+requestAnimationFrame(() => document.body.classList.add('listo')); // PASO 6
