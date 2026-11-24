@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T18:00:00Z",
+  "title": "Design System: Relojes del mundo",
+  "extensions": {
+    "colorMeta": {
+      "fondo": {
+        "role": "neutral",
+        "displayName": "Fondo",
+        "canonical": "#0b0c0e",
+        "tonalRamp": ["#0b0c0e", "#131518", "#1b1d21", "#25282d", "#33363c", "#4a4d54", "#9a978f", "#f4f1e8"]
+      },
+      "panel": { "role": "neutral", "displayName": "Panel", "canonical": "#131518" },
+      "fila": { "role": "neutral", "displayName": "Fila", "canonical": "#1b1d21" },
+      "fila-ref": { "role": "neutral", "displayName": "Fila de referencia", "canonical": "#24221a" },
+      "borde": { "role": "neutral", "displayName": "Borde", "canonical": "#25282d" },
+      "borde-fuerte": { "role": "neutral", "displayName": "Borde fuerte", "canonical": "#33363c" },
+      "paleta-arriba": { "role": "neutral", "displayName": "Paleta, mitad de arriba", "canonical": "#26292e" },
+      "paleta-abajo": { "role": "neutral", "displayName": "Paleta, mitad de abajo", "canonical": "#1e2125" },
+      "cara-noche": { "role": "neutral", "displayName": "Cara de noche", "canonical": "#2a2d33" },
+      "cifra": {
+        "role": "neutral",
+        "displayName": "Cifra",
+        "canonical": "#f4f1e8",
+        "tonalRamp": ["#3a3833", "#55524b", "#77746d", "#9a978f", "#bdbab2", "#d9d6cd", "#f4f1e8", "#fbfaf6"]
+      },
+      "rotulo": { "role": "neutral", "displayName": "Rótulo", "canonical": "#9a978f" },
+      "sugerido": { "role": "neutral", "displayName": "Texto sugerido", "canonical": "#8a877f" },
+      "amarillo": {
+        "role": "primary",
+        "displayName": "Amarillo de andén",
+        "canonical": "#f6c445",
+        "tonalRamp": ["#3a2c08", "#614a0f", "#8f6d17", "#c29523", "#f6c445", "#f8d375", "#fbe3a6", "#fdf3d8"]
+      },
+      "dia": {
+        "role": "secondary",
+        "displayName": "Luz de día",
+        "canonical": "#4cc38a",
+        "tonalRamp": ["#0d3020", "#165035", "#1f744d", "#2f9b68", "#4cc38a", "#7ad5a9", "#abe6c9", "#ddf6ea"]
+      },
+      "noche": {
+        "role": "secondary",
+        "displayName": "Luz de noche",
+        "canonical": "#7b88ff",
+        "tonalRamp": ["#151a4d", "#222b7a", "#3441b0", "#5664e6", "#7b88ff", "#a0a9ff", "#c4caff", "#e7e9ff"]
+      }
+    },
+    "typographyMeta": {
+      "titulo": { "displayName": "Título", "purpose": "«Relojes del mundo» en mayúsculas, con «del mundo» en amarillo; 26px en teléfono." },
+      "paleta": { "displayName": "Paleta", "purpose": "Cada cifra de la hora dentro de su paleta; 38px en teléfono. Los dos puntos a 40px." },
+      "ciudad": { "displayName": "Ciudad", "purpose": "El nombre de la ciudad en mayúsculas, balanceado en dos líneas si no cabe; 22px en teléfono." },
+      "destacado": { "displayName": "Destacado", "purpose": "El nombre de la referencia al pie del panel; 16px en línea cuando el panel baja." },
+      "diferencia": { "displayName": "Diferencia", "purpose": "La diferencia con la referencia; «—» en la referencia; 18px en teléfono." },
+      "cuerpo": { "displayName": "Cuerpo", "purpose": "Texto base, el día, el buscador, las sugerencias y el botón (700)." },
+      "detalle": { "displayName": "Detalle", "purpose": "El país, la fecha de la cabecera, las opciones de formato y el pie del panel." },
+      "seccion": { "displayName": "Sección", "purpose": "«Agregar ciudad» y «Formato», mayúsculas espaciadas." },
+      "columna": { "displayName": "Columna", "purpose": "La cabecera de columnas del tablero, mayúsculas espaciadas." }
+    },
+    "shadows": [
+      { "name": "canto-paleta", "value": "0 2px 0 rgba(0, 0, 0, 0.45)", "purpose": "El grosor de cada paleta de cifra; no en los dos puntos." },
+      { "name": "luz", "value": "0 0 8px #4cc38a (de noche #7b88ff)", "purpose": "El halo de la luz de día o de noche." },
+      { "name": "borde-referencia", "value": "inset 0 0 0 2px #f6c445", "purpose": "El borde interior amarillo de la fila de referencia." }
+    ],
+    "motion": [
+      { "name": "curva", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Fondo y opacidad de la fila, 160ms." },
+      { "name": "giro-bajada", "value": "perspective(260px) rotateX(0deg → -90deg), 130ms ease-in", "purpose": "Primera mitad del giro de una paleta que cambia; cada paleta lleva su propia perspectiva." },
+      { "name": "giro-subida", "value": "perspective(260px) rotateX(90deg → 0deg), 170ms ease-out", "purpose": "Segunda mitad del giro, ya con la cifra nueva." },
+      { "name": "segundero", "value": "requestAnimationFrame, continuo", "purpose": "El segundero del reloj chico avanza cuadro a cuadro." },
+      { "name": "reducido", "value": "sin giro; transition: none", "purpose": "prefers-reduced-motion: reduce cambia la cifra sin girar." }
+    ],
+    "breakpoints": [
+      { "name": "mediana", "value": "1100px" },
+      { "name": "telefono", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Fila del tablero",
+      "kind": "custom",
+      "refersTo": "fila",
+      "description": "Una ciudad: manija, nombre y país, la hora en paletas, la diferencia, la luz y el día, el reloj chico y quitar. La referencia lleva borde amarillo.",
+      "html": "<div class=\"ds-fondo\"><div class=\"ds-fila ds-fila--ref\"><button class=\"ds-icono\" aria-label=\"Mover Lima\"><svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"9\" cy=\"6\" r=\"1.6\"/><circle cx=\"15\" cy=\"6\" r=\"1.6\"/><circle cx=\"9\" cy=\"12\" r=\"1.6\"/><circle cx=\"15\" cy=\"12\" r=\"1.6\"/><circle cx=\"9\" cy=\"18\" r=\"1.6\"/><circle cx=\"15\" cy=\"18\" r=\"1.6\"/></svg></button><button class=\"ds-ciudad\"><span class=\"ds-nombre\">Lima</span><span class=\"ds-pais\">Perú<em> · tu referencia</em></span></button><span class=\"ds-paletas\"><span class=\"ds-paleta\">1</span><span class=\"ds-paleta\">2</span><span class=\"ds-paleta ds-dos\">:</span><span class=\"ds-paleta\">5</span><span class=\"ds-paleta\">3</span></span><span class=\"ds-dif ds-dif--ref\">—</span><span class=\"ds-dia\"><i class=\"ds-luz\"></i>hoy, de día</span><svg class=\"ds-reloj\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#f4f1e8\"/><circle cx=\"50\" cy=\"50\" r=\"40\" pathLength=\"12\" fill=\"none\" stroke=\"#0b0c0e\" stroke-width=\"4\" stroke-dasharray=\"0.06 0.94\"/><line x1=\"50\" y1=\"50\" x2=\"50\" y2=\"29\" stroke=\"#0b0c0e\" stroke-width=\"7\" stroke-linecap=\"round\" transform=\"rotate(-3 50 50)\"/><line x1=\"50\" y1=\"50\" x2=\"50\" y2=\"16\" stroke=\"#0b0c0e\" stroke-width=\"4.5\" stroke-linecap=\"round\" transform=\"rotate(318 50 50)\"/><line x1=\"50\" y1=\"58\" x2=\"50\" y2=\"13\" stroke=\"#9a978f\" stroke-width=\"2\" transform=\"rotate(150 50 50)\"/><circle cx=\"50\" cy=\"50\" r=\"3.5\" fill=\"#9a978f\"/></svg></div><div class=\"ds-fila ds-fila--noche\"><button class=\"ds-icono\" aria-label=\"Mover Tokio\"><svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"9\" cy=\"6\" r=\"1.6\"/><circle cx=\"15\" cy=\"6\" r=\"1.6\"/><circle cx=\"9\" cy=\"12\" r=\"1.6\"/><circle cx=\"15\" cy=\"12\" r=\"1.6\"/><circle cx=\"9\" cy=\"18\" r=\"1.6\"/><circle cx=\"15\" cy=\"18\" r=\"1.6\"/></svg></button><button class=\"ds-ciudad\"><span class=\"ds-nombre\">Tokio</span><span class=\"ds-pais\">Japón</span></button><span class=\"ds-paletas\"><span class=\"ds-paleta\">0</span><span class=\"ds-paleta\">2</span><span class=\"ds-paleta ds-dos\">:</span><span class=\"ds-paleta\">5</span><span class=\"ds-paleta\">3</span></span><span class=\"ds-dif\">+14 h</span><span class=\"ds-dia\"><i class=\"ds-luz\"></i>mañana, de noche</span><svg class=\"ds-reloj\" viewBox=\"0 0 100 100\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#2a2d33\"/><circle cx=\"50\" cy=\"50\" r=\"40\" pathLength=\"12\" fill=\"none\" stroke=\"#f4f1e8\" stroke-width=\"4\" stroke-dasharray=\"0.06 0.94\"/><line x1=\"50\" y1=\"50\" x2=\"50\" y2=\"29\" stroke=\"#f4f1e8\" stroke-width=\"7\" stroke-linecap=\"round\" transform=\"rotate(86 50 50)\"/><line x1=\"50\" y1=\"50\" x2=\"50\" y2=\"16\" stroke=\"#f4f1e8\" stroke-width=\"4.5\" stroke-linecap=\"round\" transform=\"rotate(318 50 50)\"/><line x1=\"50\" y1=\"58\" x2=\"50\" y2=\"13\" stroke=\"#9a978f\" stroke-width=\"2\" transform=\"rotate(150 50 50)\"/><circle cx=\"50\" cy=\"50\" r=\"3.5\" fill=\"#9a978f\"/></svg></div></div>",
+      "css": ".ds-fondo { display: grid; gap: 8px; padding: 24px; background: #0b0c0e; color: #f4f1e8; font: 400 16px/1.4 'Inter Tight', system-ui, sans-serif; } .ds-fila { display: grid; grid-template-columns: 28px minmax(140px, 1fr) auto 90px 150px 56px; align-items: center; column-gap: 14px; min-height: 92px; padding: 0 14px; border-radius: 8px; background: #1b1d21; transition: background-color 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-fila--ref { background: #24221a; box-shadow: inset 0 0 0 2px #f6c445; } .ds-icono { display: grid; place-items: center; width: 34px; height: 44px; margin-left: -6px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: #9a978f; cursor: grab; } .ds-icono svg { width: 20px; height: 20px; } .ds-icono:hover { background: #25282d; color: #f4f1e8; } .ds-icono:focus-visible, .ds-ciudad:focus-visible { outline: 2px solid #f4f1e8; outline-offset: 3px; } .ds-ciudad { display: grid; justify-items: start; gap: 2px; margin-left: -10px; padding: 8px 10px; border: 0; border-radius: 6px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; } .ds-ciudad:hover { background: rgba(255, 255, 255, 0.04); } .ds-nombre { font-size: 26px; font-weight: 700; line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase; } .ds-pais { font-size: 15px; color: #9a978f; } .ds-pais em { font-style: normal; color: #f6c445; } .ds-paletas { display: flex; gap: 4px; } .ds-paleta { position: relative; width: 46px; height: 62px; border-radius: 5px; background: linear-gradient(#26292e 50%, #1e2125 50%); font-size: 44px; font-weight: 800; line-height: 62px; text-align: center; font-variant-numeric: tabular-nums; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45); } .ds-paleta::after { content: ''; position: absolute; left: 0; right: 0; top: calc(50% - 1px); height: 2px; background: #0b0c0e; } .ds-dos { width: 16px; background: none; box-shadow: none; font-size: 40px; } .ds-dos::after { display: none; } .ds-dif { font-size: 20px; font-weight: 700; line-height: 1.15; white-space: nowrap; font-variant-numeric: tabular-nums; } .ds-dif--ref { color: #9a978f; } .ds-dia { display: flex; align-items: center; gap: 10px; color: #9a978f; } .ds-luz { flex: none; width: 10px; height: 10px; border-radius: 50%; background: #4cc38a; box-shadow: 0 0 8px #4cc38a; } .ds-fila--noche .ds-luz { background: #7b88ff; box-shadow: 0 0 8px #7b88ff; } .ds-reloj { width: 56px; height: 56px; }"
+    },
+    {
+      "name": "Paleta",
+      "kind": "custom",
+      "refersTo": "paleta",
+      "description": "Una cifra en dos mitades con la rendija del fondo; al pasar el mouse por la muestra gira como cuando cambia el minuto.",
+      "html": "<div class=\"ds-muestra\"><span class=\"ds-paleta\">1</span><span class=\"ds-paleta\">8</span><span class=\"ds-paleta ds-dos\">:</span><span class=\"ds-paleta\">5</span><span class=\"ds-paleta ds-gira\">3</span></div>",
+      "css": ".ds-muestra { display: flex; gap: 4px; padding: 24px; background: #1b1d21; color: #f4f1e8; font-family: 'Inter Tight', system-ui, sans-serif; } .ds-paleta { position: relative; width: 46px; height: 62px; border-radius: 5px; background: linear-gradient(#26292e 50%, #1e2125 50%); font-size: 44px; font-weight: 800; line-height: 62px; text-align: center; font-variant-numeric: tabular-nums; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.45); } .ds-paleta::after { content: ''; position: absolute; left: 0; right: 0; top: calc(50% - 1px); height: 2px; background: #0b0c0e; } .ds-dos { width: 16px; background: none; box-shadow: none; font-size: 40px; } .ds-dos::after { display: none; } .ds-muestra:hover .ds-gira { animation: ds-girar 300ms; } @keyframes ds-girar { 0% { transform: perspective(260px) rotateX(0deg); animation-timing-function: ease-in; } 43% { transform: perspective(260px) rotateX(-90deg); } 43.01% { transform: perspective(260px) rotateX(90deg); animation-timing-function: ease-out; } 100% { transform: perspective(260px) rotateX(0deg); } } @media (prefers-reduced-motion: reduce) { .ds-muestra:hover .ds-gira { animation: none; } }"
+    },
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "boton",
+      "description": "El único botón lleno, amarillo; dice qué va a agregar. Desactivado en gris mientras no hay nada que agregar.",
+      "html": "<div class=\"ds-caja\"><button class=\"ds-boton\">Agregar Tokio</button><button class=\"ds-boton\" disabled>Agregar</button></div>",
+      "css": ".ds-caja { display: grid; gap: 14px; width: 284px; padding: 28px; background: #131518; } .ds-boton { height: 48px; border: 0; border-radius: 8px; background: #f6c445; color: #0b0c0e; font: 700 16px 'Inter Tight', system-ui, sans-serif; cursor: pointer; } .ds-boton:focus-visible { outline: 2px solid #f4f1e8; outline-offset: 3px; } .ds-boton:disabled { background: #25282d; color: #9a978f; cursor: default; }"
+    },
+    {
+      "name": "Buscador",
+      "kind": "input",
+      "refersTo": "buscador",
+      "description": "Campo de 48px con la lupa; al tomar el foco, el borde y el anillo son blancos.",
+      "html": "<div class=\"ds-caja\"><div class=\"ds-buscador\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6\"/><path d=\"M15 15l5 5\"/></svg><input type=\"search\" placeholder=\"Escribe una ciudad\" aria-label=\"Buscar una ciudad\"></div></div>",
+      "css": ".ds-caja { width: 284px; padding: 28px; background: #131518; } .ds-buscador { position: relative; } .ds-buscador svg { position: absolute; left: 14px; top: 50%; width: 18px; height: 18px; translate: 0 -50%; fill: none; stroke: #9a978f; stroke-width: 2; stroke-linecap: round; pointer-events: none; } .ds-buscador input { box-sizing: border-box; width: 100%; height: 48px; padding: 0 14px 0 42px; border: 1px solid #33363c; border-radius: 8px; background: #0b0c0e; color: #f4f1e8; font: 400 16px 'Inter Tight', system-ui, sans-serif; } .ds-buscador input::placeholder { color: #8a877f; } .ds-buscador input:focus-visible { border-color: #f4f1e8; outline: 2px solid #f4f1e8; outline-offset: 0; }"
+    },
+    {
+      "name": "Sugerencias",
+      "kind": "chip",
+      "refersTo": "sugerencia",
+      "description": "Ciudades para agregar, también con el buscador vacío: el nombre y, en una segunda línea, el país y la diferencia.",
+      "html": "<ul class=\"ds-sugerencias\"><li><button><b>Bogotá</b><span>Colombia · misma hora</span></button></li><li><button aria-current=\"true\"><b>Santiago</b><span>Chile · +2 h</span></button></li><li><button><b>Nueva York</b><span>Estados Unidos · misma hora</span></button></li></ul>",
+      "css": ".ds-sugerencias { display: grid; gap: 6px; width: 284px; margin: 0; padding: 28px; list-style: none; background: #131518; } .ds-sugerencias button { display: grid; justify-items: start; gap: 2px; width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid transparent; border-radius: 6px; background: #1b1d21; color: #f4f1e8; font: 400 16px/1.4 'Inter Tight', system-ui, sans-serif; text-align: left; cursor: pointer; } .ds-sugerencias b { font-weight: 400; } .ds-sugerencias span { font-size: 14px; color: #9a978f; } .ds-sugerencias button:hover, .ds-sugerencias button[aria-current='true'] { border-color: #9a978f; } .ds-sugerencias button:focus-visible { outline: 2px solid #f4f1e8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Formato",
+      "kind": "nav",
+      "refersTo": "formato-opcion",
+      "description": "24 horas / 12 horas como radios dibujados; la elegida es blanca.",
+      "html": "<fieldset class=\"ds-formato\"><legend>Formato</legend><label><input type=\"radio\" name=\"ds-f\" checked><span>24 horas</span></label><label><input type=\"radio\" name=\"ds-f\"><span>12 horas</span></label></fieldset>",
+      "css": ".ds-formato { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 28px; border: 0; background: #131518; color: #f4f1e8; font-family: 'Inter Tight', system-ui, sans-serif; } .ds-formato legend { float: left; width: 100%; margin: 0 0 12px; padding: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #9a978f; } .ds-formato label { position: relative; } .ds-formato input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; } .ds-formato span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid #33363c; border-radius: 6px; font-size: 15px; } .ds-formato label:has(input:checked) > span { border-color: #f4f1e8; background: #f4f1e8; color: #0b0c0e; font-weight: 700; } .ds-formato input:focus-visible + span { outline: 2px solid #f4f1e8; outline-offset: 3px; }"
+    },
+    {
+      "name": "Pie de referencia",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Al pie del panel: desde qué ciudad se cuentan las diferencias y cómo cambiarla.",
+      "html": "<div class=\"ds-panel\"><p class=\"ds-referencia\">Las diferencias se cuentan desde <b>Lima</b><span>Toca el nombre de otra ciudad para usarla de referencia.</span></p></div>",
+      "css": ".ds-panel { width: 284px; padding: 28px; border-left: 1px solid #25282d; background: #131518; font-family: 'Inter Tight', system-ui, sans-serif; } .ds-referencia { margin: 0; padding-top: 20px; border-top: 1px solid #25282d; font-size: 15px; line-height: 1.5; color: #9a978f; } .ds-referencia b { display: block; margin: 2px 0 6px; font-size: 22px; color: #f4f1e8; } .ds-referencia span { display: block; margin-top: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El tablero de salidas de la estación",
+    "overview": "La hora del mundo se lee como el tablero de salidas de una estación: cada ciudad es una fila oscura, larga y baja, y su hora está en cinco paletas (cuatro cifras y los dos puntos) con la rendija negra al medio. Cuando cambia el minuto, solo giran las paletas que cambian: media vuelta hacia abajo, cambia la cifra, termina de girar. Al lado, un reloj chico de cara blanca (de día) u oscura (de noche) donde el segundero avanza sin parar. La ciudad desde la que se cuentan las diferencias se marca con un borde amarillo; es la única fila que se ve distinta.\n\nEl sistema es un andén de noche: un fondo casi negro (`fondo`), filas un tono más claras (`fila`) y paletas otro tono más (`paleta-arriba` y `paleta-abajo`). Las cifras y los nombres son blanco cálido (`cifra`), los rótulos y detalles gris piedra (`rotulo`). El color es escaso y siempre significa algo: amarillo para la referencia, la acción principal y la línea de arrastre; verde y azul solo como la luz de día o de noche. Una sola familia, Inter Tight, en 800 y mayúsculas para lo que se lee de lejos (el título y las cifras de las paletas), 700 para ciudades y diferencias, 400 para lo demás. Esquinas chicas (5 a 8px); solo los relojes y las luces son redondos.\n\nSe niega a la cuadrícula de tarjetas redondeadas iguales del reloj mundial del sistema operativo. Es un producto aparte, con su propio mundo: no usa el pizarrón del curso ni los mundos de los proyectos 1 a 3. Se abre con doble clic (file://), sin librerías, con la fuente en `fuentes/`.",
+    "keyCharacteristics": [
+      "Fondo casi negro; nunca un fondo claro.",
+      "Una fila por ciudad, todas en la misma rejilla que la cabecera de columnas: manija, ciudad, hora, diferencia, día, reloj, quitar.",
+      "La hora en paletas de dos mitades con la rendija del color del fondo; giran solo las que cambian.",
+      "Amarillo solo para la referencia, la acción principal y la línea de arrastre; el foco es blanco.",
+      "Verde y azul solo como la luz de 10px de día o de noche.",
+      "Un panel de 340px a la derecha para agregar ciudades, el formato y la referencia."
+    ],
+    "rules": [
+      { "name": "The Amarillo Escaso Rule", "body": "El amarillo dice «esta es la tuya» o «haz esto»: la fila de referencia, el botón principal, la línea de arrastre y la marca del título. El foco, lo elegido y lo que se pasa con el mouse son blancos o grises, nunca amarillos.", "section": "colors" },
+      { "name": "The Dos Luces Rule", "body": "Verde y azul existen solo como la luz de día o de noche, en un punto de 10px con halo. No tiñen texto, bordes ni fondos.", "section": "colors" },
+      { "name": "The Una Familia Rule", "body": "Todo es Inter Tight. La jerarquía se gana con peso (400 a 800), mayúsculas y tamaño, no con otra familia.", "section": "typography" },
+      { "name": "The Cifras Tabulares Rule", "body": "Toda cifra que cambia mientras se mira (paletas, diferencias, la hora UTC de la cabecera) va con `tabular-nums`, para que nada salte cuando gira.", "section": "typography" },
+      { "name": "The Una Rejilla Rule", "body": "La cabecera de columnas y las filas usan la misma rejilla; una columna nueva se agrega a las dos o a ninguna.", "section": "layout" },
+      { "name": "The Capas No Sombras Rule", "body": "La profundidad se da con el tono de la superficie. Fuera del canto de las paletas y de la luz, nada lleva sombra.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do poner cada ciudad en una fila oscura (`fila`, radio 8px) de la misma rejilla que la cabecera de columnas.",
+      "Do mostrar la hora en paletas de dos mitades con la rendija del color del fondo, y girar solo las que cambian (130ms + 170ms, `perspective(260px)` en cada una).",
+      "Do guardar el amarillo para la referencia, la acción principal y la línea de arrastre.",
+      "Do dibujar el foco como un anillo `cifra` de 2px separado 3px.",
+      "Do usar verde y azul solo como la luz de 10px de día o de noche.",
+      "Do escribir toda cifra que cambia con `tabular-nums`.",
+      "Do respetar `prefers-reduced-motion`: la cifra cambia sin girar."
+    ],
+    "donts": [
+      "Don't poner en los nombres, los textos ni la interfaz nada que no sean letras, números y signos de puntuación.",
+      "Don't volver el tablero una cuadrícula de tarjetas redondeadas iguales como el reloj mundial del sistema operativo.",
+      "Don't usar fondos claros: el andén es siempre oscuro.",
+      "Don't usar el amarillo para el foco, lo elegido o lo que se pasa con el mouse.",
+      "Don't redondear más de 8px nada que no sea un reloj o una luz.",
+      "Don't sumar sombras que hagan flotar filas o paneles; fuera del canto de la paleta y de la luz, todo es plano.",
+      "Don't añadir otra familia tipográfica."
+    ]
+  }
+}

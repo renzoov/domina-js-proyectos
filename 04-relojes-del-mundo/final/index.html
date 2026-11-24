@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relojes del mundo</title>
+  <meta name="description" content="La hora de las ciudades que elijas, en un tablero de paletas que giran: cuánto se adelantan o atrasan respecto de la tuya y si allá es de día." />
+  <meta name="theme-color" content="#0B0C0E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='2' width='18' height='16' rx='3' fill='%2326292e'/%3E%3Cpath d='M1 10h18' stroke='%230B0C0E' stroke-width='1.4'/%3E%3Cpath d='M10 10V5.5M10 10l3 2' stroke='%23F6C445' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <!-- Íconos: se dibujan una vez y cada botón los usa con <use href="#..."> -->
+  <svg class="iconos" aria-hidden="true">
+    <symbol id="i-manija" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.6" /><circle cx="15" cy="6" r="1.6" /><circle cx="9" cy="12" r="1.6" /><circle cx="15" cy="12" r="1.6" /><circle cx="9" cy="18" r="1.6" /><circle cx="15" cy="18" r="1.6" /></symbol>
+    <symbol id="i-quitar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+    <symbol id="i-buscar" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5 5" /></symbol>
+  </svg>
+
+  <div class="pagina">
+    <header class="cab">
+      <h1>Relojes <span>del mundo</span></h1>
+      <p data-fecha></p>
+    </header>
+
+    <main class="tablero">
+      <div class="columnas" aria-hidden="true">
+        <span></span><span>Ciudad</span><span>Hora</span><span>Diferencia</span><span>Día</span><span></span><span></span>
+      </div>
+      <ol class="filas" data-filas aria-label="Tus ciudades"></ol>
+    </main>
+
+    <aside class="panel">
+      <section class="agregar" aria-labelledby="titulo-agregar">
+        <h2 id="titulo-agregar">Agregar ciudad</h2>
+        <div class="buscador">
+          <svg aria-hidden="true"><use href="#i-buscar" /></svg>
+          <label class="sr-only" for="buscar">Buscar una ciudad</label>
+          <input id="buscar" type="search" data-buscar placeholder="Escribe una ciudad" autocomplete="off"
+            spellcheck="false" aria-controls="sugerencias" aria-describedby="ayuda-buscar" />
+        </div>
+        <p class="sr-only" id="ayuda-buscar">Con la flecha hacia abajo vas a las sugerencias. Enter agrega la primera.</p>
+        <ul class="sugerencias" id="sugerencias" data-sugerencias aria-label="Sugerencias"></ul>
+        <button type="button" class="boton" data-agregar disabled>Agregar</button>
+      </section>
+
+      <fieldset class="formato">
+        <legend>Formato</legend>
+        <label><input type="radio" name="formato" value="24" checked /><span>24 horas</span></label>
+        <label><input type="radio" name="formato" value="12" /><span>12 horas</span></label>
+      </fieldset>
+
+      <p class="referencia">
+        Las diferencias se cuentan desde
+        <b data-ref-nombre></b>
+        <span class="ayuda">Toca el nombre de otra ciudad para usarla de referencia. Arrastra una fila por la manija, o usa las flechas sobre ella, para cambiar el orden.</span>
+      </p>
+    </aside>
+  </div>
+
+  <!-- Una fila del tablero: app.js la copia para cada ciudad -->
+  <template data-plantilla>
+    <li class="fila" draggable="true">
+      <button type="button" class="manija" data-manija><svg aria-hidden="true"><use href="#i-manija" /></svg></button>
+      <button type="button" class="ciudad" data-ciudad aria-pressed="false">
+        <span class="nombre" data-nombre></span>
+        <span class="pais" data-pais></span>
+      </button>
+      <p class="hora">
+        <span class="sr-only" data-hora-texto></span>
+        <span class="paletas" data-paletas aria-hidden="true"></span>
+        <span class="ampm" data-ampm aria-hidden="true"></span>
+      </p>
+      <p class="dif" data-dif></p>
+      <p class="dia"><span class="luz" data-luz></span><span data-dia></span></p>
+      <svg class="reloj" viewBox="0 0 100 100" aria-hidden="true">
+        <circle class="cara" cx="50" cy="50" r="46" />
+        <circle class="marcas" cx="50" cy="50" r="40" pathLength="12" />
+        <line class="horario" data-horario x1="50" y1="50" x2="50" y2="29" />
+        <line class="minutero" data-minutero x1="50" y1="50" x2="50" y2="16" />
+        <line class="segundero" data-segundero x1="50" y1="58" x2="50" y2="13" />
+        <circle class="eje" cx="50" cy="50" r="3.5" />
+      </svg>
+      <button type="button" class="quitar" data-quitar><svg aria-hidden="true"><use href="#i-quitar" /></svg></button>
+    </li>
+  </template>
+
+  <p class="sr-only" aria-live="polite" data-anuncio></p>
+
+  <script src="app.js"></script>
+</body>
+</html>
