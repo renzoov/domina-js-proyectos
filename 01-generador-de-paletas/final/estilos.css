@@ -118,7 +118,9 @@ kbd:first-child { margin-left: 0; }
 }
 .armonias label:last-child span { border-right: 0; }
 .armonias label:hover span { color: var(--texto); }
-.armonias input:checked + span { background: var(--papel); color: var(--tinta); }
+/* también con :has(): WebKit no repinta el hermano cuando el script cambia el radio marcado */
+.armonias input:checked + span,
+.armonias label:has(input:checked) > span { background: var(--papel); color: var(--tinta); }
 .armonias input:focus-visible + span { outline: 3px solid var(--magenta-claro); outline-offset: -3px; }
 /* "De tu foto" no es una armonía: cuando la paleta sale de una imagen, ningún radio queda marcado */
 

@@ -2,3 +2,6 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.zip
+
+# Material de trabajo del diseño (capturas de revisión y contratos de dirección)
+/.impeccable/

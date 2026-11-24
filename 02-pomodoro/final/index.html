@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pomodoro</title>
+  <meta name="description" content="Un temporizador Pomodoro que no se atrasa aunque la pestaña quede escondida, con aviso, pitido y la serie del día." />
+  <meta name="theme-color" content="#084c60" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='9' fill='%23f6faf9'/%3E%3Cpath d='M10 10V3' stroke='%23e2231a' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%23111417'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <!-- Íconos: se dibujan una vez y cada botón los usa con <use href="#..."> -->
+  <svg class="iconos" aria-hidden="true">
+    <symbol id="i-empezar" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" /></symbol>
+    <symbol id="i-pausar" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14" /></symbol>
+    <symbol id="i-saltar" viewBox="0 0 24 24"><path d="M5 5l9 7-9 7zM19 5v14" /></symbol>
+    <symbol id="i-reiniciar" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.7" /><path d="M4 4v4.7h4.7" /></symbol>
+    <symbol id="i-ajustes" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8" /><circle cx="16" cy="7" r="2" /><circle cx="10" cy="17" r="2" /></symbol>
+    <symbol id="i-historial" viewBox="0 0 24 24"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-4" /></symbol>
+    <symbol id="i-aviso" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z" /><path d="M10 20.5h4" /></symbol>
+  </svg>
+
+  <header class="barra">
+    <h1 class="marca"><span class="carril" data-numero>1</span>Pomodoro</h1>
+
+    <fieldset class="bloques">
+      <legend class="sr-only">Bloque</legend>
+      <label><input type="radio" name="bloque" value="trabajo" checked /><span>Trabajo <small data-minutos="trabajo">25</small></span></label>
+      <label><input type="radio" name="bloque" value="corto" /><span><span class="largo-solo">Descanso</span><span class="corto-solo">Desc.</span> corto <small data-minutos="corto">5</small></span></label>
+      <label><input type="radio" name="bloque" value="largo" /><span><span class="largo-solo">Descanso</span><span class="corto-solo">Desc.</span> largo <small data-minutos="largo">15</small></span></label>
+    </fieldset>
+
+    <div class="herramientas">
+      <button type="button" class="boton boton--icono" data-abrir-ajustes><svg><use href="#i-ajustes" /></svg><span>Ajustes</span></button>
+      <button type="button" class="boton boton--icono" data-abrir-historial><svg><use href="#i-historial" /></svg><span>Historial</span></button>
+    </div>
+  </header>
+
+  <main class="piscina">
+    <section class="reloj" aria-label="Temporizador">
+      <div class="esfera">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="cara" cx="100" cy="100" r="97" />
+          <circle class="pista" cx="100" cy="100" r="74" />
+          <circle class="arco" cx="100" cy="100" r="74" pathLength="100" transform="rotate(-90 100 100)" data-arco />
+          <g class="marcas" data-marcas></g>
+          <g class="numeros" data-numeros></g>
+          <g class="aguja" data-aguja>
+            <line x1="100" y1="112" x2="100" y2="10" />
+            <circle cx="100" cy="100" r="5" />
+          </g>
+          <g class="segundero" data-segundero><circle cx="100" cy="3" r="2.3" /></g>
+        </svg>
+        <div class="lectura">
+          <p class="tiempo" role="timer" data-tiempo>25:00</p>
+        </div>
+      </div>
+      <p class="que" data-que>Pomodoro 1 de 4</p>
+
+      <div class="acciones">
+        <button type="button" class="boton boton--principal" data-principal title="Barra espaciadora">
+          <svg><use href="#i-empezar" data-icono-principal /></svg><span data-texto-principal>Empezar</span>
+        </button>
+        <button type="button" class="boton" data-saltar title="Tecla S"><svg><use href="#i-saltar" /></svg><span>Saltar</span></button>
+        <button type="button" class="boton" data-reiniciar title="Tecla R"><svg><use href="#i-reiniciar" /></svg><span>Reiniciar</span></button>
+      </div>
+    </section>
+
+    <aside class="serie" aria-labelledby="titulo-serie">
+      <div class="serie-cabeza">
+        <h2 id="titulo-serie">La serie de hoy</h2>
+        <button type="button" class="boton boton--chico boton--tinta" data-nueva-serie><svg><use href="#i-reiniciar" /></svg><span>Empezar de nuevo</span></button>
+      </div>
+      <ol class="carriles" data-serie></ol>
+      <dl class="resumen">
+        <div><dt>pomodoros hoy</dt><dd data-hoy>0</dd></div>
+        <div><dt>min de trabajo</dt><dd data-minutos-hoy>0</dd></div>
+        <div><dt>días seguidos</dt><dd data-racha>0</dd></div>
+      </dl>
+    </aside>
+  </main>
+
+  <footer class="pie">
+    <p class="atajos"><span><kbd>Espacio</kbd>empezar o pausar</span><span><kbd>S</kbd>saltar</span><span><kbd>R</kbd>reiniciar</span></p>
+    <p class="estados">
+      <span class="promesa">Aunque escondas la pestaña, el tiempo no se atrasa</span>
+      <span class="pantalla" data-pantalla hidden>Pantalla encendida</span>
+      <button type="button" class="boton boton--chico" data-avisos><svg><use href="#i-aviso" /></svg><span data-texto-avisos>Activar avisos</span></button>
+    </p>
+  </footer>
+
+  <!-- Lo que conviene anunciar a un lector de pantalla (el final de cada bloque) -->
+  <p class="sr-only" aria-live="polite" data-anuncio></p>
+
+  <dialog class="dialogo" data-dialogo-ajustes aria-labelledby="titulo-ajustes">
+    <form method="dialog">
+      <h2 id="titulo-ajustes">Ajustes</h2>
+      <div class="campos">
+        <label>Trabajo<span class="campo"><input type="number" name="trabajo" min="1" max="90" required /><span class="unidad">min</span></span></label>
+        <label>Descanso corto<span class="campo"><input type="number" name="corto" min="1" max="30" required /><span class="unidad">min</span></span></label>
+        <label>Descanso largo<span class="campo"><input type="number" name="largo" min="1" max="60" required /><span class="unidad">min</span></span></label>
+        <label>Pomodoros por serie<span class="campo"><input type="number" name="cada" min="2" max="8" required /><span class="unidad"></span></span></label>
+      </div>
+      <label class="casilla"><input type="checkbox" name="sonido" /> Pitido al terminar cada bloque</label>
+      <div class="botones">
+        <button class="boton" value="cancelar" formnovalidate>Cancelar</button>
+        <button class="boton boton--principal" value="guardar">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="dialogo" data-dialogo-historial aria-labelledby="titulo-historial">
+    <form method="dialog">
+      <h2 id="titulo-historial">Los últimos 7 días</h2>
+      <p class="nota">Minutos de trabajo terminados por día.</p>
+      <ol class="dias" data-dias></ol>
+      <div class="botones"><button class="boton boton--principal" value="cerrar">Cerrar</button></div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>

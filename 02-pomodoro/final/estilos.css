@@ -1,0 +1,470 @@
+/* ─────────────────────────────────────────────────────────────
+   Temporizador Pomodoro · el reloj de la piscina
+   Azul de piscina con su azulejo, una esfera blanca y un solo rojo:
+   el de la aguja, el arco de lo que queda y la acción principal.
+   ───────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Saira';
+  src: url('fuentes/saira-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-stretch: 75% 100%;
+  font-display: swap;
+}
+
+:root {
+  --agua: #0b5f78;
+  --agua-honda: #084c60;
+  --junta: rgba(255, 255, 255, 0.07);
+  --linea-agua: rgba(255, 255, 255, 0.28);
+  --texto-agua: #e9f3f2;
+  --texto-agua-suave: #c4dfe2;
+  --blanco: #f6faf9;
+  --gris-esfera: #dfe9e9;
+  --tinta: #111417;
+  --tinta-suave: #44555a;
+  --regla: #c9d6d7;
+  --rojo: #e2231a;
+  --rojo-hondo: #b8160f;
+  --azul-corchera: #1d6fd1;
+  --sombra: 0 18px 40px rgba(0, 0, 0, 0.32);
+
+  --condensada: 'Saira', 'Arial Narrow', sans-serif;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  font: 500 16px/1.4 'Saira', system-ui, sans-serif;
+  color: var(--texto-agua);
+  background-color: var(--agua);
+  /* el azulejo: una junta de 1 px cada 36 px */
+  background-image:
+    linear-gradient(var(--junta) 1px, transparent 1px),
+    linear-gradient(90deg, var(--junta) 1px, transparent 1px);
+  background-size: 36px 36px;
+  background-position: -1px -1px;
+}
+
+::selection { background: var(--rojo); color: #fff; }
+
+:focus-visible { outline: 2px solid var(--blanco); outline-offset: 3px; }
+
+.iconos { display: none; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+kbd {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 6px 1px;
+  font: 600 12px/1.2 'Saira', sans-serif;
+  border: 1px solid var(--linea-agua);
+  color: var(--texto-agua);
+}
+
+/* ── Botones ─────────────────────────────────────────────── */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  font: 600 15px/1 'Saira', sans-serif;
+  color: var(--texto-agua);
+  background: transparent;
+  border: 1px solid var(--linea-agua);
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.boton svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.boton:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.55); }
+.boton:active { background: rgba(255, 255, 255, 0.14); }
+.boton:disabled { cursor: default; opacity: 0.75; background: transparent; border-color: var(--linea-agua); }
+
+.boton--principal {
+  color: #fff;
+  background: var(--rojo);
+  border-color: var(--rojo);
+}
+.boton--principal svg { fill: currentColor; stroke-width: 2.6; }
+.boton--principal:hover { background: var(--rojo-hondo); border-color: var(--rojo-hondo); }
+.boton--principal:focus-visible { outline-color: var(--blanco); }
+
+.boton--chico { min-height: 32px; padding: 0 12px; font-size: 14px; }
+.boton--chico svg { width: 16px; height: 16px; }
+/* sobre el panel blanco de la serie: tinta en vez de agua */
+.boton--tinta { color: var(--tinta); border-color: #8fa6ad; }
+.boton--tinta:hover { background: var(--gris-esfera); border-color: var(--tinta-suave); }
+.boton--tinta:active { background: var(--regla); }
+.boton--tinta:focus-visible { outline-color: var(--tinta); }
+.boton--tinta:disabled { color: var(--tinta-suave); opacity: 0.5; border-color: var(--regla); }
+
+/* ── Barra superior ──────────────────────────────────────── */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 68px;
+  padding: 0 32px;
+  background: var(--agua-honda);
+  border-bottom: 1px solid var(--linea-agua);
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font: 700 22px/1 var(--condensada);
+  font-stretch: 80%;
+  letter-spacing: 0.02em;
+}
+/* el número del pomodoro, como el número pintado de un carril */
+.carril {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  font: 800 21px/1 var(--condensada);
+  font-stretch: 75%;
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta);
+  background: var(--blanco);
+}
+
+.bloques {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--linea-agua);
+  min-width: 0;
+}
+.bloques label { position: relative; display: flex; }
+.bloques label + label { border-left: 1px solid var(--linea-agua); }
+.bloques input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.bloques label > span {
+  padding: 10px 18px;
+  font: 600 15px/1 'Saira', sans-serif;
+  color: var(--texto-agua-suave);
+  white-space: nowrap;
+  transition: background-color 0.15s, color 0.15s;
+}
+.bloques small { margin-left: 5px; font-weight: 500; font-variant-numeric: tabular-nums; opacity: 0.8; }
+.bloques label:hover > span { color: var(--texto-agua); background: rgba(255, 255, 255, 0.06); }
+/* con :has() y no solo con «input:checked + span»: WebKit no repinta el hermano
+   cuando el script cambia qué radio está marcado */
+.bloques input:checked + span,
+.bloques label:has(input:checked) > span { color: var(--tinta); background: var(--blanco); }
+.bloques input:focus-visible + span { outline: 2px solid var(--blanco); outline-offset: 2px; }
+
+.herramientas { display: flex; gap: 10px; margin-left: auto; }
+.corto-solo { display: none; }
+
+/* ── La piscina: el reloj y la serie ─────────────────────── */
+.piscina {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  gap: 40px;
+  align-items: start;
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 32px 40px 28px;
+}
+
+.reloj { display: grid; justify-items: center; gap: 22px; }
+
+.esfera {
+  position: relative;
+  width: min(560px, 100%, calc(100dvh - 250px));
+  min-width: 260px;
+  aspect-ratio: 1;
+  container-type: inline-size;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.22), var(--sombra);
+}
+.esfera svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+/* el bisel negro del reloj, con el punto de los segundos encima */
+.cara { fill: var(--blanco); stroke: var(--tinta); stroke-width: 6; }
+.segundero { transform-box: view-box; transform-origin: 50% 50%; }
+.segundero circle { fill: var(--rojo); }
+.pista { fill: none; stroke: var(--gris-esfera); stroke-width: 9; }
+.arco { fill: none; stroke: var(--rojo); stroke-width: 9; }
+.marcas line { stroke: var(--tinta); stroke-width: 1; }
+.marcas line.grande { stroke-width: 2.6; }
+.numeros text {
+  font: 700 11px var(--condensada);
+  font-stretch: 75%;
+  fill: var(--tinta);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.aguja { transform-box: view-box; transform-origin: 50% 50%; }
+.aguja line { stroke: var(--rojo); stroke-width: 2.4; stroke-linecap: round; }
+.aguja circle { fill: var(--tinta); stroke: var(--rojo); stroke-width: 2.4; }
+
+.lectura {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding-top: 21%;
+  text-align: center;
+  pointer-events: none;
+}
+.tiempo {
+  margin: 0;
+  font: 800 18cqi/0.9 var(--condensada);
+  font-stretch: 75%;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+  /* un halo del color de la esfera: la aguja pasa por debajo de las cifras sin cortarlas */
+  text-shadow:
+    0.03em 0 var(--blanco), -0.03em 0 var(--blanco), 0 0.03em var(--blanco), 0 -0.03em var(--blanco),
+    0.02em 0.02em var(--blanco), -0.02em -0.02em var(--blanco), 0.02em -0.02em var(--blanco), -0.02em 0.02em var(--blanco);
+}
+/* qué bloque es: debajo de la esfera, como la placa de un carril */
+.que {
+  margin: -8px 0 0;
+  font: 600 15px/1.2 'Saira', sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--texto-agua);
+}
+
+.acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.acciones .boton { min-height: 52px; padding: 0 26px; font-size: 18px; }
+.acciones .boton--principal { min-width: 168px; justify-content: center; }
+
+/* ── La serie del día ────────────────────────────────────── */
+.serie {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px 24px 20px;
+  color: var(--tinta);
+  background: var(--blanco);
+  box-shadow: var(--sombra);
+}
+.serie-cabeza { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 12px; margin-bottom: 4px; }
+.serie-cabeza .boton { white-space: nowrap; }
+.serie h2 {
+  margin: 0;
+  font: 700 15px/1 'Saira', sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+
+.carriles { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.carril-fila {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  row-gap: 5px;
+  align-items: center;
+  padding: 2px 4px;
+}
+.carril-fila b {
+  grid-row: 1 / 3;
+  font: 800 23px/1 var(--condensada);
+  font-stretch: 75%;
+  text-align: center;
+}
+.carril-fila .nombre { font: 600 14px/1.1 'Saira', sans-serif; }
+.carril-fila .minutos {
+  grid-row: 1 / 3;
+  grid-column: 3;
+  font: 600 16px/1 'Saira', sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta-suave);
+}
+/* la corchera: largo proporcional a la duración del bloque. Cada flotador es una
+   baldosa que se repite con «round»: siempre entran flotadores enteros, sin cortes */
+.cuerda {
+  --avance: 0;
+  --relleno: var(--tinta);
+  display: block;
+  height: 12px;
+  background-image:
+    linear-gradient(90deg, var(--relleno) calc(var(--avance) * 100%), transparent 0),
+    linear-gradient(90deg, var(--rojo) 0 38.5%, var(--blanco) 38.5% 50%, var(--azul-corchera) 50% 88.5%, var(--blanco) 88.5%);
+  background-size: 100% 100%, 26px 100%;
+  background-repeat: no-repeat, round;
+}
+.descanso .cuerda {
+  background-image:
+    linear-gradient(90deg, var(--relleno) calc(var(--avance) * 100%), transparent 0),
+    linear-gradient(90deg, #8fa6ad 0 66%, var(--blanco) 66%);
+  background-size: 100% 100%, 9px 100%;
+}
+.carril-fila.hecho { color: var(--tinta-suave); }
+.carril-fila.hecho .nombre { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+/* lo terminado queda, pero sin pesar más que el bloque actual */
+.carril-fila.hecho .cuerda { --avance: 1; --relleno: #9aaeb3; }
+.carril-fila.actual { outline: 2px solid var(--rojo); outline-offset: 5px; }
+.carril-fila.actual .minutos { color: var(--tinta); font-weight: 700; }
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 10px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--regla);
+}
+.resumen div { display: flex; flex-direction: column-reverse; justify-content: flex-end; }
+.resumen dt { font: 500 13px/1.3 'Saira', sans-serif; color: var(--tinta-suave); }
+.resumen dd {
+  margin: 0;
+  font: 800 32px/1 var(--condensada);
+  font-stretch: 75%;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Pie ─────────────────────────────────────────────────── */
+.pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 26px;
+  padding: 12px 40px;
+  font-size: 14px;
+  color: var(--texto-agua-suave);
+  border-top: 1px solid var(--linea-agua);
+}
+.pie p { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; margin: 0; }
+.pie .estados { margin-left: auto; justify-content: flex-end; }
+.pantalla { display: inline-flex; align-items: center; gap: 8px; }
+.pantalla::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--blanco); }
+/* «Avisos activados» o «bloqueados» ya no se ven como botón: son un estado */
+.pie .boton:disabled { padding: 0; min-height: 0; border-color: transparent; opacity: 1; color: var(--texto-agua-suave); }
+.pantalla[hidden] { display: none; }
+
+/* ── Diálogos ────────────────────────────────────────────── */
+.dialogo {
+  width: min(440px, calc(100vw - 32px));
+  padding: 0;
+  color: var(--tinta);
+  background: var(--blanco);
+  border: 0;
+  box-shadow: var(--sombra);
+}
+.dialogo::backdrop { background: rgba(4, 32, 42, 0.62); }
+.dialogo form { display: grid; gap: 18px; padding: 24px; }
+.dialogo h2 { margin: 0; font: 700 24px/1 var(--condensada); font-stretch: 80%; }
+.dialogo .nota { margin: -10px 0 0; font-size: 14px; color: var(--tinta-suave); }
+.dialogo :focus-visible { outline-color: var(--tinta); }
+
+.campos { display: grid; gap: 12px; }
+.campos label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  font: 600 15px/1.2 'Saira', sans-serif;
+  border-bottom: 1px solid var(--regla);
+}
+.campo { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; color: var(--tinta-suave); }
+.campo input {
+  width: 76px;
+  appearance: textfield;
+  -moz-appearance: textfield;
+  padding: 7px 8px;
+  font: 700 18px/1 'Saira', sans-serif;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  color: var(--tinta);
+  background: #fff;
+  border: 1px solid #8fa6ad;
+  border-radius: 0;
+  caret-color: var(--rojo);
+}
+.campo input::-webkit-inner-spin-button,
+.campo input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.unidad { width: 28px; }
+.campo input:focus-visible { outline: 2px solid var(--tinta); outline-offset: 1px; }
+.campo input:user-invalid { border-color: var(--rojo); }
+
+.casilla { display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; }
+.casilla input { width: 18px; height: 18px; margin: 0; accent-color: var(--rojo); }
+
+.botones { display: flex; justify-content: flex-end; gap: 10px; }
+.dialogo .boton:not(.boton--principal) { color: var(--tinta); border-color: #8fa6ad; }
+.dialogo .boton:not(.boton--principal):hover { background: var(--gris-esfera); }
+
+.dias { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.dias li {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+.dias li span:first-child { color: var(--tinta-suave); text-transform: capitalize; }
+/* el carril vacío de cada día: una regla fina; un día sin trabajo no lleva corchera */
+.dias li { background: linear-gradient(var(--regla), var(--regla)) 76px 50% / calc(100% - 152px) 1px no-repeat; }
+.dias b { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ── Ancho intermedio: la serie baja debajo del reloj ────── */
+@media (max-width: 1080px) {
+  .piscina { grid-template-columns: minmax(0, 1fr); max-width: 680px; padding: 28px 24px; }
+  .esfera { width: min(520px, 100%); }
+}
+
+/* ── Teléfono ────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .barra { flex-wrap: wrap; gap: 12px; padding: 12px 16px; }
+  .bloques { order: 3; width: 100%; }
+  .bloques label { flex: 1; }
+  .bloques label > span { flex: 1; padding: 11px 6px; text-align: center; font-size: 14px; }
+  .largo-solo { display: none; }
+  .corto-solo { display: inline; }
+  .promesa { display: none; }
+  .boton--icono { width: 40px; padding: 0; justify-content: center; }
+  .boton--icono span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .piscina { padding: 20px 16px; gap: 24px; }
+  .acciones .boton { min-height: 48px; padding: 0 18px; font-size: 17px; }
+  .acciones .boton--principal { min-width: 0; flex-basis: 100%; }
+  .serie { padding: 20px 18px 18px; }
+  .pie { padding: 12px 16px; }
+  .atajos { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
