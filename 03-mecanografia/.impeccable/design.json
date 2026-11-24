@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T12:00:00Z",
+  "title": "Design System: Reto de mecanografía",
+  "extensions": {
+    "colorMeta": {
+      "pared": {
+        "role": "neutral",
+        "displayName": "Pared",
+        "canonical": "#141016",
+        "tonalRamp": ["#0a080b", "#141016", "#1b131d", "#2a1c2c", "#4b3a4a", "#8f7a8d", "#a88fa6", "#f7e9f2"]
+      },
+      "resplandor": {
+        "role": "neutral",
+        "displayName": "Resplandor",
+        "canonical": "#2a1c2c"
+      },
+      "fondo-cartel": {
+        "role": "neutral",
+        "displayName": "Fondo del cartel",
+        "canonical": "#1b131d"
+      },
+      "rosa": {
+        "role": "primary",
+        "displayName": "Tubo rosa",
+        "canonical": "#ff4fb0",
+        "tonalRamp": ["#3d0d28", "#6b1748", "#a8226f", "#e0349a", "#ff4fb0", "#ff85c8", "#ffb9de", "#ffe6f3"]
+      },
+      "cian": {
+        "role": "secondary",
+        "displayName": "Tubo cian",
+        "canonical": "#53f2e6",
+        "tonalRamp": ["#0a3a37", "#11605b", "#1a8f87", "#2cc4b9", "#53f2e6", "#86f6ee", "#b9faf5", "#e6fdfb"]
+      },
+      "encendida": {
+        "role": "tertiary",
+        "displayName": "Letra encendida",
+        "canonical": "#fff2c7",
+        "tonalRamp": ["#4a3a10", "#7a6119", "#b38f2a", "#e6bd48", "#ffd66b", "#ffe49a", "#fff2c7", "#fffaeb"]
+      },
+      "ambar": {
+        "role": "tertiary",
+        "displayName": "Halo ámbar",
+        "canonical": "rgba(255, 214, 107, 0.85)"
+      },
+      "error": {
+        "role": "tertiary",
+        "displayName": "Error",
+        "canonical": "#ff3b3b",
+        "tonalRamp": ["#3f0707", "#6e0d0d", "#a81616", "#e02626", "#ff3b3b", "#ff7373", "#ffa8a8", "#ffe3e3"]
+      },
+      "apagada": {
+        "role": "neutral",
+        "displayName": "Letra apagada",
+        "canonical": "#8f7a8d"
+      },
+      "texto": {
+        "role": "neutral",
+        "displayName": "Texto de la pared",
+        "canonical": "#f7e9f2"
+      },
+      "rotulo": {
+        "role": "neutral",
+        "displayName": "Rótulo",
+        "canonical": "#a88fa6"
+      }
+    },
+    "typographyMeta": {
+      "nombre": { "displayName": "Nombre", "purpose": "«Mecanografía» en Monoton cian sobre el borde del cartel; el único uso de Monoton." },
+      "resultado": { "displayName": "Resultado", "purpose": "Palabras por minuto al terminar, en letra encendida con halo ámbar; 56px en pantallas bajas." },
+      "cifra": { "displayName": "Cifra", "purpose": "Las cuatro cifras de las esquinas, con halo rosa; 34px en teléfono." },
+      "texto": { "displayName": "Texto", "purpose": "El texto del cartel, tres renglones visibles de 1.6em." },
+      "dato": { "displayName": "Dato", "purpose": "Datos del resultado y cifras de la tabla de récords; 22px en pantallas bajas." },
+      "titulo": { "displayName": "Título", "purpose": "Título del diálogo de récords en rosa; «Récord nuevo» en cian con el mismo estilo." },
+      "cuerpo": { "displayName": "Cuerpo", "purpose": "Texto base; la ayuda bajo el cartel a 16px." },
+      "tubo": { "displayName": "Tubo", "purpose": "Pastillas y botones." },
+      "rotulo": { "displayName": "Rótulo", "purpose": "Nombre de cada cifra de las esquinas y de las columnas de récords, mayúsculas espaciadas." }
+    },
+    "shadows": [
+      { "name": "halo-rosa", "value": "0 0 26px rgba(255, 79, 176, 0.55), inset 0 0 26px rgba(255, 79, 176, 0.25)", "purpose": "El tubo del cartel; se suma 0 0 140px rgba(255, 79, 176, 0.1) como luz sobre la pared." },
+      { "name": "halo-cian", "value": "0 0 16px rgba(83, 242, 230, 0.75)", "purpose": "Pastilla elegida, tubo lleno, tubo al pasar el mouse, récord nuevo." },
+      { "name": "halo-dialogo", "value": "0 0 26px rgba(83, 242, 230, 0.4), inset 0 0 22px rgba(83, 242, 230, 0.15)", "purpose": "El tubo cian del diálogo de récords." },
+      { "name": "brillo-letra", "value": "text-shadow: 0 0 10px rgba(255, 214, 107, 0.85)", "purpose": "Letra encendida; el error usa 0 0 12px #ff3b3b, las cifras de las esquinas 0 0 18px rgba(255, 79, 176, 0.5), la cifra del resultado 0 0 22px ámbar." },
+      { "name": "fondo-dialogo", "value": "rgba(10, 7, 11, 0.78)", "purpose": "El ::backdrop del diálogo de récords." }
+    ],
+    "motion": [
+      { "name": "curva", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Curva de todas las transiciones: renglón, tubos, aviso de foco perdido." },
+      { "name": "arrancar", "value": "steps(1, end), opacidad 0.15 / 1 / 0.3 / 1 / 0.55 / 1", "purpose": "El tubo que duda antes de prenderse: cartel 1000ms, nombre 1000ms con 250ms de retraso, diálogo 700ms, récord nuevo 900ms. Una vez por aparición." },
+      { "name": "chispa", "value": "260ms steps(1, end)", "purpose": "La letra fallada parpadea y queda roja." },
+      { "name": "titilar", "value": "1.1s steps(1, end) infinite", "purpose": "El subrayado cian del cursor mientras espera; quieto mientras se escribe." },
+      { "name": "renglon", "value": "transform 220ms", "purpose": "El texto sube un renglón cuando el cursor llega al tercero." },
+      { "name": "letra", "value": "color y text-shadow 120ms ease-out", "purpose": "El encendido de cada letra." },
+      { "name": "tubo", "value": "160ms", "purpose": "Fondo, color y halo de pastillas y botones." },
+      { "name": "reducido", "value": "animation: none; transition: none", "purpose": "prefers-reduced-motion: reduce deja todo encendido y estático." }
+    ],
+    "breakpoints": [
+      { "name": "telefono", "value": "760px" },
+      { "name": "escritorio-bajo", "value": "min-width: 761px and max-height: 820px" },
+      { "name": "tactil", "value": "hover: none and pointer: coarse" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Tubo lleno",
+      "kind": "button",
+      "refersTo": "tubo-lleno",
+      "description": "La acción principal de la superficie, relleno cian con halo; una por superficie. Puede llevar su tecla de atajo.",
+      "html": "<div style=\"background:#1b131d;padding:24px\"><button class=\"ds-tubo ds-tubo--lleno\">Otro texto <kbd class=\"ds-kbd\">Enter</kbd></button></div>",
+      "css": ".ds-tubo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 20px; border: 2px solid #53f2e6; border-radius: 24px; background: transparent; font: 400 16px/1 Kanit, system-ui, sans-serif; color: #53f2e6; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-tubo:hover { box-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-tubo:active { translate: 0 1px; } .ds-tubo:focus-visible { outline: 2px solid #53f2e6; outline-offset: 4px; } .ds-tubo--lleno { background: #53f2e6; color: #141016; box-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-kbd { display: inline-block; padding: 0 0.45em; border: 1px solid currentColor; border-radius: 6px; font: inherit; font-size: 0.82em; line-height: 1.5; opacity: 0.85; }"
+    },
+    {
+      "name": "Tubo",
+      "kind": "button",
+      "refersTo": "tubo",
+      "description": "Botón secundario: solo el tubo cian; se enciende el halo al pasar el mouse.",
+      "html": "<div style=\"background:#1b131d;padding:24px\"><button class=\"ds-tubo\">Repetir el mismo <kbd class=\"ds-kbd\">Esc</kbd></button> <button class=\"ds-tubo\">Cerrar</button></div>",
+      "css": ".ds-tubo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 20px; border: 2px solid #53f2e6; border-radius: 24px; background: transparent; font: 400 16px/1 Kanit, system-ui, sans-serif; color: #53f2e6; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-tubo:hover { box-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-tubo:active { translate: 0 1px; } .ds-tubo:focus-visible { outline: 2px solid #53f2e6; outline-offset: 4px; } .ds-kbd { display: inline-block; padding: 0 0.45em; border: 1px solid currentColor; border-radius: 6px; font: inherit; font-size: 0.82em; line-height: 1.5; opacity: 0.85; }"
+    },
+    {
+      "name": "Pastillas de duración",
+      "kind": "nav",
+      "refersTo": "pastilla",
+      "description": "30 s / 60 s / 120 s como radios en tubo cian, la elegida llena; seguidas del tubo «Récords».",
+      "html": "<nav class=\"ds-pastillas\"><label><input type=\"radio\" name=\"ds-d\"><span>30 s</span></label><label><input type=\"radio\" name=\"ds-d\" checked><span>60 s</span></label><label><input type=\"radio\" name=\"ds-d\"><span>120 s</span></label><button class=\"ds-pastilla\">Récords</button></nav>",
+      "css": ".ds-pastillas { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 24px; background: #141016; } .ds-pastillas label { position: relative; } .ds-pastillas input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; } .ds-pastillas span, .ds-pastilla { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 20px; border: 2px solid #53f2e6; border-radius: 24px; background: transparent; font: 400 16px/1 Kanit, system-ui, sans-serif; color: #53f2e6; cursor: pointer; transition: background-color 160ms cubic-bezier(0.16, 1, 0.3, 1), color 160ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-pastillas label:hover span, .ds-pastilla:hover { box-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-pastillas label:has(input:checked) span { background: #53f2e6; color: #141016; box-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-pastillas input:focus-visible + span, .ds-pastilla:focus-visible { outline: 2px solid #53f2e6; outline-offset: 4px; }"
+    },
+    {
+      "name": "El cartel",
+      "kind": "custom",
+      "refersTo": "cartel",
+      "description": "El tubo rosa con el nombre en Monoton cian sobre el borde y el texto dentro: letras encendidas, una fallada, el cursor y lo apagado.",
+      "html": "<div style=\"background:#141016;padding:40px 24px 24px\"><section class=\"ds-cartel\"><h1 class=\"ds-nombre\">Mecanografía</h1><p class=\"ds-texto\"><span class=\"ok\">con aceite de oliva y un poco de sal. La niña guard</span><span class=\"err\">ó</span><span class=\"ok\"> las semillas de girasol en un frasco de vi</span><span class=\"cursor\">d</span>rio, junto a la ventana de la cocina.</p></section></div>",
+      "css": ".ds-cartel { position: relative; max-width: 720px; margin: 0 auto; padding: 40px 36px 32px; border: 3px solid #ff4fb0; border-radius: 28px; background: #1b131d; box-shadow: 0 0 26px rgba(255, 79, 176, 0.55), inset 0 0 26px rgba(255, 79, 176, 0.25), 0 0 140px rgba(255, 79, 176, 0.1); } .ds-nombre { position: absolute; top: 0; left: 50%; translate: -50% -55%; margin: 0; padding: 0 20px; background: linear-gradient(transparent 38%, #1b131d 38% 64%, transparent 64%); font: 400 28px/1 Monoton, Kanit, sans-serif; color: #53f2e6; text-shadow: 0 0 14px #53f2e6; white-space: nowrap; } .ds-texto { margin: 0; font: 300 26px/1.6 Kanit, system-ui, sans-serif; color: #8f7a8d; } .ds-texto .ok { color: #fff2c7; text-shadow: 0 0 10px rgba(255, 214, 107, 0.85); } .ds-texto .err { color: #ff3b3b; text-shadow: 0 0 12px #ff3b3b; } .ds-texto .cursor { color: #fff; box-shadow: inset 0 -3px 0 #53f2e6; }"
+    },
+    {
+      "name": "Cifra de esquina",
+      "kind": "card",
+      "description": "Rótulo en mayúsculas espaciadas y cifra 600 tabular con halo rosa; el récord nuevo se enciende en cian, el vacío queda apagado.",
+      "html": "<div class=\"ds-pared\"><p class=\"ds-cifra\">Palabras por minuto<b>42</b></p><p class=\"ds-cifra ds-cifra--nuevo\">Récord<b>29</b></p><p class=\"ds-cifra ds-cifra--vacio\">Récord<b>—</b></p></div>",
+      "css": ".ds-pared { display: flex; gap: 40px; padding: 24px; background: #141016; } .ds-cifra { margin: 0; font: 300 14px/1.3 Kanit, system-ui, sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: #a88fa6; } .ds-cifra b { display: block; margin-top: 4px; font-size: 44px; font-weight: 600; line-height: 1; letter-spacing: 0; color: #f7e9f2; font-variant-numeric: tabular-nums; text-shadow: 0 0 18px rgba(255, 79, 176, 0.5); } .ds-cifra--nuevo b { color: #53f2e6; text-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-cifra--vacio b { color: #8f7a8d; text-shadow: none; }"
+    },
+    {
+      "name": "Letras más falladas",
+      "kind": "chip",
+      "refersTo": "letra-fallada",
+      "description": "Hasta tres letras en recuadros de borde rojo con su halo, en el pie del resultado.",
+      "html": "<p class=\"ds-falladas\">Las que más fallaste: <span><b>r</b><b>espacio</b><b>ó</b></span></p>",
+      "css": ".ds-falladas { margin: 0; padding: 24px; background: #1b131d; font: 300 18px/1.5 Kanit, system-ui, sans-serif; color: #a88fa6; } .ds-falladas span { color: #f7e9f2; } .ds-falladas b { display: inline-block; min-width: 1.6em; margin-left: 6px; padding: 0 0.3em; border: 2px solid #ff3b3b; border-radius: 8px; font-weight: 400; text-align: center; box-shadow: 0 0 10px rgba(255, 59, 59, 0.45); }"
+    },
+    {
+      "name": "Diálogo de récords",
+      "kind": "card",
+      "refersTo": "dialogo",
+      "description": "Tubo cian de 3px con título rosa y columnas de récords: cifra encendida, detalle y fecha.",
+      "html": "<div class=\"ds-dialogo\"><h2>Récords</h2><section><h3>60 segundos</h3><ol><li><b>42</b><span>ppm · 98 %</span><span>24 nov</span></li><li><b>29</b><span>ppm · 95 %</span><span>23 nov</span></li></ol></section><div class=\"ds-acciones\"><button class=\"ds-tubo\">Cerrar</button></div></div>",
+      "css": ".ds-dialogo { max-width: 360px; padding: 40px 32px 32px; border: 3px solid #53f2e6; border-radius: 28px; background: #1b131d; color: #f7e9f2; font: 300 18px/1.5 Kanit, system-ui, sans-serif; box-shadow: 0 0 26px rgba(83, 242, 230, 0.4), inset 0 0 22px rgba(83, 242, 230, 0.15); } .ds-dialogo h2 { margin: 0 0 24px; font: 600 22px/1 Kanit, system-ui, sans-serif; letter-spacing: 0.16em; text-transform: uppercase; color: #ff4fb0; text-shadow: 0 0 12px rgba(255, 79, 176, 0.8); } .ds-dialogo h3 { margin: 0 0 8px; font-size: 14px; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: #a88fa6; } .ds-dialogo ol { margin: 0; padding: 0; list-style: none; } .ds-dialogo li { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 0 10px; padding: 8px 0; border-top: 1px solid rgba(168, 143, 166, 0.25); } .ds-dialogo li b { grid-row: span 2; font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; color: #fff2c7; text-shadow: 0 0 10px rgba(255, 214, 107, 0.85); } .ds-dialogo li span { font-size: 14px; color: #a88fa6; } .ds-acciones { margin-top: 28px; text-align: right; } .ds-tubo { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 20px; border: 2px solid #53f2e6; border-radius: 24px; background: transparent; font: 400 16px/1 Kanit, system-ui, sans-serif; color: #53f2e6; cursor: pointer; transition: box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-tubo:hover { box-shadow: 0 0 16px rgba(83, 242, 230, 0.75); } .ds-tubo:focus-visible { outline: 2px solid #53f2e6; outline-offset: 4px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El rótulo de neón que se enciende letra por letra",
+    "overview": "Escribir es encender un cartel. El texto vive dentro de un tubo rosa colgado en una pared oscura: antes de escribirlo está apagado (un tubo sin corriente, que se lee pero no brilla); cada letra escrita bien se enciende en un blanco cálido con halo ámbar, y el error parpadea y queda rojo. El nombre, «Mecanografía», es un segundo tubo, cian, montado sobre el borde superior del cartel. Las cuatro cifras de la prueba (quedan, palabras por minuto, precisión, récord) están clavadas en las esquinas de la pared como letreros chicos.\n\nEl sistema es una pared y tres tubos. La pared (`pared`, con un resplandor radial `resplandor` al centro) no brilla: aloja rótulos chicos y cifras. Lo que brilla es tubo, y cada tubo tiene un trabajo: el rosa es el cartel (y el título del diálogo de récords), el cian es lo que se toca (nombre, cursor, pastillas, botones, la línea del ritmo, el foco), el cálido es lo escrito bien, el rojo es el error. El brillo es el material, no un adorno: un elemento que no es tubo no lleva halo. La tipografía es Kanit para todo, ligera (300) para leer y escribir, 600 para las cifras; Monoton aparece una sola vez, en el nombre.\n\nSe niega al campo gris monoespaciado de la categoría (Monkeytype, 10FastFingers), donde el texto es una caja de formulario. Es un producto aparte, con su propio mundo: no usa el pizarrón del curso ni los mundos de los proyectos 1 y 2. Se abre con doble clic (file://), sin librerías, con las fuentes en `fuentes/`.",
+    "keyCharacteristics": [
+      "Pared casi negra con un resplandor ciruela al centro; nunca un fondo claro.",
+      "Un cartel de tubo rosa (3px, radio 28px, halo rosa) con el texto dentro, en tres renglones que suben a medida que escribes.",
+      "Letras en tres estados: apagada, encendida con halo ámbar, error rojo que parpadea.",
+      "Cian para todo lo que se toca: pastillas y botones en tubo de 2px, cursor, foco.",
+      "Cuatro cifras en las esquinas, con rótulo en mayúsculas espaciadas y cifra 600 tabular con halo rosa.",
+      "El resultado aparece dentro del mismo cartel; no hay otra pantalla."
+    ],
+    "rules": [
+      { "name": "The Todo Lo Que Brilla Es Tubo Rule", "body": "El halo (`text-shadow`, `box-shadow` o `drop-shadow` de color) es el material del tubo y solo lo llevan el cartel, los tubos cian, las letras encendidas o falladas y las cifras. La pared, los rótulos y la ayuda no brillan.", "section": "colors" },
+      { "name": "The Un Color Un Trabajo Rule", "body": "Rosa es el cartel; cian, lo que se toca y dónde estás; cálido, lo escrito bien; rojo, el error. Un color no cambia de trabajo: un botón nunca es rosa, un error nunca es cian.", "section": "colors" },
+      { "name": "The Monoton Una Vez Rule", "body": "Monoton es el nombre y nada más. Todo lo demás es Kanit; la jerarquía se gana con peso (300 a 600), tamaño y brillo.", "section": "typography" },
+      { "name": "The Cifras Tabulares Rule", "body": "Toda cifra que cambia mientras se mira (reloj, palabras por minuto, precisión, récord, datos, ejes de la gráfica) va con `tabular-nums`.", "section": "typography" },
+      { "name": "The El Cartel Manda Rule", "body": "El cartel es lo primero que se ve y lo único que crece; las cifras van a las esquinas, lejos de él, y el resultado se muestra dentro del mismo cartel, sin cambiar de pantalla ni empujarlo fuera de la ventana.", "section": "layout" },
+      { "name": "The Luz No Sombra Rule", "body": "Ningún halo se desplaza: todo es `0 0 Npx` del color del tubo. Una sombra negra desplazada no existe en esta pared.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do poner el texto dentro del cartel de tubo rosa (3px, radio 28px, relleno `fondo-cartel`) y mostrar el resultado en el mismo cartel.",
+      "Do usar los tres estados de letra: apagada `apagada`, encendida `encendida` con halo ámbar, error `error` que parpadea y queda rojo.",
+      "Do dibujar todo lo que se toca como tubo cian de 2px y radio 24px, con la acción principal llena; una por superficie.",
+      "Do hacer brillar solo lo que es tubo, con halos `0 0 Npx` del color del tubo.",
+      "Do escribir toda cifra en Kanit 600 con `tabular-nums`.",
+      "Do mantener el texto sin escribir en `apagada` sobre el relleno opaco del cartel, para que se lea a 4.5:1.",
+      "Do respetar `prefers-reduced-motion`: sin parpadeos, sin titileo, sin transiciones."
+    ],
+    "donts": [
+      "Don't poner en los textos para escribir ni en la interfaz nada que no sea letras y signos de puntuación.",
+      "Don't convertir el texto en un campo gris monoespaciado como Monkeytype o 10FastFingers; el texto vive en el cartel.",
+      "Don't usar fondos claros: la pared es siempre oscura.",
+      "Don't poner halo a la pared, a los rótulos o a la ayuda, ni usar sombras negras desplazadas.",
+      "Don't cambiar el trabajo de un color: botones siempre cian, errores siempre rojos, el cartel siempre rosa.",
+      "Don't usar Monoton fuera del nombre ni añadir otra familia tipográfica.",
+      "Don't dejar el cartel transparente ni oscurecer la letra apagada por debajo de `apagada`."
+    ]
+  }
+}

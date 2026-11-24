@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reto de mecanografía</title>
+  <meta name="description" content="Escribe un texto en español contra reloj y mide tus palabras por minuto, tu precisión y las letras que más fallas." />
+  <meta name="theme-color" content="#141016" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1.5' y='3.5' width='17' height='13' rx='4' fill='%23141016' stroke='%23FF4FB0' stroke-width='2'/%3E%3Cpath d='M6 13.5h8' stroke='%2353F2E6' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <main class="pared" data-pared>
+    <p class="cifra cifra--quedan"><span class="cifra__nombre">Quedan</span><b data-quedan>1:00</b></p>
+    <p class="cifra cifra--ppm"><span class="cifra__nombre">Palabras por minuto</span><b data-ppm>0</b></p>
+
+    <section class="cartel" data-cartel data-fase="listo" aria-labelledby="nombre">
+      <h1 class="nombre" id="nombre">Mecanografía</h1>
+
+      <div class="vista-texto" data-vista-texto>
+        <label class="sr-only" for="entrada">Escribe el texto del cartel</label>
+        <input id="entrada" class="entrada" data-entrada type="text" autocomplete="off" autocapitalize="off"
+          autocorrect="off" spellcheck="false" enterkeyhint="done" aria-describedby="texto-leible ayuda" />
+        <p class="sr-only" id="texto-leible" data-texto-leible></p>
+        <div class="ventana" aria-hidden="true">
+          <p class="texto" data-texto></p>
+        </div>
+        <p class="sin-foco" aria-hidden="true">Haz clic aquí para seguir escribiendo<span class="solo-teclado">, o pulsa una letra</span></p>
+      </div>
+
+      <div class="vista-resultado" data-vista-resultado hidden>
+        <div class="resultado__cabeza">
+          <p class="resultado__ppm"><b data-r-ppm>0</b> palabras por minuto</p>
+          <p class="resultado__record" data-r-record hidden>Récord nuevo</p>
+        </div>
+
+        <dl class="resultado__datos">
+          <div><dt>Precisión</dt><dd data-r-precision>100 %</dd></div>
+          <div><dt>Letras bien</dt><dd data-r-bien>0</dd></div>
+          <div><dt>Errores</dt><dd data-r-errores>0</dd></div>
+          <div><dt>Tilde, ñ o diéresis</dt><dd data-r-tildes>0</dd></div>
+        </dl>
+
+        <figure class="ritmo" data-ritmo>
+          <svg class="grafica" data-grafica viewBox="0 0 800 130" role="img" aria-labelledby="grafica-titulo">
+            <title id="grafica-titulo" data-grafica-titulo>Tu ritmo segundo a segundo</title>
+          </svg>
+          <figcaption>Tu ritmo, segundo a segundo. Cada punto rojo marca un segundo con errores: cuanto más grande, más errores.</figcaption>
+        </figure>
+
+        <div class="resultado__pie">
+          <p class="falladas" data-r-falladas-linea>Las que más fallaste: <span data-r-falladas></span></p>
+          <div class="acciones">
+            <button type="button" class="tubo tubo--lleno" data-otro>Otro texto <kbd>Enter</kbd></button>
+            <button type="button" class="tubo" data-repetir>Repetir el mismo <kbd>Esc</kbd></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="avisos">
+        <p class="ayuda" id="ayuda" data-ayuda>El reloj arranca con la primera letra.<span class="solo-teclado"> <kbd>Esc</kbd> empieza de nuevo.</span></p>
+        <p class="mayus" data-mayus hidden>Bloq Mayús está activado</p>
+      </div>
+    </section>
+
+    <p class="cifra cifra--precision"><span class="cifra__nombre">Precisión</span><b data-precision>100 %</b></p>
+
+    <nav class="pastillas" aria-label="Duración y récords">
+      <fieldset class="duraciones">
+        <legend class="sr-only">Duración</legend>
+        <label><input type="radio" name="duracion" value="30" /><span>30 s</span></label>
+        <label><input type="radio" name="duracion" value="60" checked /><span>60 s</span></label>
+        <label><input type="radio" name="duracion" value="120" /><span>120 s</span></label>
+      </fieldset>
+      <button type="button" class="tubo" data-abrir-records>Récords</button>
+    </nav>
+
+    <p class="cifra cifra--record" data-cifra-record><span class="cifra__nombre">Récord</span><b data-record>—</b></p>
+  </main>
+
+  <dialog class="dialogo" data-dialogo-records aria-labelledby="records-titulo">
+    <h2 id="records-titulo">Récords</h2>
+    <div class="tablas" data-tablas></div>
+    <form method="dialog">
+      <button class="tubo" value="cerrar">Cerrar</button>
+    </form>
+  </dialog>
+
+  <p class="sr-only" aria-live="polite" data-anuncio></p>
+
+  <script src="app.js"></script>
+</body>
+</html>

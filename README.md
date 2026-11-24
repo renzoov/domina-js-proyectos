@@ -10,6 +10,7 @@ El HTML y el CSS de cada proyecto ya vienen hechos. Tú escribes el JavaScript p
 |---|---|---|---|---|
 | 1 | [Generador de paletas](01-generador-de-paletas/) | Fácil | [Guía](https://domina-js.pages.dev/proyectos/generador-de-paletas) | [Pruébalo](https://domina-js-proyectos.pages.dev/01-generador-de-paletas/final/) |
 | 2 | [Temporizador Pomodoro](02-pomodoro/) | Fácil | [Guía](https://domina-js.pages.dev/proyectos/pomodoro) | [Pruébalo](https://domina-js-proyectos.pages.dev/02-pomodoro/final/) |
+| 3 | [Reto de mecanografía](03-mecanografia/) | Fácil | [Guía](https://domina-js.pages.dev/proyectos/mecanografia) | [Pruébalo](https://domina-js-proyectos.pages.dev/03-mecanografia/final/) |
 
 Cada demo está en `domina-js-proyectos.pages.dev/<carpeta>/final/`. Los demás proyectos se publican de a uno. La lista completa está en [domina-js.pages.dev/proyectos](https://domina-js.pages.dev/proyectos).
 
