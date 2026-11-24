@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T21:00:00Z",
+  "title": "Design System: Mi sala",
+  "extensions": {
+    "colorMeta": {
+      "fondo": { "role": "neutral", "displayName": "Fondo", "canonical": "#F3EDFB", "tonalRamp": ["#241d3b", "#3E3360", "#635690", "#9D8FC7", "#C9B9EF", "#D9CCF5", "#E4DAF9", "#F3EDFB"] },
+      "pared": { "role": "neutral", "displayName": "Pared", "canonical": "#D9CCF5" },
+      "pared-clara": { "role": "neutral", "displayName": "Pared clara", "canonical": "#E4DAF9" },
+      "puntos": { "role": "neutral", "displayName": "Puntos de la pared", "canonical": "#C9B9EF" },
+      "piso": { "role": "neutral", "displayName": "Piso durazno", "canonical": "#F7D9C4", "tonalRamp": ["#4a2c19", "#7a4a2b", "#a96d48", "#d29873", "#EFC6AA", "#F7D9C4", "#fbe8db", "#fdf5ef"] },
+      "linea": { "role": "primary", "displayName": "Violeta de contorno", "canonical": "#6B5B95", "tonalRamp": ["#1e1830", "#3E3360", "#544679", "#6B5B95", "#8577ad", "#9D8FC7", "#B9AEDB", "#e2dcf2"] },
+      "tinta": { "role": "neutral", "displayName": "Tinta", "canonical": "#3E3360" },
+      "tinta-suave": { "role": "neutral", "displayName": "Tinta suave", "canonical": "#635690" },
+      "amarillo": { "role": "secondary", "displayName": "Amarillo cuenta", "canonical": "#FFE58F", "tonalRamp": ["#3d3206", "#6b590f", "#a68a1c", "#d9b738", "#f5d461", "#FFE58F", "#fff0c0", "#fffaeb"] },
+      "rosa": { "role": "tertiary", "displayName": "Rosa mueble", "canonical": "#FFC7D9", "tonalRamp": ["#3d1424", "#6e2a45", "#a84a6f", "#E595B2", "#F2A9C3", "#FFC7D9", "#ffdfe9", "#fff3f7"] },
+      "blanco": { "role": "neutral", "displayName": "Blanco", "canonical": "#FFFFFF" },
+      "apagado": { "role": "neutral", "displayName": "Apagado", "canonical": "#B9AEDB" },
+      "error": { "role": "error", "displayName": "Error", "canonical": "#B4234A" },
+      "error-fondo": { "role": "error", "displayName": "Fondo de error", "canonical": "#FCEFF3" }
+    },
+    "typographyMeta": {
+      "sala": { "displayName": "Sala", "purpose": "«Mi sala» en `linea`; 34px hasta 820px." },
+      "ficha": { "displayName": "Ficha", "purpose": "El título de la obra en la ficha, en `linea`, balanceado." },
+      "museo": { "displayName": "Museo", "purpose": "«Obras del museo» en `linea`." },
+      "destacado": { "displayName": "Destacado", "purpose": "El autor en la ficha; el título del aviso usa 800." },
+      "obra": { "displayName": "Obra", "purpose": "El título en la lista, como mucho dos líneas." },
+      "cuerpo": { "displayName": "Cuerpo", "purpose": "Texto base." },
+      "lectura": { "displayName": "Lectura", "purpose": "La descripción de la ficha, hasta 65ch." },
+      "detalle": { "displayName": "Detalle", "purpose": "Autor · año en la lista y los créditos, en `tinta-suave`; las etiquetas de la ficha usan 800." },
+      "accion": { "displayName": "Acción", "purpose": "Los botones de píldora; 16px en «Colgar en mi sala»." },
+      "cuenta": { "displayName": "Cuenta", "purpose": "«n de 3 964», tabular." }
+    },
+    "shadows": [
+      { "name": "apoyo", "value": "0 3px 0 rgba(107, 91, 149, .22) (al apretar: none y baja 2px)", "purpose": "Los botones de píldora." },
+      { "name": "ficha", "value": "0 10px 0 rgba(107, 91, 149, .25)", "purpose": "La ficha abierta, sobre el fondo rgba(62, 51, 96, .55)." },
+      { "name": "cuadro-colgado", "value": "rect rgba(107, 91, 149, .25) desplazado 4px × 5px", "purpose": "Cada cuadro en la pared de la sala." }
+    ],
+    "motion": [
+      { "name": "asentarse", "value": "translateY(-36px) rotate(-7deg) opacity 0 → translateY(3px) rotate(4deg) → rotate(-2deg) → none; 700ms cubic-bezier(.2, .8, .2, 1); transform-origin 50% 0", "purpose": "Al colgar, el cuadro cae en la pared y se asienta con un pequeño rebote (animate() en app.js)." },
+      { "name": "aparecer", "value": "opacity 0, translateY(12px) → none; 250ms ease-out", "purpose": "La ficha al abrirse." },
+      { "name": "latido", "value": "background fondo → pared-clara; 1.2s ease-in-out infinite alternate", "purpose": "Las barras de las tarjetas de espera." },
+      { "name": "inclinar", "value": "rotate(-2deg); 150ms ease-out", "purpose": "La miniatura al pasar el mouse." },
+      { "name": "reducido", "value": "sin animate(); animation y transition 0.01ms", "purpose": "prefers-reduced-motion: reduce; el cuadro aparece sin rebote." }
+    ],
+    "breakpoints": [
+      { "name": "mediana", "value": "1100px" },
+      { "name": "telefono", "value": "820px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón «Colgar»",
+      "kind": "button",
+      "refersTo": "colgar",
+      "description": "Píldora con contorno y sombra de apoyo: en reposo lila, «En tu sala» violeta, «Sala llena» apagada; la grande va en la ficha.",
+      "html": "<div class=\"ds-botones\"><button class=\"ds-colgar\"><svg class=\"ds-icono\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><circle cx=\"10\" cy=\"2.6\" r=\"1.4\"/><path d=\"M10 2.6L5 8M10 2.6L15 8\" fill=\"none\"/><rect x=\"3\" y=\"8\" width=\"14\" height=\"10\" rx=\"1\" fill=\"none\"/><path d=\"M5.5 15.5l3-3.2 2.2 2.2 1.6-1.6 2.2 2.6\" fill=\"none\" stroke-width=\"1.6\"/></svg>Colgar</button><button class=\"ds-colgar ds-colgada\"><svg class=\"ds-icono\" viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M4 10.5l4 4 8-9\" fill=\"none\"/></svg>En tu sala</button><button class=\"ds-colgar\" aria-disabled=\"true\">Sala llena</button><button class=\"ds-colgar ds-grande\">Colgar en mi sala</button></div>",
+      "css": ".ds-botones { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; background: #FFFFFF; } .ds-colgar { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 5px 14px 5px 10px; border: 3px solid #6B5B95; border-radius: 999px; background: #D9CCF5; color: #3E3360; font: 800 14px/1 'Nunito', system-ui, sans-serif; cursor: pointer; box-shadow: 0 3px 0 rgba(107, 91, 149, .22); transition: transform .15s ease-out, background-color .15s; } .ds-colgar:hover { background: #E4DAF9; } .ds-colgar:active { transform: translateY(2px); box-shadow: none; } .ds-colgar:focus-visible { outline: 3px solid #3E3360; outline-offset: 3px; } .ds-colgada { background: #6B5B95; color: #FFFFFF; } .ds-colgada:hover { background: #3E3360; } .ds-colgar[aria-disabled='true'] { background: #FFFFFF; border-color: #B9AEDB; color: #635690; box-shadow: none; cursor: not-allowed; } .ds-grande { min-height: 48px; padding: 8px 20px 8px 14px; font-size: 16px; } .ds-icono { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; fill: currentColor; }"
+    },
+    {
+      "name": "Tarjeta de obra",
+      "kind": "card",
+      "refersTo": "obra",
+      "description": "Miniatura enmarcada como un cuadro, título, autor · año y «Colgar»; la miniatura se inclina al pasar el mouse.",
+      "html": "<ul class=\"ds-obras\"><li class=\"ds-obra\"><button class=\"ds-ver\" aria-label=\"Ver la ficha\"><svg viewBox=\"0 0 80 100\"><rect width=\"80\" height=\"100\" fill=\"#8aa6c9\"/><rect y=\"62\" width=\"80\" height=\"38\" fill=\"#7a9a5a\"/><circle cx=\"58\" cy=\"26\" r=\"10\" fill=\"#f4e2a1\"/></svg></button><div class=\"ds-pie\"><div><h3 lang=\"en\">Landscape with a River</h3><p>Anónimo · 1650</p></div><button class=\"ds-colgar\">Colgar</button></div></li></ul>",
+      "css": ".ds-obras { width: 372px; margin: 0; padding: 24px; list-style: none; background: #FFFFFF; font: 400 16px/1.5 'Nunito', system-ui, sans-serif; color: #3E3360; } .ds-obra { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 14px; padding: 10px 12px 10px 10px; border: 3px solid #E4DAF9; border-radius: 14px; background: #FFFFFF; transition: border-color .2s; } .ds-obra:hover { border-color: #D9CCF5; } .ds-ver { display: grid; place-items: center; width: 96px; height: 96px; padding: 5px; border: 3px solid #6B5B95; border-radius: 4px; background: #FFFFFF; cursor: zoom-in; transition: transform .15s ease-out; } .ds-ver:hover { transform: rotate(-2deg); } .ds-ver svg { height: 100%; } .ds-ver:focus-visible { outline: 3px solid #3E3360; outline-offset: 3px; } .ds-pie { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; } .ds-pie h3 { margin: 0; font-weight: 800; font-size: 16px; line-height: 1.25; } .ds-pie p { margin: 2px 0 0; font-size: 14px; color: #635690; } .ds-colgar { min-height: 36px; padding: 5px 14px; border: 3px solid #6B5B95; border-radius: 999px; background: #D9CCF5; color: #3E3360; font: 800 14px/1 'Nunito', system-ui, sans-serif; box-shadow: 0 3px 0 rgba(107, 91, 149, .22); cursor: pointer; }"
+    },
+    {
+      "name": "Cabecera del museo",
+      "kind": "nav",
+      "refersTo": "cuenta",
+      "description": "«Obras del museo» en 900 violeta y la cuenta amarilla con contorno, sobre una línea lila.",
+      "html": "<header class=\"ds-cabeza\"><h2>Obras del museo</h2><span class=\"ds-cuenta\">24 de 3 964</span></header>",
+      "css": ".ds-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 372px; padding: 26px 24px 16px; background: #FFFFFF; border-bottom: 3px solid #E4DAF9; font-family: 'Nunito', system-ui, sans-serif; } .ds-cabeza h2 { margin: 0; font-weight: 900; font-size: 22px; color: #6B5B95; } .ds-cuenta { padding: 4px 12px; border-radius: 999px; background: #FFE58F; border: 2px solid #6B5B95; font-weight: 800; font-size: 14px; font-variant-numeric: tabular-nums; color: #3E3360; }"
+    },
+    {
+      "name": "Rincón de la sala",
+      "kind": "custom",
+      "refersTo": "miniatura",
+      "description": "Una pared isométrica de puntos con un cuadro colgado de su clavo y un lugar vacío punteado; al pasar el mouse, el cuadro se asienta.",
+      "html": "<svg class=\"ds-sala\" viewBox=\"140 40 380 420\" role=\"img\" aria-label=\"Pared con un cuadro colgado y un lugar vacío\"><defs><pattern id=\"ds-puntos\" width=\"26\" height=\"26\" patternUnits=\"userSpaceOnUse\"><circle cx=\"13\" cy=\"13\" r=\"3.2\" fill=\"#C9B9EF\"/></pattern></defs><polygon points=\"160,230 500,60 500,440 160,610\" fill=\"#D9CCF5\"/><polygon points=\"160,230 500,60 500,440 160,610\" fill=\"url(#ds-puntos)\"/><path d=\"M160,230 L500,60 V440 M160,230 V610\" fill=\"none\" stroke=\"#6B5B95\" stroke-width=\"3\" stroke-linejoin=\"round\"/><g transform=\"matrix(1 -.5 0 1 160 230)\"><g class=\"ds-cuadro\"><path d=\"M58 86 L109 66 L160 86\" fill=\"none\" stroke=\"#6B5B95\" stroke-width=\"2\"/><rect x=\"50\" y=\"91\" width=\"118\" height=\"160\" rx=\"3\" fill=\"rgba(107,91,149,.25)\"/><rect x=\"46\" y=\"86\" width=\"118\" height=\"160\" rx=\"3\" fill=\"#FFFFFF\" stroke=\"#6B5B95\" stroke-width=\"3\"/><rect x=\"54\" y=\"94\" width=\"102\" height=\"144\" fill=\"#8aa6c9\"/><rect x=\"54\" y=\"190\" width=\"102\" height=\"48\" fill=\"#7a9a5a\"/></g><circle cx=\"105\" cy=\"66\" r=\"4.5\" fill=\"#6B5B95\"/><rect x=\"206\" y=\"78\" width=\"104\" height=\"84\" rx=\"4\" fill=\"rgba(255,255,255,.35)\" stroke=\"#9D8FC7\" stroke-width=\"2.5\" stroke-dasharray=\"8 7\"/></g></svg>",
+      "css": ".ds-sala { display: block; width: 320px; background: #F3EDFB; } .ds-cuadro { transform-box: fill-box; transform-origin: 50% 0; } .ds-sala:hover .ds-cuadro { animation: ds-asentarse 700ms cubic-bezier(.2, .8, .2, 1); } @keyframes ds-asentarse { 0% { transform: translateY(-36px) rotate(-7deg); opacity: 0; } 50% { transform: translateY(3px) rotate(4deg); opacity: 1; } 75% { transform: rotate(-2deg); } } @media (prefers-reduced-motion: reduce) { .ds-sala:hover .ds-cuadro { animation: none; } }"
+    },
+    {
+      "name": "Aviso",
+      "kind": "card",
+      "refersTo": "aviso-mal",
+      "description": "El aviso de error con «Reintentar» al final de la lista; el de fin usa borde violeta y fondo lila.",
+      "html": "<div class=\"ds-aviso ds-mal\" role=\"status\"><b>No se pudieron traer más obras</b><p>Revisa tu conexión e inténtalo de nuevo.</p><button class=\"ds-colgar\">Reintentar</button></div>",
+      "css": ".ds-aviso { width: 340px; padding: 16px; border: 3px solid #6B5B95; border-radius: 14px; background: #F3EDFB; color: #3E3360; font: 400 16px/1.5 'Nunito', system-ui, sans-serif; } .ds-mal { border-color: #B4234A; background: #FCEFF3; } .ds-aviso b { display: block; font-weight: 800; font-size: 17px; } .ds-aviso p { margin: 4px 0 0; font-size: 15px; color: #635690; } .ds-colgar { margin-top: 12px; min-height: 36px; padding: 5px 14px; border: 3px solid #6B5B95; border-radius: 999px; background: #D9CCF5; color: #3E3360; font: 800 14px/1 'Nunito', system-ui, sans-serif; box-shadow: 0 3px 0 rgba(107, 91, 149, .22); cursor: pointer; } .ds-colgar:hover { background: #E4DAF9; } .ds-colgar:focus-visible { outline: 3px solid #3E3360; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ficha",
+      "kind": "custom",
+      "refersTo": "ficha",
+      "description": "El diálogo de una obra: blanco con contorno, radio 20px y sombra violeta de 10px; «Cerrar» redondo y los datos en filas.",
+      "html": "<div class=\"ds-ficha\"><button class=\"ds-cerrar\" aria-label=\"Cerrar la ficha\"><svg viewBox=\"0 0 20 20\" aria-hidden=\"true\"><path d=\"M5 5l10 10M15 5L5 15\"/></svg></button><h2 lang=\"en\">Landscape with a River</h2><p class=\"ds-autor\">Anónimo</p><dl><div><dt>Fecha</dt><dd>c. 1650</dd></div><div><dt>Técnica</dt><dd lang=\"en\">oil on canvas</dd></div></dl><a class=\"ds-enlace\" href=\"#\">Ver en el museo</a></div>",
+      "css": ".ds-ficha { position: relative; width: 420px; padding: 32px 30px 28px; border: 3px solid #6B5B95; border-radius: 20px; background: #FFFFFF; color: #3E3360; box-shadow: 0 10px 0 rgba(107, 91, 149, .25); font: 400 16px/1.5 'Nunito', system-ui, sans-serif; } .ds-ficha h2 { margin: 0; padding-right: 48px; font-weight: 900; font-size: 30px; line-height: 1.15; color: #6B5B95; } .ds-autor { margin: 8px 0 0; font-weight: 700; font-size: 17px; } .ds-ficha dl { display: grid; gap: 8px; margin: 18px 0 0; } .ds-ficha dl div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding-bottom: 8px; border-bottom: 2px solid #E4DAF9; } .ds-ficha dt { font-weight: 800; font-size: 14px; color: #635690; } .ds-ficha dd { margin: 0; font-size: 15px; } .ds-cerrar { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 44px; height: 44px; border: 3px solid #6B5B95; border-radius: 50%; background: #FFFFFF; color: #3E3360; cursor: pointer; } .ds-cerrar:hover { background: #F3EDFB; } .ds-cerrar svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; } .ds-cerrar:focus-visible, .ds-enlace:focus-visible { outline: 3px solid #3E3360; outline-offset: 3px; } .ds-enlace { display: inline-block; margin-top: 22px; font-weight: 800; color: #6B5B95; text-decoration-thickness: 2px; text-underline-offset: 3px; } .ds-enlace:hover { color: #3E3360; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Tu sala en miniatura",
+    "overview": "El explorador es una habitación de juguete. A la izquierda, fija mientras bajas, está «Mi sala»: un cuarto isométrico dibujado en SVG, con dos paredes lila de puntos, un piso durazno de baldosas, una alfombra amarilla, un banco rosa y una planta. En las paredes hay seis huecos punteados donde se cuelgan cuadros. A la derecha corre el museo: un panel blanco con «Obras del museo», la cuenta amarilla y la lista de pinturas, que se alarga sola al llegar al final. Cada obra es una tarjeta con su miniatura enmarcada como un cuadro de la sala y un botón de píldora «Colgar». Al colgarla, el cuadro cae en su lugar desde un clavo, se balancea y queda quieto.\n\nEs un mundo claro y pastel, con un trazo de cómic: todo lleva contorno violeta (`linea`) de 3px, sala, tarjetas, botones, marcos y la ficha. El texto es un violeta muy oscuro (`tinta`). La profundidad no viene de halos ni de vidrio, sino de sombras cortas hacia abajo en violeta translúcido, como un juguete apoyado en la mesa. Una sola familia, Nunito, del 400 al 900; los títulos van en 900 y en `linea`.\n\nSe niega al mosaico blanco de la web de colección de cualquier museo: las obras son una lista para elegir y la sala es donde viven. Es un producto aparte, con su propio mundo: no usa el pizarrón del curso ni los mundos de los proyectos 1 a 5. Se abre con doble clic (file://), sin librerías, con Nunito en `fuentes/`.",
+    "keyCharacteristics": [
+      "Fondo lila muy claro; la sala es un cuarto isométrico en SVG, nunca una cuadrícula de fotos.",
+      "Contorno de 3px en `linea` en todo lo que se toca o se enmarca.",
+      "Las obras van enmarcadas igual en la lista, en la sala y en la ficha: paspartú blanco y marco violeta de radio 4px.",
+      "Los botones son píldoras con contorno y una sombra corta violeta que desaparece al apretar.",
+      "El amarillo es la cuenta; el rosa y el durazno son muebles y piso, nunca interfaz.",
+      "Al colgar, el cuadro se asienta con un pequeño rebote; sin movimiento si la persona lo pidió."
+    ],
+    "rules": [
+      { "name": "The Un Solo Contorno Rule", "body": "Todo lo que se toca o enmarca lleva el mismo trazo: 3px en `linea` (2px en la cuenta y en las líneas finas). Las tarjetas de la lista usan `pared-clara` para no competir con la sala; al pasar el mouse, `pared`.", "section": "colors" },
+      { "name": "The Amarillo Cuenta Rule", "body": "El amarillo cuenta: la píldora de obras cargadas y la selección. En la sala, solo la alfombra. No pinta botones ni estados.", "section": "colors" },
+      { "name": "The Una Familia Rule", "body": "Todo es Nunito. Los títulos se distinguen por el peso 900 y el color `linea`, no por otra letra ni por mayúsculas.", "section": "typography" },
+      { "name": "The Sala y Museo Rule", "body": "La sala y la lista se ven juntas: la sala a la izquierda y la lista a la derecha en pantallas grandes, la sala arriba en el teléfono. Seis lugares, ni uno más.", "section": "layout" },
+      { "name": "The Sombra de Juguete Rule", "body": "Las sombras son cortas y violetas, sin desenfoque, y dicen sobre qué se apoya algo. No hay halos, brillos, desenfoques de fondo ni vidrio.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do dibujar todo lo que se toca o enmarca con el contorno de 3px en `linea`.",
+      "Do enmarcar cada obra igual en la lista, la pared y la ficha: paspartú `blanco` y marco `linea` de radio 4px.",
+      "Do usar píldoras con contorno y la sombra de apoyo de 3px para las acciones; al apretar, bajan 2px y pierden la sombra.",
+      "Do guardar el amarillo para la cuenta, la selección y la alfombra.",
+      "Do escribir los títulos en Nunito 900 y `linea`, y la cuenta con `tabular-nums`.",
+      "Do dibujar el foco como un anillo de 3px en `tinta` separado 3px.",
+      "Do respetar `prefers-reduced-motion`: el cuadro aparece sin rebote."
+    ],
+    "donts": [
+      "Don't volver el museo un mosaico blanco de fotos sin marco.",
+      "Don't sacar el rosa, el durazno ni el verde de la sala a textos, botones o bordes.",
+      "Don't usar halos, brillos, desenfoques ni vidrio; las sombras son cortas, verticales y violetas.",
+      "Don't añadir una segunda familia tipográfica.",
+      "Don't poner en los textos ni la interfaz nada que no sean letras, números y signos de puntuación."
+    ]
+  }
+}

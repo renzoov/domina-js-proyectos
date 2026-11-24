@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi sala · Explorador de arte</title>
+  <meta name="description" content="Recorre las pinturas de dominio público del Cleveland Museum of Art, que se cargan solas al bajar, y cuelga tus favoritas en tu propia sala." />
+  <meta name="theme-color" content="#F3EDFB" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 1l9 4.5v9L10 19l-9-4.5v-9z' fill='%23D9CCF5' stroke='%236B5B95' stroke-width='1.6' stroke-linejoin='round'/%3E%3Crect x='6.5' y='6' width='7' height='6' fill='%23fff' stroke='%236B5B95' stroke-width='1.4'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://openaccess-api.clevelandart.org" crossorigin />
+  <link rel="preconnect" href="https://openaccess-cdn.clevelandart.org" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <!-- Los íconos: cada botón usa uno con <use href="#i-...">. -->
+  <svg class="iconos" aria-hidden="true">
+    <symbol id="i-clavo" viewBox="0 0 20 20"><circle cx="10" cy="2.6" r="1.4" /><path d="M10 2.6L5 8M10 2.6L15 8" fill="none" /><rect x="3" y="8" width="14" height="10" rx="1" fill="none" /><path d="M5.5 15.5l3-3.2 2.2 2.2 1.6-1.6 2.2 2.6" fill="none" stroke-width="1.6" /></symbol>
+    <symbol id="i-listo" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" /></symbol>
+    <symbol id="i-cerrar" viewBox="0 0 20 20"><path d="M5 5l10 10M15 5L5 15" fill="none" /></symbol>
+    <symbol id="i-afuera" viewBox="0 0 20 20"><path d="M8 4H4v12h12v-4M11 3h6v6M17 3l-8 8" fill="none" /></symbol>
+    <symbol id="i-reintentar" viewBox="0 0 20 20"><path d="M16 10a6 6 0 1 1-2-4.5M16 3v4h-4" fill="none" /></symbol>
+  </svg>
+
+  <main class="app">
+    <!-- La sala: dos paredes y un piso en perspectiva, con 6 lugares para colgar -->
+    <section class="sala" aria-labelledby="titulo-sala">
+      <header class="sala-cabeza">
+        <h1 id="titulo-sala">Mi sala</h1>
+        <p id="cuenta-sala" role="status">Cuelga aquí hasta 6 obras que te gusten.</p>
+        <div class="aviso-sala" id="aviso-sala"></div>
+      </header>
+
+      <svg class="cuarto" viewBox="0 0 1000 800" role="group" aria-labelledby="titulo-sala">
+        <defs>
+          <pattern id="puntos" width="26" height="26" patternUnits="userSpaceOnUse">
+            <circle cx="13" cy="13" r="3.2" fill="#C9B9EF" />
+          </pattern>
+          <pattern id="baldosas" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="matrix(1 .5 -1 .5 0 0)">
+            <rect width="60" height="60" fill="none" stroke="#EFC6AA" stroke-width="2" />
+          </pattern>
+        </defs>
+        <!-- piso -->
+        <polygon points="500,440 160,610 500,780 840,610" fill="#F7D9C4" />
+        <polygon points="500,440 160,610 500,780 840,610" fill="url(#baldosas)" />
+        <polygon points="500,440 160,610 500,780 840,610" fill="none" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+        <!-- alfombra -->
+        <polygon points="500,540 360,610 500,680 640,610" fill="#FFE58F" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+        <!-- paredes -->
+        <polygon points="160,230 500,60 500,440 160,610" fill="#D9CCF5" />
+        <polygon points="160,230 500,60 500,440 160,610" fill="url(#puntos)" />
+        <polygon points="500,60 840,230 840,610 500,440" fill="#E4DAF9" />
+        <polygon points="500,60 840,230 840,610 500,440" fill="url(#puntos)" />
+        <path d="M160,230 L500,60 L840,230 M500,60 V440 M160,230 V610 M840,230 V610" fill="none" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+        <!-- zócalos -->
+        <path d="M160,596 L500,426 L840,596" fill="none" stroke="#B9A8E3" stroke-width="10" />
+
+        <!-- Los 6 lugares. Cada uno vive en el plano de su pared (la matriz lo inclina).
+             app.js llena cada lugar: el marco, la imagen y su nombre. -->
+        <g transform="matrix(1 -.5 0 1 160 230)">
+          <g class="lugar" data-lugar="0"><rect class="hueco" x="34" y="78" width="150" height="188" rx="4" /></g>
+          <g class="lugar" data-lugar="1"><rect class="hueco" x="206" y="78" width="104" height="84" rx="4" /></g>
+          <g class="lugar" data-lugar="2"><rect class="hueco" x="206" y="182" width="104" height="84" rx="4" /></g>
+        </g>
+        <g transform="matrix(1 .5 0 1 500 60)">
+          <g class="lugar" data-lugar="3"><rect class="hueco" x="30" y="78" width="104" height="84" rx="4" /></g>
+          <g class="lugar" data-lugar="4"><rect class="hueco" x="30" y="182" width="104" height="84" rx="4" /></g>
+          <g class="lugar" data-lugar="5"><rect class="hueco" x="156" y="78" width="150" height="188" rx="4" /></g>
+        </g>
+
+        <!-- banco -->
+        <g transform="translate(620 560)">
+          <polygon points="0,-26 64,6 0,38 -64,6" fill="#FFC7D9" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+          <polygon points="-64,6 0,38 0,58 -64,26" fill="#F2A9C3" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+          <polygon points="0,38 64,6 64,26 0,58" fill="#E595B2" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+        </g>
+        <!-- planta -->
+        <g transform="translate(250 600)">
+          <path d="M-8 -40 C -40 -80 -30 -110 -6 -120 C -2 -90 6 -70 0 -40 Z" fill="#9BD3AE" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+          <path d="M4 -40 C 34 -72 52 -78 62 -66 C 44 -56 26 -46 6 -36 Z" fill="#9BD3AE" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+          <polygon points="-26,-40 26,-40 18,8 -18,8" fill="#FFC7D9" stroke="#6B5B95" stroke-width="3" stroke-linejoin="round" />
+        </g>
+      </svg>
+
+      <p class="creditos">Pinturas de dominio público (CC0) del <a href="https://www.clevelandart.org/open-access" rel="noopener">Cleveland Museum of Art</a>.</p>
+    </section>
+
+    <!-- El museo: la lista que crece sola al llegar al final -->
+    <aside class="museo" aria-labelledby="titulo-museo">
+      <header class="museo-cabeza">
+        <h2 id="titulo-museo">Obras del museo</h2>
+        <span class="cuenta" id="cuenta-obras">Cargando…</span>
+      </header>
+      <ul class="obras" id="lista" aria-labelledby="titulo-museo"></ul>
+      <div class="estado-carga" id="estado-carga" role="status"></div>
+      <div class="centinela" id="centinela" aria-hidden="true"></div>
+    </aside>
+  </main>
+
+  <!-- Una obra de la lista. app.js copia esta plantilla y la llena. -->
+  <template id="plantilla-obra">
+    <li class="obra">
+      <button class="ver" type="button" data-ver>
+        <img alt="" loading="lazy" decoding="async" data-imagen />
+      </button>
+      <div class="obra-pie">
+        <div class="obra-datos">
+          <h3 lang="en" data-titulo></h3>
+          <p><span data-autor></span><span data-anio></span></p>
+        </div>
+        <button class="colgar" type="button" data-colgar>
+          <svg class="icono" aria-hidden="true"><use href="#i-clavo" /></svg>
+          <span data-texto>Colgar</span>
+        </button>
+      </div>
+    </li>
+  </template>
+
+  <!-- La ficha de una obra -->
+  <dialog class="ficha" id="ficha" aria-labelledby="ficha-titulo">
+    <button class="cerrar" type="button" data-cerrar aria-label="Cerrar la ficha">
+      <svg class="icono" aria-hidden="true"><use href="#i-cerrar" /></svg>
+    </button>
+    <div class="ficha-cuerpo">
+      <figure class="ficha-figura">
+        <img alt="" data-ficha-imagen />
+      </figure>
+      <div class="ficha-texto">
+        <h2 id="ficha-titulo" lang="en" data-ficha-titulo></h2>
+        <p class="ficha-autor" lang="en" data-ficha-autor></p>
+        <dl class="ficha-datos">
+          <div><dt>Fecha</dt><dd data-ficha-fecha></dd></div>
+          <div><dt>Técnica</dt><dd lang="en" data-ficha-tecnica></dd></div>
+          <div><dt>Inventario</dt><dd data-ficha-inventario></dd></div>
+        </dl>
+        <div class="ficha-acciones">
+          <button class="colgar grande" type="button" data-ficha-colgar>
+            <svg class="icono" aria-hidden="true"><use href="#i-clavo" /></svg>
+            <span data-texto>Colgar en mi sala</span>
+          </button>
+          <a class="enlace" data-ficha-enlace rel="noopener" target="_blank">
+            Ver en el museo
+            <svg class="icono" aria-hidden="true"><use href="#i-afuera" /></svg>
+          </a>
+        </div>
+        <p class="ficha-aviso" data-ficha-aviso role="status"></p>
+        <p class="ficha-descripcion" lang="en" data-ficha-descripcion></p>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
