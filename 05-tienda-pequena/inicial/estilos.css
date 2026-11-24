@@ -1,0 +1,818 @@
+/* Ferretería Don Lucho: el tablero perforado de una ferretería de barrio.
+   Las herramientas cuelgan de ganchos con su etiqueta naranja de precio,
+   y lo que llevas va a la caja de herramientas azul que espera abajo. */
+
+@font-face {
+  font-family: "Oswald";
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("fuentes/oswald-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-weight: 400;
+  font-display: swap;
+  src: url("fuentes/barlow-400-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-weight: 500;
+  font-display: swap;
+  src: url("fuentes/barlow-500-latin.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-weight: 600;
+  font-display: swap;
+  src: url("fuentes/barlow-600-latin.woff2") format("woff2");
+}
+
+:root {
+  color-scheme: dark;
+  --madera: #2b2118;
+  --barra: #1f1811;
+  --tablero: #8a5a2b;
+  --agujero: #4a2f16;
+  --marco: #6e4520;
+  --naranja: #f2a541;
+  --naranja-hondo: #d98a22;
+  --azul: #2e6f95;
+  --azul-hondo: #255b7a;
+  --claro: #f7f3ea;
+  --suave: #d9cbb4;
+  --metal: #c9c6bd;
+  --error: #ff9f80;
+  --curva: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background: var(--madera);
+  color: var(--claro);
+  font: 400 16px/1.45 Barlow, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--naranja);
+  color: var(--madera);
+}
+
+:focus-visible {
+  outline: 3px solid var(--naranja);
+  outline-offset: 3px;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+.dibujos {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ── La barra de arriba ── */
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 32px;
+  min-height: 84px;
+  padding: 14px 48px;
+  background: var(--barra);
+}
+.marca {
+  margin: 0;
+  font: 700 32px/1 Oswald, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.marca a {
+  color: var(--naranja);
+  text-decoration: none;
+}
+
+.secciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 22px;
+  margin-right: auto;
+}
+.secciones a {
+  padding: 6px 0 4px;
+  border-bottom: 2px solid transparent;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--suave);
+  text-decoration: none;
+}
+.secciones a:hover {
+  color: var(--claro);
+}
+.secciones a[aria-current="page"] {
+  border-bottom-color: var(--naranja);
+  color: var(--naranja);
+}
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 6px;
+  background: var(--azul);
+  font-weight: 600;
+  font-size: 17px;
+  text-decoration: none;
+  box-shadow: 0 3px 0 var(--azul-hondo);
+}
+.contador b {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  border-radius: 14px;
+  background: var(--claro);
+  color: var(--azul);
+  font-variant-numeric: tabular-nums;
+}
+/* Cuando la caja cambia (también desde otra pestaña), el número salta y queda marcado */
+.contador.cambio b {
+  background: var(--naranja);
+  color: var(--madera);
+  animation: salto 420ms var(--curva);
+}
+@keyframes salto {
+  0% { transform: translateY(0); }
+  35% { transform: translateY(-7px); }
+  100% { transform: translateY(0); }
+}
+
+/* ── El tablero ── */
+
+.tienda {
+  padding: 0 48px 40px;
+}
+
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 16px 0 10px;
+}
+.encabezado h2 {
+  margin: 0;
+  font: 600 28px/1.1 Oswald, sans-serif;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.encabezado p {
+  margin: 0;
+  color: var(--suave);
+}
+
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px 26px;
+  margin: 0;
+  padding: 18px 34px 22px;
+  border-radius: 6px;
+  list-style: none;
+  background-color: var(--tablero);
+  background-image: radial-gradient(circle, var(--agujero) 3px, transparent 3.5px);
+  background-size: 32px 32px;
+  background-position: 16px 16px;
+  box-shadow: inset 0 0 0 6px var(--marco), 0 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.tablero :focus-visible {
+  outline-color: var(--claro);
+}
+
+.herramienta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: 50% 0;
+}
+.herramienta.balanceo {
+  animation: balanceo 900ms var(--curva);
+}
+@keyframes balanceo {
+  0% { transform: rotate(0); }
+  20% { transform: rotate(7deg); }
+  45% { transform: rotate(-5deg); }
+  70% { transform: rotate(2.5deg); }
+  100% { transform: rotate(0); }
+}
+
+.gancho {
+  position: relative;
+  width: 12px;
+  height: 18px;
+  border: 3px solid var(--metal);
+  border-top: 0;
+  border-radius: 0 0 7px 7px;
+}
+/* El agujero del tablero del que sale el gancho */
+.gancho::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--agujero);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.ver {
+  display: block;
+  width: 100%;
+  max-width: 132px;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: zoom-in;
+}
+.ver:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+.dibujo {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 5px 4px rgba(40, 22, 8, 0.35));
+}
+
+.etiqueta {
+  position: relative;
+  margin-top: 4px;
+  padding: 6px 12px 7px;
+  border-radius: 3px;
+  background: var(--naranja);
+  color: var(--madera);
+  text-align: center;
+  line-height: 1.15;
+  box-shadow: 1px 3px 6px rgba(40, 22, 8, 0.4);
+}
+.nombre {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+.precio {
+  margin: 2px 0 0;
+  font: 700 20px Oswald, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.agregar {
+  margin-top: 8px;
+  min-height: 36px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--barra);
+  color: var(--claro);
+  font: 600 15px Oswald, sans-serif;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.agregar:hover {
+  background: #000;
+}
+/* «En tu caja» es una pegatina en la esquina de la etiqueta: la fila no cambia de alto */
+.en-caja {
+  position: absolute;
+  top: -21px;
+  right: -14px;
+  white-space: nowrap;
+  margin: 0;
+  padding: 2px 10px;
+  color: var(--claro);
+  box-shadow: 0 2px 4px rgba(40, 22, 8, 0.45);
+  border-radius: 10px;
+  background: var(--azul);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ── La caja y el pago ── */
+
+.pie {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px 30px;
+  align-items: end;
+  margin-top: 18px;
+}
+
+.caja {
+  position: relative;
+  min-width: 0;
+  min-height: 140px;
+  padding: 14px 24px 24px;
+  border-radius: 10px 10px 14px 14px;
+  background: var(--azul);
+  box-shadow: inset 0 -14px 0 var(--azul-hondo);
+}
+.caja:focus {
+  outline: none;
+}
+/* El asa de la caja de herramientas */
+.caja::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  width: 120px;
+  height: 22px;
+  translate: -50% 0;
+  border: 6px solid #9aa0a6;
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+}
+.caja h2 {
+  margin: 0 0 10px;
+  font: 600 22px Oswald, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.items {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  padding: 0 0 6px;
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-color: var(--claro) var(--azul-hondo);
+}
+.item {
+  flex: none;
+  display: grid;
+  grid-template-columns: 44px auto;
+  gap: 2px 12px;
+  align-items: center;
+  min-width: 220px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: var(--azul-hondo);
+}
+.item svg {
+  grid-row: span 2;
+  width: 44px;
+  height: 38px;
+}
+.item b {
+  font-weight: 600;
+}
+.cantidad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.cantidad button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid rgba(247, 243, 234, 0.8);
+  border-radius: 16px;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cantidad button svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.cantidad button:hover {
+  background: rgba(247, 243, 234, 0.15);
+}
+.cantidad .subtotal {
+  margin-left: 6px;
+  color: var(--suave);
+}
+.vacia {
+  margin: 0;
+  color: var(--claro);
+}
+
+.lado {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.pasillos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--suave);
+}
+.pasillos a {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 2px solid #9c8d78;
+  border-radius: 4px;
+  font: 600 18px Oswald, sans-serif;
+  text-decoration: none;
+}
+.pasillos a:hover {
+  border-color: var(--naranja);
+}
+.pasillos a[aria-current="page"] {
+  border-color: var(--naranja);
+  background: var(--naranja);
+  color: var(--madera);
+}
+.total {
+  margin: 0;
+  font-size: 17px;
+  color: var(--suave);
+}
+.total b {
+  margin-left: 8px;
+  font: 700 28px Oswald, sans-serif;
+  color: var(--claro);
+  font-variant-numeric: tabular-nums;
+}
+
+.boton {
+  min-height: 48px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--naranja);
+  color: var(--madera);
+  font: 700 18px Oswald, sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 3px 0 var(--naranja-hondo);
+}
+.boton:hover {
+  background: #f7b45c;
+}
+.boton:active {
+  translate: 0 2px;
+  box-shadow: 0 1px 0 var(--naranja-hondo);
+}
+.boton:disabled {
+  background: #4a3b2e;
+  color: #cbbfa9;
+  box-shadow: none;
+  cursor: default;
+}
+.boton--pagar {
+  min-height: 56px;
+  padding: 0 34px;
+  font-size: 22px;
+}
+.boton--borde {
+  background: transparent;
+  color: var(--claro);
+  box-shadow: inset 0 0 0 2px var(--suave);
+}
+.boton--borde:hover {
+  background: rgba(247, 243, 234, 0.08);
+}
+
+/* ── La vista rápida (popover) ── */
+
+.vista {
+  width: min(720px, calc(100% - 32px));
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--barra);
+  color: var(--claro);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.vista:popover-open {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+.vista::backdrop {
+  background: rgba(15, 10, 6, 0.7);
+}
+.vista .dibujo {
+  height: 100%;
+  padding: 36px 26px;
+  background-color: var(--tablero);
+  background-image: radial-gradient(circle, var(--agujero) 3px, transparent 3.5px);
+  background-size: 32px 32px;
+  border-radius: 10px 0 0 10px;
+}
+.vista-texto {
+  padding: 30px 30px 28px;
+}
+.vista h2 {
+  margin: 0 0 10px;
+  font: 600 30px/1.1 Oswald, sans-serif;
+}
+.vista p {
+  margin: 0;
+}
+.vista-precio {
+  margin-top: 16px !important;
+  font: 700 32px Oswald, sans-serif;
+}
+.vista-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* ── El pago (diálogo) ── */
+
+.pago {
+  width: min(560px, calc(100% - 32px));
+  max-height: calc(100svh - 32px);
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--barra);
+  color: var(--claro);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+}
+.pago::backdrop {
+  background: rgba(15, 10, 6, 0.75);
+}
+.formulario,
+.confirmado {
+  padding: 30px 32px 28px;
+}
+.formulario h2,
+.confirmado h2 {
+  margin: 0;
+  font: 700 30px Oswald, sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.aviso {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(46, 111, 149, 0.3);
+  font-size: 15px;
+}
+.resumen-pago {
+  margin: 14px 0 6px;
+  color: var(--suave);
+}
+.resumen-pago b {
+  color: var(--claro);
+}
+
+.campo {
+  display: grid;
+  gap: 6px;
+  margin-top: 14px;
+}
+.campo label {
+  font-weight: 600;
+}
+.campo input {
+  height: 46px;
+  padding: 0 14px;
+  border: 1px solid #8a7560;
+  border-radius: 6px;
+  background: var(--madera);
+  font-size: 17px;
+}
+.campo input::placeholder {
+  color: #9c8d78;
+}
+.campo input:focus-visible {
+  outline-offset: 0;
+  border-color: var(--naranja);
+}
+.campo input[aria-invalid="true"] {
+  border-color: var(--error);
+}
+.error {
+  min-height: 0;
+  margin: 0;
+  font-size: 15px;
+  color: var(--error);
+}
+.error:empty {
+  display: none;
+}
+.fila-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.estado-pago {
+  margin: 16px 0 0;
+  font-weight: 600;
+}
+.estado-pago:empty {
+  display: none;
+}
+.estado-pago.mal {
+  color: var(--error);
+}
+.acciones-pago {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 22px;
+}
+.formulario[aria-busy="true"] input {
+  opacity: 0.6;
+}
+
+.confirmado {
+  text-align: center;
+}
+.sello {
+  width: 84px;
+  height: 84px;
+  margin: 6px auto 14px;
+  fill: var(--naranja);
+  stroke: var(--madera);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sello path {
+  fill: none;
+}
+.confirmado h2:focus {
+  outline: none;
+}
+.confirmado p {
+  margin: 10px 0 22px;
+  color: var(--suave);
+}
+.confirmado p b {
+  color: var(--claro);
+}
+
+/* ── Pantallas medianas y teléfonos ── */
+
+@media (max-width: 1100px) {
+  .barra,
+  .tienda {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .tablero {
+    gap: 14px 12px;
+    padding: 18px 16px 22px;
+  }
+  .nombre {
+    display: grid;
+    place-items: center;
+    min-height: 2.3em;
+  }
+}
+
+@media (max-width: 820px) {
+  .tablero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .pie {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lado {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 640px) {
+  /* En el teléfono la barra queda fija arriba: el contador de la caja siempre a la vista */
+  .barra {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    gap: 10px 12px;
+    padding: 12px 16px 10px;
+  }
+  .caja {
+    scroll-margin-top: 123px; /* el alto de la barra fija, más un respiro */
+  }
+  .items {
+    flex-direction: column;
+    overflow: visible;
+  }
+  .item {
+    min-width: 0;
+  }
+  .marca {
+    font-size: 20px;
+    letter-spacing: 0.02em;
+  }
+  .contador {
+    gap: 6px;
+    height: 40px;
+    margin-left: auto;
+    padding: 0 10px;
+    font-size: 16px;
+  }
+  /* Las secciones en una sola fila que se desliza de lado */
+  .secciones {
+    order: 3;
+    flex-wrap: nowrap;
+    width: calc(100% + 32px);
+    margin: 0 -16px;
+    padding: 0 16px 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    /* Se desvanece a la derecha: hay más secciones si deslizas */
+    mask-image: linear-gradient(90deg, #000 82%, transparent);
+  }
+  .secciones a {
+    flex: none;
+  }
+  .tienda {
+    padding: 0 16px 32px;
+  }
+  .tablero {
+    gap: 18px 14px;
+    padding: 18px 12px;
+  }
+  .nombre {
+    font-size: 15px;
+  }
+  .vista:popover-open {
+    grid-template-columns: 1fr;
+  }
+  .vista .dibujo {
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+  }
+  .fila-campos {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .formulario,
+  .confirmado {
+    padding: 24px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T19:53:37Z",
+  "title": "Design System: Ferretería Don Lucho",
+  "extensions": {
+    "colorMeta": {
+      "madera": {
+        "role": "neutral",
+        "displayName": "Madera",
+        "canonical": "#2b2118",
+        "tonalRamp": [
+          "#1f1811",
+          "#2b2118",
+          "#4a2f16",
+          "#6e4520",
+          "#8a5a2b",
+          "#8a7560",
+          "#d9cbb4",
+          "#f7f3ea"
+        ]
+      },
+      "barra": {
+        "role": "neutral",
+        "displayName": "Barra",
+        "canonical": "#1f1811"
+      },
+      "tablero": {
+        "role": "neutral",
+        "displayName": "Tablero",
+        "canonical": "#8a5a2b"
+      },
+      "agujero": {
+        "role": "neutral",
+        "displayName": "Agujero",
+        "canonical": "#4a2f16"
+      },
+      "marco": {
+        "role": "neutral",
+        "displayName": "Marco del tablero",
+        "canonical": "#6e4520"
+      },
+      "naranja": {
+        "role": "primary",
+        "displayName": "Naranja de etiqueta",
+        "canonical": "#f2a541",
+        "tonalRamp": [
+          "#3d2507",
+          "#6b420c",
+          "#a86514",
+          "#d98a22",
+          "#f2a541",
+          "#f7b45c",
+          "#fad29a",
+          "#fdedd5"
+        ]
+      },
+      "naranja-hondo": {
+        "role": "primary",
+        "displayName": "Naranja hondo",
+        "canonical": "#d98a22"
+      },
+      "naranja-claro": {
+        "role": "primary",
+        "displayName": "Naranja claro",
+        "canonical": "#f7b45c"
+      },
+      "azul": {
+        "role": "secondary",
+        "displayName": "Azul de caja",
+        "canonical": "#2e6f95",
+        "tonalRamp": [
+          "#0e2230",
+          "#173a50",
+          "#255b7a",
+          "#2e6f95",
+          "#4b8cb2",
+          "#7fb0cd",
+          "#b4d2e3",
+          "#e3eff6"
+        ]
+      },
+      "azul-hondo": {
+        "role": "secondary",
+        "displayName": "Azul hondo",
+        "canonical": "#255b7a"
+      },
+      "claro": {
+        "role": "neutral",
+        "displayName": "Claro",
+        "canonical": "#f7f3ea"
+      },
+      "suave": {
+        "role": "neutral",
+        "displayName": "Suave",
+        "canonical": "#d9cbb4"
+      },
+      "metal": {
+        "role": "neutral",
+        "displayName": "Metal",
+        "canonical": "#c9c6bd"
+      },
+      "metal-oscuro": {
+        "role": "neutral",
+        "displayName": "Metal oscuro",
+        "canonical": "#9aa0a6"
+      },
+      "borde-campo": {
+        "role": "neutral",
+        "displayName": "Borde de campo",
+        "canonical": "#8a7560"
+      },
+      "sugerido": {
+        "role": "neutral",
+        "displayName": "Texto sugerido",
+        "canonical": "#9c8d78"
+      },
+      "error": {
+        "role": "error",
+        "displayName": "Error",
+        "canonical": "#ff9f80"
+      }
+    },
+    "typographyMeta": {
+      "marca": {
+        "displayName": "Marca",
+        "purpose": "«Ferretería Don Lucho» en mayúsculas y naranja; 20px en teléfono."
+      },
+      "precio-grande": {
+        "displayName": "Precio grande",
+        "purpose": "El precio en la vista rápida."
+      },
+      "dialogo": {
+        "displayName": "Diálogo",
+        "purpose": "«Pagar» y «¡Pago confirmado!» en mayúsculas; el nombre en la vista rápida usa 600 sin mayúsculas."
+      },
+      "pasillo": {
+        "displayName": "Pasillo",
+        "purpose": "El nombre de la sección arriba del tablero, en mayúsculas."
+      },
+      "total": {
+        "displayName": "Total",
+        "purpose": "El monto de la caja, tabular."
+      },
+      "caja": {
+        "displayName": "Caja",
+        "purpose": "«Tu caja» en mayúsculas."
+      },
+      "precio": {
+        "displayName": "Precio",
+        "purpose": "El precio en la etiqueta, en soles, tabular."
+      },
+      "accion": {
+        "displayName": "Acción",
+        "purpose": "Los botones en mayúsculas; 22px en «Pagar»."
+      },
+      "accion-chica": {
+        "displayName": "Acción chica",
+        "purpose": "«Agregar» bajo cada etiqueta."
+      },
+      "menu": {
+        "displayName": "Menú",
+        "purpose": "Las secciones de la barra; el contador en 600."
+      },
+      "nombre": {
+        "displayName": "Nombre",
+        "purpose": "El nombre en la etiqueta y en la caja; 15px en teléfono."
+      },
+      "cuerpo": {
+        "displayName": "Cuerpo",
+        "purpose": "Texto base, descripción, campos (17px) y etiquetas de campo (600)."
+      },
+      "detalle": {
+        "displayName": "Detalle",
+        "purpose": "El aviso del pago de prueba y los mensajes de error."
+      },
+      "pegatina": {
+        "displayName": "Pegatina",
+        "purpose": "«En tu caja: n»."
+      }
+    },
+    "shadows": [
+      {
+        "name": "canto-boton",
+        "value": "0 3px 0 #d98a22 (al apretar: 0 1px 0 y baja 2px)",
+        "purpose": "El grosor de los botones naranjas."
+      },
+      {
+        "name": "canto-contador",
+        "value": "0 3px 0 #255b7a",
+        "purpose": "El grosor del contador «Tu caja»."
+      },
+      {
+        "name": "tablero",
+        "value": "inset 0 0 0 6px #6e4520, 0 6px 0 rgba(0, 0, 0, 0.25)",
+        "purpose": "El marco y el canto del tablero perforado."
+      },
+      {
+        "name": "base-caja",
+        "value": "inset 0 -14px 0 #255b7a",
+        "purpose": "La base más honda de la caja de herramientas."
+      },
+      {
+        "name": "colgado-dibujo",
+        "value": "drop-shadow(2px 5px 4px rgba(40, 22, 8, 0.35))",
+        "purpose": "La herramienta colgada sobre el tablero."
+      },
+      {
+        "name": "colgado-etiqueta",
+        "value": "1px 3px 6px rgba(40, 22, 8, 0.4)",
+        "purpose": "La etiqueta de cartón."
+      },
+      {
+        "name": "pegatina",
+        "value": "0 2px 4px rgba(40, 22, 8, 0.45)",
+        "purpose": "La pegatina «En tu caja»."
+      },
+      {
+        "name": "panel-encima",
+        "value": "0 24px 60px rgba(0, 0, 0, 0.6)",
+        "purpose": "Solo la vista rápida y el diálogo de pago."
+      }
+    ],
+    "motion": [
+      {
+        "name": "curva",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "La curva de todo movimiento."
+      },
+      {
+        "name": "balanceo",
+        "value": "rotate 0 → 7deg → -5deg → 2.5deg → 0, 900ms, transform-origin 50% 0",
+        "purpose": "Al agregar, la herramienta se balancea en su gancho."
+      },
+      {
+        "name": "salto",
+        "value": "translateY 0 → -7px → 0, 420ms",
+        "purpose": "El número del contador salta cuando la caja cambia, también desde otra pestaña."
+      },
+      {
+        "name": "reducido",
+        "value": "animation: none; transition: none",
+        "purpose": "prefers-reduced-motion: reduce; nada se mueve."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mediana",
+        "value": "1100px"
+      },
+      {
+        "name": "tableta",
+        "value": "820px"
+      },
+      {
+        "name": "telefono",
+        "value": "640px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Producto del tablero",
+      "kind": "custom",
+      "refersTo": "etiqueta",
+      "description": "Una herramienta colgada: gancho, dibujo, etiqueta naranja con nombre y precio, y «Agregar». Si ya está en la caja, lleva la pegatina azul. Al pasar el mouse por la muestra, la segunda se balancea.",
+      "html": "<ol class=\"ds-tablero\"><li class=\"ds-herr\"><span class=\"ds-gancho\"></span><button class=\"ds-ver\" aria-label=\"Ver de cerca: Martillo de uña\"><svg viewBox=\"0 0 150 130\"><rect x=\"68\" y=\"18\" width=\"14\" height=\"104\" rx=\"4\" fill=\"#3b2a1d\"/><rect x=\"38\" y=\"6\" width=\"74\" height=\"24\" rx=\"5\" fill=\"#9aa0a6\"/><path d=\"M112 10l14-6v24l-14-6z\" fill=\"#7d838a\"/></svg></button><div class=\"ds-etiqueta\"><p class=\"ds-nombre\">Martillo de uña</p><p class=\"ds-precio\">S/ 24.90</p><p class=\"ds-en-caja\">En tu caja: 1</p></div><button class=\"ds-agregar\">Agregar</button></li><li class=\"ds-herr ds-balancea\"><span class=\"ds-gancho\"></span><button class=\"ds-ver\" aria-label=\"Ver de cerca: Destornillador estrella\"><svg viewBox=\"0 0 150 130\"><rect x=\"71\" y=\"4\" width=\"8\" height=\"66\" fill=\"#c3c8cd\"/><rect x=\"61\" y=\"68\" width=\"28\" height=\"56\" rx=\"10\" fill=\"#f2c14e\"/><rect x=\"66\" y=\"76\" width=\"4\" height=\"40\" rx=\"2\" fill=\"rgba(0,0,0,.2)\"/></svg></button><div class=\"ds-etiqueta\"><p class=\"ds-nombre\">Destornillador estrella</p><p class=\"ds-precio\">S/ 8.50</p></div><button class=\"ds-agregar\">Agregar</button></li></ol>",
+      "css": ".ds-tablero { display: grid; grid-template-columns: repeat(2, 170px); gap: 14px 26px; margin: 0; padding: 30px 34px 22px; list-style: none; border-radius: 6px; background-color: #8a5a2b; background-image: radial-gradient(circle, #4a2f16 3px, transparent 3.5px); background-size: 32px 32px; background-position: 16px 16px; box-shadow: inset 0 0 0 6px #6e4520, 0 6px 0 rgba(0, 0, 0, 0.25); font: 400 16px/1.45 'Barlow', system-ui, sans-serif; } .ds-herr { display: flex; flex-direction: column; align-items: center; transform-origin: 50% 0; } .ds-tablero:hover .ds-balancea { animation: ds-balanceo 900ms cubic-bezier(0.22, 1, 0.36, 1); } @keyframes ds-balanceo { 20% { transform: rotate(7deg); } 45% { transform: rotate(-5deg); } 70% { transform: rotate(2.5deg); } } .ds-gancho { position: relative; width: 12px; height: 18px; border: 3px solid #c9c6bd; border-top: 0; border-radius: 0 0 7px 7px; } .ds-gancho::before { content: ''; position: absolute; left: -6px; top: -6px; width: 9px; height: 9px; border-radius: 50%; background: #4a2f16; box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6); } .ds-ver { width: 100%; max-width: 132px; padding: 2px 4px; border: 0; border-radius: 8px; background: transparent; cursor: zoom-in; } .ds-ver:hover { background: rgba(0, 0, 0, 0.12); } .ds-ver svg { display: block; width: 100%; filter: drop-shadow(2px 5px 4px rgba(40, 22, 8, 0.35)); } .ds-etiqueta { position: relative; margin-top: 4px; padding: 6px 12px 7px; border-radius: 3px; background: #f2a541; color: #2b2118; text-align: center; line-height: 1.15; box-shadow: 1px 3px 6px rgba(40, 22, 8, 0.4); } .ds-etiqueta p { margin: 0; } .ds-nombre { font-weight: 600; } .ds-etiqueta .ds-precio { margin-top: 2px; font: 700 20px 'Oswald', sans-serif; font-variant-numeric: tabular-nums; } .ds-en-caja { position: absolute; top: -21px; right: -14px; padding: 2px 10px; border-radius: 10px; background: #2e6f95; color: #f7f3ea; font-size: 14px; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 4px rgba(40, 22, 8, 0.45); } .ds-agregar { margin-top: 8px; min-height: 36px; padding: 0 16px; border: 0; border-radius: 4px; background: #1f1811; color: #f7f3ea; font: 600 15px 'Oswald', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; } .ds-agregar:hover { background: #000; } .ds-tablero :focus-visible { outline: 3px solid #f7f3ea; outline-offset: 3px; } @media (prefers-reduced-motion: reduce) { .ds-tablero:hover .ds-balancea { animation: none; } }"
+    },
+    {
+      "name": "Contador «Tu caja»",
+      "kind": "custom",
+      "refersTo": "contador",
+      "description": "El camino a la caja: azul con canto; tras un cambio el número salta y queda naranja hasta que lo miras.",
+      "html": "<div class=\"ds-barra\"><a class=\"ds-contador\" href=\"#\">Tu caja <b>2</b></a><a class=\"ds-contador ds-cambio\" href=\"#\">Tu caja <b>3</b></a></div>",
+      "css": ".ds-barra { display: flex; gap: 24px; padding: 20px 24px; background: #1f1811; font: 400 16px/1.45 'Barlow', system-ui, sans-serif; } .ds-contador { display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 18px; border-radius: 6px; background: #2e6f95; color: #f7f3ea; font-weight: 600; font-size: 17px; text-decoration: none; box-shadow: 0 3px 0 #255b7a; } .ds-contador b { display: grid; place-items: center; min-width: 28px; height: 28px; padding: 0 6px; border-radius: 14px; background: #f7f3ea; color: #2e6f95; font-variant-numeric: tabular-nums; } .ds-cambio b { background: #f2a541; color: #2b2118; } .ds-barra:hover .ds-cambio b { animation: ds-salto 420ms cubic-bezier(0.22, 1, 0.36, 1); } @keyframes ds-salto { 35% { transform: translateY(-7px); } } .ds-contador:focus-visible { outline: 3px solid #f2a541; outline-offset: 3px; } @media (prefers-reduced-motion: reduce) { .ds-barra:hover .ds-cambio b { animation: none; } }"
+    },
+    {
+      "name": "Botones",
+      "kind": "button",
+      "refersTo": "boton",
+      "description": "El principal naranja con su canto, «Pagar» más grande y el botón de borde para cerrar o volver.",
+      "html": "<div class=\"ds-botones\"><button class=\"ds-boton\">Agregar a la caja</button><button class=\"ds-boton ds-boton--borde\">Cerrar</button><button class=\"ds-boton ds-boton--pagar\">Pagar</button></div>",
+      "css": ".ds-botones { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 28px; background: #1f1811; } .ds-boton { min-height: 48px; padding: 0 26px; border: 0; border-radius: 6px; background: #f2a541; color: #2b2118; font: 700 18px 'Oswald', sans-serif; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; box-shadow: 0 3px 0 #d98a22; } .ds-boton:hover { background: #f7b45c; } .ds-boton:active { translate: 0 2px; box-shadow: 0 1px 0 #d98a22; } .ds-boton:focus-visible { outline: 3px solid #f2a541; outline-offset: 3px; } .ds-boton--pagar { min-height: 56px; padding: 0 34px; font-size: 22px; } .ds-boton--borde, .ds-boton--borde:active { background: transparent; color: #f7f3ea; box-shadow: inset 0 0 0 2px #d9cbb4; } .ds-boton--borde:hover { background: rgba(247, 243, 234, 0.08); }"
+    },
+    {
+      "name": "La caja",
+      "kind": "card",
+      "refersTo": "caja",
+      "description": "La caja de herramientas azul con su asa y su base honda; cada cosa en una ficha más honda con el nombre, la cantidad y el subtotal.",
+      "html": "<div class=\"ds-fondo\"><section class=\"ds-caja\"><h2>Tu caja</h2><ul class=\"ds-items\"><li class=\"ds-item\"><svg viewBox=\"0 0 150 130\"><rect x=\"30\" y=\"30\" width=\"80\" height=\"76\" rx=\"14\" fill=\"#f2c14e\"/><circle cx=\"70\" cy=\"68\" r=\"16\" fill=\"rgba(0,0,0,.18)\"/><rect x=\"108\" y=\"88\" width=\"30\" height=\"12\" fill=\"#f2e4a0\"/></svg><b>Wincha de 5 m</b><span class=\"ds-cant\"><button aria-label=\"Uno menos\">−</button>2<button aria-label=\"Uno más\">+</button><span class=\"ds-sub\">S/ 29.00</span></span></li></ul></section></div>",
+      "css": ".ds-fondo { padding: 40px 24px 24px; background: #2b2118; font: 400 16px/1.45 'Barlow', system-ui, sans-serif; color: #f7f3ea; } .ds-caja { position: relative; min-height: 140px; padding: 14px 24px 24px; border-radius: 10px 10px 14px 14px; background: #2e6f95; box-shadow: inset 0 -14px 0 #255b7a; } .ds-caja::before { content: ''; position: absolute; left: 50%; top: -16px; width: 120px; height: 22px; translate: -50% 0; border: 6px solid #9aa0a6; border-bottom: 0; border-radius: 10px 10px 0 0; } .ds-caja h2 { margin: 0 0 10px; font: 600 22px 'Oswald', sans-serif; letter-spacing: 0.04em; text-transform: uppercase; } .ds-items { display: flex; gap: 12px; margin: 0; padding: 0; list-style: none; } .ds-item { display: grid; grid-template-columns: 44px auto; gap: 2px 12px; align-items: center; min-width: 220px; padding: 10px 12px; border-radius: 6px; background: #255b7a; } .ds-item svg { grid-row: span 2; width: 44px; height: 38px; } .ds-item b { font-weight: 600; } .ds-cant { display: flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; } .ds-cant button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 16px; background: transparent; color: #f7f3ea; font: 600 18px 'Barlow', system-ui, sans-serif; cursor: pointer; } .ds-cant button:hover { background: rgba(247, 243, 234, 0.15); } .ds-cant button:focus-visible { outline: 3px solid #f2a541; outline-offset: 3px; } .ds-sub { margin-left: 6px; color: #d9cbb4; }"
+    },
+    {
+      "name": "Campo del pago",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Etiqueta, campo de 46px y el mensaje de error debajo; con el foco, el borde es naranja; mal llenado, coral.",
+      "html": "<div class=\"ds-dialogo\"><div class=\"ds-campo\"><label for=\"ds-t\">Número de tarjeta</label><input id=\"ds-t\" inputmode=\"numeric\" placeholder=\"1234 5678 9012 3456\"></div><div class=\"ds-campo\"><label for=\"ds-c\">Correo para la boleta</label><input id=\"ds-c\" aria-invalid=\"true\" value=\"lucia@\" aria-describedby=\"ds-e\"><p class=\"ds-error\" id=\"ds-e\">Escribe un correo como nombre@correo.com.</p></div></div>",
+      "css": ".ds-dialogo { width: 420px; padding: 30px 32px 28px; border-radius: 10px; background: #1f1811; color: #f7f3ea; font: 400 16px/1.45 'Barlow', system-ui, sans-serif; } .ds-campo { display: grid; gap: 6px; margin-top: 14px; } .ds-campo label { font-weight: 600; } .ds-campo input { height: 46px; padding: 0 14px; border: 1px solid #8a7560; border-radius: 6px; background: #2b2118; color: #f7f3ea; font: inherit; font-size: 17px; } .ds-campo input::placeholder { color: #9c8d78; } .ds-campo input:focus-visible { border-color: #f2a541; outline: 3px solid #f2a541; outline-offset: 0; } .ds-campo input[aria-invalid='true'] { border-color: #ff9f80; } .ds-error { margin: 0; font-size: 15px; color: #ff9f80; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El tablero perforado de la ferretería del barrio",
+    "overview": "La tienda es la pared de una ferretería de barrio: un tablero perforado de madera, con un agujero cada 32px, del que cuelgan diez herramientas por pasillo. Cada una sale de un agujero por un gancho de metal, tiene su dibujo plano y, debajo, su etiqueta de cartón naranja con el nombre y el precio en soles; más abajo, el botón negro «Agregar». Lo que llevas va a la caja de herramientas azul que espera bajo el tablero, con su asa de metal arriba. Al agregar, la herramienta se balancea en su gancho y el número del contador salta.\n\nEl sistema es un local de noche: piso de madera oscura (`madera`), una barra más oscura arriba (`barra`) y el tablero marrón claro (`tablero`) con agujeros (`agujero`) y marco (`marco`). Dos colores de trabajo que nunca se cruzan: naranja de etiqueta para el precio, la marca, lo elegido y la acción principal; azul de caja para todo lo que ya es tuyo (la caja, el contador, la pegatina «En tu caja»). El texto es un blanco cálido (`claro`) y los detalles un beige (`suave`). Dos familias: Oswald condensada en mayúsculas para lo que se pinta en un rótulo (marca, títulos, precios, acciones) y Barlow para leer. Esquinas chicas (3 a 10px); las sombras son cortas, como de cosas colgadas, y nunca halos.\n\nSe niega a la cuadrícula de tarjetas blancas con foto de la tienda en línea genérica. Es un producto aparte, con su propio mundo: no usa el pizarrón del curso ni los mundos de los proyectos 1 a 4. Se abre con doble clic (file://), sin librerías, con las fuentes en `fuentes/`.",
+    "keyCharacteristics": [
+      "Fondo de madera oscura; nunca un fondo claro.",
+      "Los productos cuelgan del tablero perforado, cinco por fila, cada uno con gancho, dibujo, etiqueta naranja y «Agregar».",
+      "Naranja es la etiqueta y la acción; azul es lo que ya llevas. No se intercambian.",
+      "Los dibujos son SVG planos de un `<symbol>` cada uno; el color propio de cada producto entra por la variable `--c`.",
+      "La caja de herramientas azul abajo, a todo el ancho, con los pasillos, el total y «Pagar» a su derecha.",
+      "La vista rápida y el pago son paneles de `barra` que flotan sobre la tienda oscurecida."
+    ],
+    "rules": [
+      {
+        "name": "The Naranja Etiqueta Rule",
+        "body": "El naranja dice «esto cuesta», «esto es donde estás» o «haz esto»: etiquetas, marca, sección y pasillo actuales, el botón principal y el foco. Nada que ya esté en tu caja es naranja; la única excepción es el número del contador justo después de un cambio, que avisa y se apaga en cuanto lo miras.",
+        "section": "colors"
+      },
+      {
+        "name": "The Azul Caja Rule",
+        "body": "El azul es solo lo que llevas: la caja, el contador y la pegatina «En tu caja». Fuera del contador, que es el camino a la caja, no pinta botones, enlaces ni estados de la tienda.",
+        "section": "colors"
+      },
+      {
+        "name": "The Rótulo y Letra Rule",
+        "body": "Oswald es solo para lo que iría pintado en un rótulo: marca, títulos, precios, total y acciones. Todo lo que se lee de corrido es Barlow. No hay una tercera familia.",
+        "section": "typography"
+      },
+      {
+        "name": "The Soles Tabulares Rule",
+        "body": "Todo precio, total, cantidad y el número del contador va con `tabular-nums`, para que nada salte al sumar.",
+        "section": "typography"
+      },
+      {
+        "name": "The Cinco Ganchos Rule",
+        "body": "Un pasillo son diez productos en el tablero: cinco por fila en pantallas grandes, dos en el teléfono. Nunca una lista ni tarjetas sueltas fuera del tablero.",
+        "section": "layout"
+      },
+      {
+        "name": "The Colgado No Halo Rule",
+        "body": "Las sombras dicen de dónde cuelga o sobre qué descansa algo: cortas, hacia abajo y en marrón. No hay halos de color ni brillos alrededor de nada.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do colgar cada producto del tablero perforado con su gancho, su dibujo, su etiqueta naranja y «Agregar».",
+      "Do guardar el naranja para etiquetas, marca, lo actual, la acción principal y el foco.",
+      "Do guardar el azul para la caja, el contador y la pegatina «En tu caja».",
+      "Do usar Oswald en mayúsculas solo para rótulos, precios y acciones; Barlow para leer.",
+      "Do escribir precios, totales y cantidades en soles con `Intl.NumberFormat` y `tabular-nums`.",
+      "Do dar a los botones naranjas y al contador un canto vertical de 3px del mismo color en más hondo.",
+      "Do dibujar el foco como un anillo de 3px separado 3px: `naranja` fuera del tablero, `claro` dentro.",
+      "Do respetar `prefers-reduced-motion`: nada se balancea ni salta."
+    ],
+    "donts": [
+      "Don't poner en los nombres, los textos ni la interfaz nada que no sean letras, números y signos de puntuación.",
+      "Don't volver la tienda una cuadrícula de tarjetas blancas con foto.",
+      "Don't usar fondos claros: el local es siempre de madera oscura.",
+      "Don't usar el azul para otros botones o enlaces que no sean el contador, ni el naranja para lo que ya está en la caja (salvo el aviso del contador tras un cambio).",
+      "Don't sacar la pintura de los dibujos (rojo, verde, amarillo…) a textos, bordes o fondos de la interfaz.",
+      "Don't usar halos, brillos ni sombras diagonales en negro; las sombras cuelgan hacia abajo.",
+      "Don't redondear más de 10px nada que no sea una píldora, un círculo o la base de la caja.",
+      "Don't añadir una tercera familia tipográfica."
+    ]
+  }
+}

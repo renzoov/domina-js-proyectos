@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ferretería Don Lucho</title>
+  <meta name="description" content="Una tienda pequeña: herramientas colgadas de un tablero, una caja que se sincroniza entre pestañas y un pago de prueba." />
+  <meta name="theme-color" content="#1f1811" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect width='20' height='20' rx='4' fill='%238A5A2B'/%3E%3Crect x='9' y='4' width='3' height='13' rx='1' fill='%232B2118'/%3E%3Crect x='5' y='3' width='11' height='4' rx='1' fill='%23F2A541'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <!-- Los dibujos de las herramientas: cada producto usa uno con <use href="#d-...">.
+       La parte de color sale de la variable --c, que app.js pone en cada producto. -->
+  <svg class="dibujos" aria-hidden="true">
+    <symbol id="i-menos" viewBox="0 0 16 16"><path d="M3 8h10" /></symbol>
+    <symbol id="i-mas" viewBox="0 0 16 16"><path d="M3 8h10M8 3v10" /></symbol>
+    <symbol id="d-martillo" viewBox="0 0 150 130"><rect x="68" y="18" width="14" height="104" rx="4" fill="var(--c)" /><rect x="38" y="6" width="74" height="24" rx="5" fill="#9aa0a6" /><path d="M112 10l14-6v24l-14-6z" fill="#7d838a" /></symbol>
+    <symbol id="d-destornillador" viewBox="0 0 150 130"><rect x="71" y="4" width="8" height="66" fill="#c3c8cd" /><path d="M71 4h8l-4-6z" fill="#c3c8cd" /><rect x="61" y="68" width="28" height="56" rx="10" fill="var(--c)" /><rect x="66" y="76" width="4" height="40" rx="2" fill="rgba(0,0,0,.2)" /></symbol>
+    <symbol id="d-alicate" viewBox="0 0 150 130"><path d="M62 6h26l-4 46H66z" fill="#9aa0a6" /><circle cx="75" cy="54" r="7" fill="#7d838a" /><path d="M68 58l-14 66h14l7-44 7 44h14l-14-66z" fill="var(--c)" /></symbol>
+    <symbol id="d-wincha" viewBox="0 0 150 130"><rect x="30" y="30" width="80" height="76" rx="14" fill="var(--c)" /><circle cx="70" cy="68" r="16" fill="rgba(0,0,0,.18)" /><rect x="108" y="88" width="30" height="12" fill="#f2e4a0" /><path d="M114 88v6M120 88v4M126 88v6M132 88v4" stroke="#2B2118" stroke-width="1.5" /></symbol>
+    <symbol id="d-serrucho" viewBox="0 0 150 130"><path d="M16 34h96l26 22v14H16z" fill="#c3c8cd" /><path d="M16 70h122l-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6-6 6-6-6z" fill="#9aa0a6" /><rect x="16" y="22" width="42" height="40" rx="8" fill="var(--c)" /><rect x="28" y="32" width="18" height="18" rx="4" fill="#2B2118" /></symbol>
+    <symbol id="d-taladro" viewBox="0 0 150 130"><rect x="34" y="18" width="80" height="46" rx="12" fill="var(--c)" /><rect x="114" y="32" width="18" height="18" rx="3" fill="#9aa0a6" /><rect x="132" y="38" width="14" height="6" fill="#c3c8cd" /><path d="M54 62h30l-6 60H60z" fill="#1f1811" /><circle cx="60" cy="40" r="8" fill="#F2A541" /></symbol>
+    <symbol id="d-llave" viewBox="0 0 150 130"><path d="M75 4a24 24 0 0 1 0 48a24 24 0 0 1 0-48zM67 16h16v20H67z" fill="#9aa0a6" fill-rule="evenodd" /><rect x="68" y="48" width="14" height="76" rx="6" fill="var(--c)" /></symbol>
+    <symbol id="d-nivel" viewBox="0 0 150 130"><rect x="10" y="50" width="130" height="26" rx="4" fill="var(--c)" /><rect x="62" y="46" width="26" height="34" rx="4" fill="#1f1811" /><rect x="66" y="56" width="18" height="14" rx="7" fill="#9be37a" /><circle cx="75" cy="63" r="3.5" fill="#f7f3ea" /></symbol>
+    <symbol id="d-espatula" viewBox="0 0 150 130"><path d="M46 6h58l-8 56H54z" fill="#c3c8cd" /><rect x="68" y="60" width="14" height="10" fill="#9aa0a6" /><rect x="64" y="68" width="22" height="56" rx="9" fill="var(--c)" /></symbol>
+    <symbol id="d-candado" viewBox="0 0 150 130"><path d="M50 60V36a25 25 0 0 1 50 0v24" fill="none" stroke="#9aa0a6" stroke-width="10" /><rect x="34" y="58" width="82" height="64" rx="10" fill="var(--c)" /><circle cx="75" cy="84" r="7" fill="#2B2118" /><rect x="72" y="88" width="6" height="16" fill="#2B2118" /></symbol>
+    <symbol id="d-cinta" viewBox="0 0 150 130"><circle cx="75" cy="66" r="48" fill="var(--c)" /><circle cx="75" cy="66" r="22" fill="#e8e3d6" /><circle cx="75" cy="66" r="16" fill="#2B2118" /></symbol>
+    <symbol id="d-lata" viewBox="0 0 150 130"><path d="M44 30a31 22 0 0 1 62 0" fill="none" stroke="#7d838a" stroke-width="4" /><rect x="36" y="34" width="78" height="88" rx="6" fill="#b9bec4" /><rect x="36" y="52" width="78" height="52" fill="var(--c)" /><ellipse cx="75" cy="34" rx="39" ry="7" fill="#d6dadd" /></symbol>
+    <symbol id="d-brocha" viewBox="0 0 150 130"><rect x="68" y="66" width="14" height="58" rx="6" fill="var(--c)" /><rect x="50" y="48" width="50" height="22" rx="3" fill="#9aa0a6" /><path d="M48 6h54v44H48z" fill="#e8e3d6" /><path d="M56 6v44M66 6v44M76 6v44M86 6v44M96 6v44" stroke="#cfc8b6" stroke-width="2" /></symbol>
+    <symbol id="d-rodillo" viewBox="0 0 150 130"><rect x="26" y="8" width="98" height="34" rx="16" fill="var(--c)" /><path d="M124 25h10v34H75v18" fill="none" stroke="#9aa0a6" stroke-width="5" /><rect x="67" y="76" width="16" height="48" rx="7" fill="#1f1811" /></symbol>
+    <symbol id="d-spray" viewBox="0 0 150 130"><rect x="52" y="30" width="46" height="94" rx="10" fill="var(--c)" /><rect x="60" y="14" width="30" height="18" rx="4" fill="#d6dadd" /><rect x="70" y="6" width="12" height="10" rx="2" fill="#2B2118" /><rect x="52" y="60" width="46" height="26" fill="rgba(255,255,255,.25)" /></symbol>
+    <symbol id="d-caja" viewBox="0 0 150 130"><rect x="26" y="30" width="98" height="92" rx="6" fill="var(--c)" /><rect x="40" y="46" width="70" height="44" rx="4" fill="#efe9da" /><path d="M50 58l10 22M64 54l10 22M78 58l10 22M92 54l10 22" stroke="#7d838a" stroke-width="4" stroke-linecap="round" /><rect x="40" y="98" width="70" height="12" rx="2" fill="rgba(0,0,0,.2)" /></symbol>
+    <symbol id="d-pala" viewBox="0 0 150 130"><rect x="69" y="4" width="12" height="70" rx="5" fill="var(--c)" /><rect x="60" y="2" width="30" height="10" rx="5" fill="#1f1811" /><path d="M52 72h46v26c0 16-12 26-23 26S52 114 52 98z" fill="#9aa0a6" /></symbol>
+    <symbol id="d-rastrillo" viewBox="0 0 150 130"><rect x="69" y="4" width="12" height="80" rx="5" fill="var(--c)" /><rect x="30" y="82" width="90" height="12" rx="3" fill="#9aa0a6" /><path d="M36 94v26M50 94v26M64 94v26M78 94v26M92 94v26M106 94v26M114 94v26" stroke="#9aa0a6" stroke-width="5" stroke-linecap="round" /></symbol>
+    <symbol id="d-regadera" viewBox="0 0 150 130"><path d="M30 50h70v66a6 6 0 0 1-6 6H36a6 6 0 0 1-6-6z" fill="var(--c)" /><path d="M100 70l38-36" stroke="var(--c)" stroke-width="10" stroke-linecap="round" /><rect x="128" y="22" width="18" height="18" rx="4" fill="#9aa0a6" transform="rotate(-45 137 31)" /><path d="M42 50a24 24 0 0 1 46 0" fill="none" stroke="var(--c)" stroke-width="8" /></symbol>
+    <symbol id="d-manguera" viewBox="0 0 150 130"><g fill="none" stroke="var(--c)" stroke-width="10"><circle cx="75" cy="68" r="48" /><circle cx="75" cy="68" r="34" /><circle cx="75" cy="68" r="20" /></g><rect x="112" y="98" width="26" height="12" rx="3" fill="#F2A541" /></symbol>
+    <symbol id="d-tijera" viewBox="0 0 150 130"><path d="M62 4c-6 22 0 46 13 56M88 4c6 22 0 46-13 56" stroke="#9aa0a6" stroke-width="10" fill="none" stroke-linecap="round" /><circle cx="75" cy="62" r="6" fill="#7d838a" /><path d="M70 66l-18 58M80 66l18 58" stroke="var(--c)" stroke-width="14" stroke-linecap="round" /></symbol>
+    <symbol id="d-guantes" viewBox="0 0 150 130"><path d="M44 124V58c0-8 10-8 10 0v-26c0-8 10-8 10 0v-6c0-8 10-8 10 0v6c0-8 10-8 10 0v34l8-10c6-6 14 0 10 6l-16 30v32z" fill="var(--c)" /><rect x="44" y="110" width="52" height="14" fill="rgba(0,0,0,.2)" /></symbol>
+    <symbol id="d-semillas" viewBox="0 0 150 130"><path d="M40 10h70v110H40z" fill="var(--c)" /><path d="M40 10l8 8 8-8 8 8 8-8 8 8 8-8 8 8 8-8v0" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="3" /><circle cx="75" cy="62" r="22" fill="#f7f3ea" /><path d="M75 74V54M75 60c-8-8-14-4-14 0M75 58c8-8 14-4 14 0" stroke="#3e7d3a" stroke-width="4" fill="none" stroke-linecap="round" /></symbol>
+    <symbol id="d-saco" viewBox="0 0 150 130"><path d="M42 20h66l-4 12 10 82a8 8 0 0 1-8 8H44a8 8 0 0 1-8-8l10-82z" fill="var(--c)" /><rect x="50" y="62" width="50" height="30" rx="3" fill="#f7f3ea" /><path d="M58 72h34M58 82h22" stroke="#2B2118" stroke-width="4" /></symbol>
+    <symbol id="d-aspersor" viewBox="0 0 150 130"><path d="M75 60V30M75 30l-30-22M75 30l30-22M75 30V4" stroke="#7fc3e8" stroke-width="4" stroke-dasharray="6 6" stroke-linecap="round" /><rect x="60" y="56" width="30" height="40" rx="6" fill="#9aa0a6" /><path d="M36 122l14-30h50l14 30z" fill="var(--c)" /></symbol>
+  </svg>
+
+  <header class="barra">
+    <h1 class="marca"><a href="?">Ferretería Don Lucho</a></h1>
+    <nav class="secciones" aria-label="Secciones" data-secciones></nav>
+    <a class="contador" href="#caja" data-contador>Tu caja <b data-cantidad>0</b></a>
+  </header>
+
+  <main class="tienda">
+    <div class="encabezado">
+      <h2 data-titulo>Todo</h2>
+      <p data-resumen></p>
+    </div>
+
+    <ol class="tablero" data-tablero aria-label="Productos de este pasillo"></ol>
+
+    <div class="pie">
+      <section class="caja" id="caja" aria-labelledby="titulo-caja" tabindex="-1">
+        <h2 id="titulo-caja">Tu caja</h2>
+        <ul class="items" data-items></ul>
+        <p class="vacia" data-vacia>Todavía está vacía. Agrega herramientas del tablero.</p>
+      </section>
+
+      <div class="lado">
+        <nav class="pasillos" aria-label="Pasillos" data-pasillos></nav>
+        <p class="total">Total <b data-total></b></p>
+        <button type="button" class="boton boton--pagar" data-pagar disabled>Pagar</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Un producto del tablero: app.js copia esta plantilla para cada uno -->
+  <template data-plantilla>
+    <li class="herramienta">
+      <span class="gancho" aria-hidden="true"></span>
+      <button type="button" class="ver" data-ver>
+        <svg class="dibujo" viewBox="0 0 150 130" aria-hidden="true"><use data-uso href="" /></svg>
+      </button>
+      <div class="etiqueta">
+        <p class="nombre" data-nombre></p>
+        <p class="precio" data-precio></p>
+        <p class="en-caja" data-en-caja hidden></p>
+      </div>
+      <button type="button" class="agregar" data-agregar>Agregar</button>
+    </li>
+  </template>
+
+  <!-- La vista rápida: un popover que se cierra con Escape o tocando afuera -->
+  <div class="vista" id="vista" popover role="dialog" data-vista aria-labelledby="vista-nombre">
+    <svg class="dibujo" viewBox="0 0 150 130" aria-hidden="true"><use data-vista-uso href="" /></svg>
+    <div class="vista-texto">
+      <h2 id="vista-nombre" data-vista-nombre></h2>
+      <p data-vista-descripcion></p>
+      <p class="vista-precio" data-vista-precio></p>
+      <div class="vista-acciones">
+        <button type="button" class="boton" data-vista-agregar>Agregar a la caja</button>
+        <button type="button" class="boton boton--borde" popovertarget="vista" popovertargetaction="hide">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- El pago: un formulario dentro de un diálogo -->
+  <dialog class="pago" data-dialogo-pago aria-labelledby="titulo-pago">
+    <form class="formulario" data-formulario novalidate>
+      <h2 id="titulo-pago">Pagar</h2>
+      <p class="aviso">Es un pago de prueba: no se cobra nada. Sirve cualquier tarjeta de 16 dígitos; una que termina en 0000 se rechaza.</p>
+      <p class="resumen-pago" data-resumen-pago></p>
+
+      <div class="campo">
+        <label for="nombre">Nombre en la tarjeta</label>
+        <input id="nombre" name="nombre" autocomplete="cc-name" required minlength="3" aria-describedby="error-nombre" />
+        <p class="error" id="error-nombre" data-error="nombre"></p>
+      </div>
+      <div class="campo">
+        <label for="correo">Correo para la boleta</label>
+        <input id="correo" name="correo" type="email" autocomplete="email" required aria-describedby="error-correo" />
+        <p class="error" id="error-correo" data-error="correo"></p>
+      </div>
+      <div class="campo">
+        <label for="tarjeta">Número de tarjeta</label>
+        <input id="tarjeta" name="tarjeta" inputmode="numeric" autocomplete="cc-number" required
+          pattern="\d{4} \d{4} \d{4} \d{4}" maxlength="19" placeholder="1234 5678 9012 3456" aria-describedby="error-tarjeta" />
+        <p class="error" id="error-tarjeta" data-error="tarjeta"></p>
+      </div>
+      <div class="fila-campos">
+        <div class="campo">
+          <label for="vencimiento">Vence</label>
+          <input id="vencimiento" name="vencimiento" inputmode="numeric" autocomplete="cc-exp" required
+            pattern="(0[1-9]|1[0-2])/\d{2}" maxlength="5" placeholder="MM/AA" aria-describedby="error-vencimiento" />
+          <p class="error" id="error-vencimiento" data-error="vencimiento"></p>
+        </div>
+        <div class="campo">
+          <label for="codigo">Código</label>
+          <input id="codigo" name="codigo" inputmode="numeric" autocomplete="cc-csc" required
+            pattern="\d{3,4}" maxlength="4" placeholder="123" aria-describedby="error-codigo" />
+          <p class="error" id="error-codigo" data-error="codigo"></p>
+        </div>
+      </div>
+
+      <p class="estado-pago" data-estado-pago role="status"></p>
+      <div class="acciones-pago">
+        <button type="button" class="boton boton--borde" data-cancelar>Volver a la tienda</button>
+        <button type="submit" class="boton boton--pagar" data-confirmar>Pagar</button>
+      </div>
+    </form>
+
+    <div class="confirmado" data-confirmado hidden>
+      <svg class="sello" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="28" /><path d="M20 33l8 8 16-18" /></svg>
+      <h2 tabindex="-1" data-titulo-confirmado>¡Pago confirmado!</h2>
+      <p data-detalle-confirmado></p>
+      <button type="button" class="boton" data-seguir>Seguir comprando</button>
+    </div>
+  </dialog>
+
+  <p class="sr-only" aria-live="polite" data-anuncio></p>
+
+  <script src="app.js"></script>
+</body>
+</html>
