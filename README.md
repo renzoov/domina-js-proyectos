@@ -8,9 +8,9 @@ El HTML y el CSS de cada proyecto ya vienen hechos. Tú escribes el JavaScript p
 
 | N.º | Proyecto | Nivel | Guía | Demo |
 |---|---|---|---|---|
-| 1 | [Generador de paletas](01-generador-de-paletas/) | Fácil | Próximamente | Próximamente |
+| 1 | [Generador de paletas](01-generador-de-paletas/) | Fácil | [Guía](https://domina-js.pages.dev/proyectos/generador-de-paletas) | [Pruébalo](https://domina-js-proyectos.pages.dev/01-generador-de-paletas/final/) |
 
-Los demás se publican de a uno. La lista completa está en [domina-js.pages.dev/proyectos](https://domina-js.pages.dev/proyectos).
+Cada demo está en `domina-js-proyectos.pages.dev/<carpeta>/final/`. Los demás proyectos se publican de a uno. La lista completa está en [domina-js.pages.dev/proyectos](https://domina-js.pages.dev/proyectos).
 
 ## Qué hay en cada carpeta
 

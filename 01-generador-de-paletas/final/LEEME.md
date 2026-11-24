@@ -10,6 +10,7 @@ Abre `index.html` con doble clic en tu navegador. No hace falta instalar nada.
 Una línea que termina en `// PASO n` se agrega en ese paso, dentro de código anterior.
 
 Guía paso a paso: https://domina-js.pages.dev/proyectos/generador-de-paletas
+Demo en línea: https://domina-js-proyectos.pages.dev/01-generador-de-paletas/final/
 
 ## Llévalo más lejos
 

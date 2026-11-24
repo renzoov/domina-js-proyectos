@@ -5,8 +5,8 @@
 La barra espaciadora genera cinco colores que combinan. Puedes fijar los que te gustan, revisar su contraste, copiarlos, exportarlos como variables CSS o sacar una paleta de una foto tuya.
 
 - **Nivel:** Fácil
-- **Guía paso a paso:** próximamente en [domina-js.pages.dev/proyectos](https://domina-js.pages.dev/proyectos)
-- **Demo:** próximamente
+- **Guía paso a paso:** [domina-js.pages.dev/proyectos/generador-de-paletas](https://domina-js.pages.dev/proyectos/generador-de-paletas)
+- **Demo:** [pruébalo en el navegador](https://domina-js-proyectos.pages.dev/01-generador-de-paletas/final/)
 
 ## Qué vas a usar
 
@@ -18,7 +18,7 @@ No necesita instalar nada: abre `index.html` con doble clic en tu navegador.
 
 ## Carpetas
 
-- `inicial/`: el punto de partida para seguir la guía (llega junto con la guía).
+- `inicial/`: el punto de partida para seguir la guía.
 - `final/`: el proyecto terminado.
 
 ## Créditos
