@@ -1,0 +1,330 @@
+/* ─────────────────────────────────────────────────────────────
+   Avisos en fila: la página de demostración de zona-toasts
+   Proyecto 8 de domina-js
+   Los estilos de los avisos no están aquí: viven en zona-toasts.css,
+   dentro del Shadow DOM del elemento.
+   ───────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fuentes/inter-tight-latin.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fuentes/jetbrains-mono-500-latin.woff2") format("woff2");
+}
+
+:root {
+  --fondo: #0E1116;
+  --panel: #151A22;
+  --celda: #1C2330;
+  --borde: #2A3342;
+  --linea: #232A36;
+  --tinta: #E8ECF2;
+  --suave: #8A93A1;
+  --azul: #3D7BFF;
+  --azul-claro: #8AB0FF;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scrollbar-color: var(--borde) var(--fondo); }
+
+body {
+  margin: 0;
+  background: var(--fondo);
+  color: var(--tinta);
+  font: 400 16px/1.5 "Inter Tight", system-ui, sans-serif;
+}
+
+::selection { background: var(--azul); color: #FFFFFF; }
+
+:focus-visible { outline: 3px solid var(--azul-claro); outline-offset: 3px; }
+
+h1, h2, p { margin: 0; }
+
+.iconos { display: none; }
+
+/* ── La página: escena y panel ── */
+
+.demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 440px;
+  min-height: 100vh;
+}
+
+.escena {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  container-type: inline-size;
+}
+
+.escena-foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(.62);
+}
+
+.escena::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(14, 17, 22, 0) 55%, rgba(14, 17, 22, .9));
+  pointer-events: none;
+}
+
+.escena-texto {
+  position: absolute;
+  left: 48px;
+  top: 44px;
+  z-index: 1;
+  max-width: 40ch;
+}
+
+.escena-texto h1 {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+
+.escena-texto p {
+  margin-top: 10px;
+  font-size: 17px;
+  color: #C6CEDA;
+}
+
+/* El elemento de la librería, puesto en la escena (por defecto va fijo arriba a la derecha) */
+zona-toasts {
+  position: absolute;
+  top: 44px;
+  right: 32px;
+  z-index: 2;
+}
+
+/* Si la escena es angosta, los avisos bajan para no tapar el título */
+@container (max-width: 880px) {
+  zona-toasts { top: 190px; left: 24px; right: 24px; width: auto; max-width: 440px; }
+}
+
+/* La copia de una fila que viaja de la cola a la escena */
+.fantasma {
+  position: fixed;
+  z-index: 50;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+/* ── El panel ── */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 40px 32px 32px;
+  background: var(--panel);
+  border-left: 1px solid var(--linea);
+}
+
+.bloque h2 {
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--suave);
+}
+
+.botones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.probar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  background: var(--celda);
+  color: var(--tinta);
+  font: 600 15px/1 "Inter Tight", system-ui, sans-serif;
+  cursor: pointer;
+  transition: background-color .15s, border-color .15s;
+}
+
+.probar:hover { background: #232C3C; border-color: #3A4559; }
+.probar:active { transform: translateY(1px); }
+.probar.ancho { grid-column: 1 / -1; }
+
+.ico {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+
+.ico svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ico.exito { background: #1F3D2B; color: #5BE38F; }
+.ico.error { background: #43222A; color: #FF7A8A; }
+.ico.info { background: #1E2F4F; color: var(--azul-claro); }
+.ico.cargando { background: #3B3320; color: #FFC876; }
+
+.aviso-demo {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px dashed #4A5468;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #C6CEDA;
+}
+
+/* La cola */
+
+.cola {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fila {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px dashed #33405A;
+  border-radius: 10px;
+  background: var(--celda);
+  animation: entra-fila .3s ease-out both;
+}
+
+@keyframes entra-fila { from { opacity: 0; transform: translateY(6px); } }
+
+.fila.siguiente {
+  border-style: solid;
+  border-color: var(--azul);
+  animation: entra-fila .3s ease-out both, pulso 1.6s ease-in-out .3s infinite;
+}
+
+@keyframes pulso { 50% { background: #1F2A3F; } }
+
+.fila-foto {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #2A3342 center / cover no-repeat;
+}
+
+.fila-texto { min-width: 0; }
+.fila-texto b { display: block; font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fila-texto small { display: block; font-size: 13px; color: var(--suave); }
+
+.fila-orden {
+  font: 500 12px/1 "JetBrains Mono", ui-monospace, monospace;
+  color: var(--azul-claro);
+}
+
+.vacia {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px dashed var(--borde);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--suave);
+}
+
+.vacia[hidden] { display: none; }
+
+/* El código */
+
+.codigo {
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  background: var(--fondo);
+  font: 500 13.5px/1.65 "JetBrains Mono", ui-monospace, monospace;
+  color: #C9D2E0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.codigo .k { color: #FF8BC0; }
+.codigo .s { color: #8FE3A9; }
+.codigo .f { color: var(--azul-claro); }
+.codigo .n { color: #FFC876; }
+
+.respuesta {
+  margin-top: 10px;
+  font: 500 13.5px/1.5 "JetBrains Mono", ui-monospace, monospace;
+  color: var(--suave);
+}
+
+.respuesta output { color: #8FE3A9; }
+
+.creditos {
+  margin-top: auto;
+  font-size: 13px;
+  color: var(--suave);
+}
+
+.creditos a { color: var(--azul-claro); text-underline-offset: 3px; }
+
+/* ── Pantallas medianas y chicas ── */
+
+@media (max-width: 1000px) {
+  .demo { grid-template-columns: 1fr; }
+  .escena { min-height: 560px; }
+  .escena::after { background: linear-gradient(180deg, rgba(14, 17, 22, 0) 55%, rgba(14, 17, 22, .9)); }
+  .panel { border-left: 0; border-top: 1px solid var(--linea); }
+}
+
+@media (max-width: 560px) {
+  .escena { min-height: 480px; }
+  .escena-texto { left: 16px; right: 16px; top: 24px; }
+  .escena-texto h1 { font-size: 32px; }
+  .escena-texto p { font-size: 15px; }
+  zona-toasts { top: 176px; left: 16px; right: 16px; }
+  .panel { padding: 28px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -1,0 +1,165 @@
+/* ─────────────────────────────────────────────────────────────
+   zona-toasts: los estilos de los avisos
+   Viven dentro del Shadow DOM de <zona-toasts>: la página no los pisa
+   y ellos no tocan la página. La letra se hereda de la página.
+   ───────────────────────────────────────────────────────────── */
+
+:host {
+  --aviso-fondo: #FFFFFF;
+  --aviso-tinta: #0E1116;
+  --aviso-suave: #5B6676;
+  --aviso-acento: #3D7BFF;
+  --aviso-radio: 14px;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  width: min(400px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.lista {
+  display: block;
+}
+
+.aviso {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 32px;
+  gap: 14px;
+  align-items: start;
+  margin-bottom: 12px;
+  padding: 12px;
+  border-radius: var(--aviso-radio);
+  background: var(--aviso-fondo);
+  color: var(--aviso-tinta);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+  overflow: hidden;
+  pointer-events: auto;
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+
+.aviso.arrastrando { cursor: grabbing; }
+
+.foto {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.icono {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+}
+
+.icono svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.exito .icono { background: #E3F7EA; color: #17803D; }
+.error .icono { background: #FDE8EB; color: #C2253A; }
+.info .icono { background: #E6EEFF; color: #2A5FD6; }
+.cargando .icono { background: #FFF3DC; color: #9A6200; }
+.cargando .icono svg { animation: girar 0.9s linear infinite; }
+
+@keyframes girar { to { transform: rotate(360deg); } }
+
+.cuerpo {
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.titulo {
+  display: block;
+  font-weight: 650;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.texto {
+  margin: 2px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--aviso-suave);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.acciones button {
+  min-height: 34px;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #EEF1F5;
+  color: var(--aviso-tinta);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.acciones button.primaria { background: var(--aviso-tinta); color: #FFFFFF; }
+.acciones button:hover { background: #E2E7EE; }
+.acciones button.primaria:hover { background: #262B33; }
+
+.cerrar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #8A93A1;
+  cursor: pointer;
+}
+
+.cerrar:hover { background: #EEF1F5; color: var(--aviso-tinta); }
+
+.cerrar svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--aviso-acento);
+  outline-offset: 2px;
+}
+
+.tiempo {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--aviso-acento);
+  transform-origin: left;
+}
+
+.error .tiempo { background: #E5484D; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cargando .icono svg { animation: none; }
+}
