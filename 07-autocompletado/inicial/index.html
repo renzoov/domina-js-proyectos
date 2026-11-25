@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Viaja a un artículo · Buscador de Wikipedia</title>
+  <meta name="description" content="Un buscador de Wikipedia que sugiere mientras escribes: cada resultado es un billete con la foto de su destino, y el elegido trae su resumen." />
+  <meta name="theme-color" content="#0E2A5C" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Crect x='1' y='4' width='18' height='12' rx='2' fill='%23fff'/%3E%3Cpath d='M13 4v12' stroke='%230E2A5C' stroke-width='1.4' stroke-dasharray='1.5 1.5'/%3E%3Crect x='3' y='7' width='7' height='2' fill='%23E0263A'/%3E%3Crect x='3' y='11' width='5' height='1.6' fill='%230E2A5C'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://es.wikipedia.org" crossorigin />
+  <link rel="preconnect" href="https://upload.wikimedia.org" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+  <!-- Los íconos: cada uno se usa con <use href="#i-...">. -->
+  <svg class="iconos" aria-hidden="true">
+    <symbol id="i-lupa" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5L21 21" /></symbol>
+    <symbol id="i-borrar" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></symbol>
+    <symbol id="i-afuera" viewBox="0 0 24 24"><path d="M10 5H5v14h14v-5M14 4h6v6M20 4l-9 9" /></symbol>
+    <symbol id="i-reintentar" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2.3-5.2M19 4v4.5h-4.5" /></symbol>
+  </svg>
+
+  <main class="app">
+    <section class="mostrador" aria-labelledby="titulo">
+      <h1 id="titulo">Viaja a un artículo</h1>
+      <p class="bajada">Escribe un lugar, una persona o una idea. Cada resultado de Wikipedia es un billete: elige uno y te llevamos.</p>
+
+      <!-- El combobox: una caja de texto que controla una lista de opciones -->
+      <div class="buscador">
+        <svg class="icono lupa" aria-hidden="true"><use href="#i-lupa" /></svg>
+        <input
+          id="campo"
+          type="text"
+          role="combobox"
+          aria-label="Buscar en Wikipedia"
+          aria-autocomplete="list"
+          aria-expanded="false"
+          aria-controls="billetes"
+          autocomplete="off"
+          spellcheck="false"
+          placeholder="Machu Picchu, ajedrez, Frida Kahlo…"
+        />
+        <button class="borrar" type="button" id="borrar" aria-label="Borrar la búsqueda" hidden>
+          <svg class="icono" aria-hidden="true"><use href="#i-borrar" /></svg>
+        </button>
+      </div>
+      <p class="estado" id="estado" role="status"></p>
+
+      <!-- La lista de resultados: cada opción es un billete -->
+      <ul class="billetes" id="billetes" role="listbox" aria-label="Destinos encontrados"></ul>
+      <div class="aviso" id="aviso"></div>
+    </section>
+
+    <!-- El billete elegido, con el resumen del artículo -->
+    <aside class="elegido" id="elegido" aria-labelledby="elegido-titulo">
+      <div class="billete-grande" id="bienvenida">
+        <div class="grande-foto" id="foto-bienvenida"></div>
+        <div class="grande-cuerpo">
+          <h2 id="elegido-titulo">¿A dónde viajamos hoy?</h2>
+          <p class="grande-resumen">Elige un destino de la lista o escribe el tuyo. Cada billete lleva la foto del artículo, y el que elijas trae su resumen.</p>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Un billete de la lista. app.js copia esta plantilla y la llena. -->
+  <template id="plantilla-billete">
+    <li class="billete" role="option" aria-selected="false">
+      <span class="foto" data-foto></span>
+      <span class="cuerpo">
+        <span class="nombre" data-nombre></span>
+        <span class="descripcion" data-descripcion></span>
+      </span>
+      <span class="talon" aria-hidden="true">
+        <span class="talon-etiqueta">Destino</span>
+        <span class="talon-numero" data-numero></span>
+      </span>
+    </li>
+  </template>
+
+  <!-- El billete elegido. app.js copia esta plantilla y la llena. -->
+  <template id="plantilla-elegido">
+    <article class="billete-grande" aria-labelledby="elegido-titulo">
+      <div class="grande-foto" data-foto></div>
+      <div class="grande-cuerpo">
+        <h2 id="elegido-titulo" data-titulo></h2>
+        <p class="grande-descripcion" data-descripcion></p>
+        <p class="grande-resumen" data-resumen></p>
+        <a class="leer" data-enlace target="_blank" rel="noopener">
+          Leer en Wikipedia
+          <svg class="icono" aria-hidden="true"><use href="#i-afuera" /></svg>
+        </a>
+      </div>
+      <span class="sello" aria-hidden="true">Elegido</span>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

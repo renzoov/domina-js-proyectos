@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T23:00:00Z",
+  "title": "Design System: Viaja a un artículo",
+  "extensions": {
+    "colorMeta": {
+      "azul": { "role": "primary", "displayName": "Azul aerolínea", "canonical": "#0E2A5C", "tonalRamp": ["#05112a", "#0A1F45", "#0E2A5C", "#17397A", "#173E85", "#4B5C7C", "#9FB6E0", "#dfe7f6"] },
+      "azul-hondo": { "role": "neutral", "displayName": "Azul hondo", "canonical": "#0A1F45" },
+      "azul-hover": { "role": "primary", "displayName": "Azul al pasar", "canonical": "#173E85" },
+      "azul-claro": { "role": "neutral", "displayName": "Azul claro", "canonical": "#9FB6E0" },
+      "blanco": { "role": "neutral", "displayName": "Papel blanco", "canonical": "#FFFFFF" },
+      "papel": { "role": "neutral", "displayName": "Papel", "canonical": "#F4F6FB", "tonalRamp": ["#33415E", "#4B5C7C", "#8391AC", "#B9C4D8", "#DCE3F0", "#E3E8F3", "#F4F6FB", "#FFFFFF"] },
+      "rojo": { "role": "secondary", "displayName": "Rojo sello", "canonical": "#E0263A", "tonalRamp": ["#3d0910", "#6e1220", "#a61b2c", "#E0263A", "#ea5a69", "#f39aa3", "#FFD9DD", "#FDE7EA"] },
+      "morado": { "role": "tertiary", "displayName": "Morado carbón", "canonical": "#6E3FA8", "tonalRamp": ["#1f1033", "#3a1f61", "#552f86", "#6E3FA8", "#8c66bf", "#ad92d4", "#d2c3ea", "#f0eaf8"] },
+      "tinta-suave": { "role": "neutral", "displayName": "Tinta suave", "canonical": "#4B5C7C" },
+      "corte": { "role": "neutral", "displayName": "Línea de corte", "canonical": "#B9C4D8" },
+      "foco": { "role": "neutral", "displayName": "Amarillo foco", "canonical": "#FFD24D" }
+    },
+    "typographyMeta": {
+      "titular": { "displayName": "Titular", "purpose": "«VIAJA A UN ARTÍCULO», condensado y en mayúsculas; 50px en el teléfono." },
+      "grande": { "displayName": "Grande", "purpose": "El título del billete elegido, en mayúsculas; 36px en el teléfono." },
+      "numero": { "displayName": "Número", "purpose": "El número del talón en `morado`, tabular; 34px en el teléfono." },
+      "destino": { "displayName": "Destino", "purpose": "El título de cada billete, en mayúsculas, con la coincidencia en rojo; el título del aviso usa 30px." },
+      "sello": { "displayName": "Sello", "purpose": "«ELEGIDO»; el talón anulado del aviso usa 18px." },
+      "campo": { "displayName": "Campo", "purpose": "Lo que se escribe en la caja; el texto de ejemplo va en 600." },
+      "bajada": { "displayName": "Bajada", "purpose": "La frase bajo el titular, en `azul-claro`, hasta 52ch." },
+      "cuerpo": { "displayName": "Cuerpo", "purpose": "Texto base y el texto de los avisos." },
+      "resumen": { "displayName": "Resumen", "purpose": "El extracto del billete grande, como mucho nueve líneas." },
+      "detalle": { "displayName": "Detalle", "purpose": "La descripción de cada billete, dos líneas; el estado usa 600." },
+      "accion": { "displayName": "Acción", "purpose": "«Reintentar» y «Leer en Wikipedia»." },
+      "etiqueta": { "displayName": "Etiqueta", "purpose": "«DESTINO» en el talón, en `rojo`; solo vive en el talón." }
+    },
+    "shadows": [
+      { "name": "billete", "value": "0 14px 30px rgba(3, 12, 30, .45)", "purpose": "Los billetes del mazo, la caja de búsqueda y los avisos." },
+      { "name": "billete-grande", "value": "0 24px 50px rgba(3, 12, 30, .55)", "purpose": "El billete elegido." },
+      { "name": "activo", "value": "0 0 0 4px #FFD24D, 0 14px 30px rgba(3, 12, 30, .45)", "purpose": "El billete activo con las flechas o el mouse." }
+    ],
+    "motion": [
+      { "name": "caer", "value": "opacity 0, translateY(-36px) rotate(giro × 6) → reposo; 550ms cubic-bezier(.2, .8, .2, 1); 60ms × i de retraso", "purpose": "Los billetes al llegar los resultados, en abanico; el aviso en 500ms." },
+      { "name": "imprimir", "value": "opacity 1 → .6; 1.1s ease-in-out infinite alternate", "purpose": "Los billetes de espera." },
+      { "name": "salir", "value": "opacity 0, translateX(-120px) rotate(-6deg) → rotate(1.5deg); 700ms cubic-bezier(.2, .8, .2, 1)", "purpose": "El billete elegido sale del mazo." },
+      { "name": "estampar", "value": "opacity 0, scale(1.6) → rotate(-12deg); 260ms cubic-bezier(.55, 0, .9, .4), 360ms de retraso", "purpose": "El sello «ELEGIDO» cae de golpe, sin rebote." },
+      { "name": "golpe", "value": "translateY(3px) al 40 %; 160ms ease-out, 620ms de retraso", "purpose": "El billete grande se sacude cuando el sello lo toca." },
+      { "name": "enderezar", "value": "rotate(0) translateX(6px); 200ms ease-out", "purpose": "El billete bajo el mouse." },
+      { "name": "reducido", "value": "animation y transition 0.01ms, sin retraso, una vez", "purpose": "prefers-reduced-motion: reduce; todo aparece sin movimiento." }
+    ],
+    "breakpoints": [
+      { "name": "mediana", "value": "1100px" },
+      { "name": "telefono", "value": "820px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Billete",
+      "kind": "custom",
+      "refersTo": "billete",
+      "description": "Un resultado en el mazo: foto, título con la coincidencia en rojo, descripción y talón con «DESTINO» y su número; el segundo está activo y el tercero elegido.",
+      "html": "<ul class=\"ds-mazo\" role=\"listbox\" aria-label=\"Destinos\"><li class=\"ds-billete\" role=\"option\" aria-selected=\"false\" style=\"--i:0\"><span class=\"ds-foto\" style=\"background:linear-gradient(#8aa6c9 60%, #7a9a5a 60%)\"></span><span class=\"ds-cuerpo\"><span class=\"ds-nombre\"><mark>Mach</mark>u Picchu</span><span class=\"ds-desc\">Ciudadela inca en los Andes del Perú</span></span><span class=\"ds-talon\"><span class=\"ds-etiqueta\">Destino</span><span class=\"ds-numero\">01</span></span></li><li class=\"ds-billete\" role=\"option\" aria-selected=\"true\" style=\"--i:1\"><span class=\"ds-foto\" style=\"background:linear-gradient(#c9a27a 55%, #6d7a8a 55%)\"></span><span class=\"ds-cuerpo\"><span class=\"ds-nombre\"><mark>Mach</mark>ala</span><span class=\"ds-desc\">Ciudad de Ecuador</span></span><span class=\"ds-talon\"><span class=\"ds-etiqueta\">Destino</span><span class=\"ds-numero\">02</span></span></li><li class=\"ds-billete ds-elegido\" role=\"option\" aria-selected=\"false\" style=\"--i:2\"><span class=\"ds-foto\" style=\"background:linear-gradient(#a7b9cf 50%, #8b6f52 50%)\"></span><span class=\"ds-cuerpo\"><span class=\"ds-nombre\"><mark>Mach</mark>ismo</span><span class=\"ds-desc\">Artículo de Wikipedia</span></span><span class=\"ds-talon\"><span class=\"ds-etiqueta\">Destino</span><span class=\"ds-numero\">03</span></span></li></ul>",
+      "css": ".ds-mazo { display: grid; width: 720px; margin: 0; padding: 32px 40px 40px; list-style: none; background: #0E2A5C; font: 400 16px/1.5 'Archivo', system-ui, sans-serif; } .ds-billete { --giro: -1.2deg; position: relative; z-index: calc(20 - var(--i)); display: grid; grid-template-columns: 160px minmax(0, 1fr) 110px; min-height: 150px; margin-left: calc(var(--i) * 12px); margin-top: -10px; border-radius: 10px; background: #FFFFFF; color: #0E2A5C; box-shadow: 0 4px 10px rgba(3, 12, 30, .3); overflow: hidden; cursor: pointer; transform: rotate(var(--giro)); transition: transform .2s ease-out, box-shadow .2s ease-out; } .ds-billete:first-child { margin-top: 0; } .ds-billete:nth-child(even) { --giro: 1.2deg; } .ds-billete:hover { z-index: 30; transform: rotate(0) translateX(6px); } .ds-billete[aria-selected='true'] { z-index: 31; transform: rotate(0) translateX(18px); box-shadow: 0 0 0 4px #FFD24D, 0 14px 30px rgba(3, 12, 30, .45); } .ds-foto { display: block; } .ds-cuerpo { display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; padding: 16px 22px; } .ds-nombre { font-weight: 900; font-stretch: 75%; font-variation-settings: 'wdth' 75; font-size: 32px; line-height: 1; text-transform: uppercase; } .ds-nombre mark { background: none; color: #E0263A; } .ds-desc { font-size: 15px; color: #4B5C7C; } .ds-talon { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; border-left: 2px dashed #B9C4D8; color: #6E3FA8; } .ds-talon::before, .ds-talon::after { content: ''; position: absolute; left: -11px; width: 20px; height: 20px; border-radius: 50%; background: #0E2A5C; } .ds-talon::before { top: -10px; } .ds-talon::after { bottom: -10px; } .ds-etiqueta { font-weight: 800; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #E0263A; } .ds-numero { font-weight: 900; font-stretch: 72%; font-variation-settings: 'wdth' 72; font-size: 54px; line-height: 1; font-variant-numeric: tabular-nums; } .ds-elegido .ds-talon { background: #E0263A; color: #FFFFFF; } .ds-elegido .ds-etiqueta { color: #FFD9DD; } @media (prefers-reduced-motion: reduce) { .ds-billete { transition: none; } }"
+    },
+    {
+      "name": "Caja de búsqueda",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "La caja grande y blanca sobre el azul, con lupa, cursor rojo, botón de borrar y el estado debajo.",
+      "html": "<div class=\"ds-fondo\"><div class=\"ds-buscador\"><svg class=\"ds-lupa\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"M15.5 15.5L21 21\"/></svg><input class=\"ds-campo\" type=\"text\" role=\"combobox\" aria-label=\"Buscar en Wikipedia\" aria-expanded=\"false\" value=\"Mach\" placeholder=\"Machu Picchu, ajedrez, Frida Kahlo…\"/><button class=\"ds-borrar\" type=\"button\" aria-label=\"Borrar la búsqueda\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 6l12 12M18 6L6 18\"/></svg></button></div><p class=\"ds-estado\"><b>10 destinos</b> para «Mach». Elige uno con ↓ y Enter.</p></div>",
+      "css": ".ds-fondo { width: 640px; padding: 32px; background: #0E2A5C; font: 400 16px/1.5 'Archivo', system-ui, sans-serif; } .ds-buscador { position: relative; } .ds-lupa { position: absolute; left: 22px; top: 50%; width: 28px; height: 28px; transform: translateY(-50%); fill: none; stroke: #4B5C7C; stroke-width: 2.2; stroke-linecap: round; pointer-events: none; } .ds-campo { width: 100%; height: 76px; padding: 0 72px 0 66px; border: 0; border-radius: 14px; background: #FFFFFF; color: #0E2A5C; font: 800 30px/1 'Archivo', system-ui, sans-serif; letter-spacing: -.01em; caret-color: #E0263A; box-shadow: 0 14px 30px rgba(3, 12, 30, .45); box-sizing: border-box; } .ds-campo::placeholder { color: #5E6B88; font-weight: 600; } .ds-campo:focus-visible { outline: 4px solid #E0263A; outline-offset: 3px; } .ds-borrar { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 48px; height: 48px; border: 0; border-radius: 10px; background: #F4F6FB; color: #0E2A5C; cursor: pointer; } .ds-borrar:hover { background: #E3E8F3; } .ds-borrar:focus-visible { outline: 3px solid #FFD24D; outline-offset: 3px; } .ds-borrar svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; } .ds-estado { margin: 14px 0 0; font-weight: 600; font-size: 15px; color: #9FB6E0; } .ds-estado b { color: #FFFFFF; }"
+    },
+    {
+      "name": "Botón",
+      "kind": "button",
+      "refersTo": "boton",
+      "description": "El botón azul de tinta: «Reintentar» en el aviso y «Leer en Wikipedia» en el billete grande.",
+      "html": "<div class=\"ds-papel\"><button class=\"ds-boton\" type=\"button\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M19 12a7 7 0 1 1-2.3-5.2M19 4v4.5h-4.5\"/></svg>Reintentar</button><a class=\"ds-boton ds-leer\" href=\"#\">Leer en Wikipedia<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M10 5H5v14h14v-5M14 4h6v6M20 4l-9 9\"/></svg></a></div>",
+      "css": ".ds-papel { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; padding: 24px; background: #FFFFFF; } .ds-boton { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 18px 8px 14px; border: 0; border-radius: 8px; background: #0E2A5C; color: #FFFFFF; font: 800 16px/1 'Archivo', system-ui, sans-serif; text-decoration: none; cursor: pointer; } .ds-leer { padding: 12px 18px; } .ds-boton:hover { background: #173E85; } .ds-boton:focus-visible { outline: 3px solid #FFD24D; outline-offset: 3px; } .ds-boton svg { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }"
+    },
+    {
+      "name": "Billete elegido",
+      "kind": "card",
+      "refersTo": "billete-grande",
+      "description": "El billete grande con la foto, el título, el resumen y el sello «ELEGIDO»; al pasar el mouse vuelve a salir del mazo y el sello se estampa.",
+      "html": "<div class=\"ds-mesa\"><article class=\"ds-grande\"><div class=\"ds-grande-foto\"></div><div class=\"ds-grande-cuerpo\"><h2><mark>Mach</mark>u Picchu</h2><p class=\"ds-grande-desc\">Ciudadela inca en los Andes del Perú</p><p class=\"ds-resumen\">Machu Picchu es una antigua ciudadela inca construida en el siglo XV en la cordillera Oriental del sur del Perú, sobre el cerro del mismo nombre.</p></div><span class=\"ds-sello\" aria-hidden=\"true\">Elegido</span></article></div>",
+      "css": ".ds-mesa { width: 520px; padding: 40px 20px; background: #0E2A5C; font: 400 16px/1.5 'Archivo', system-ui, sans-serif; } .ds-grande { position: relative; width: 480px; border-radius: 14px; background: #FFFFFF; color: #0E2A5C; box-shadow: 0 24px 50px rgba(3, 12, 30, .55); transform: rotate(1.5deg); overflow: hidden; } .ds-mesa:hover .ds-grande { animation: ds-salir .7s cubic-bezier(.2, .8, .2, 1) both, ds-golpe .16s ease-out .62s; } .ds-mesa:hover .ds-sello { animation: ds-estampar .26s cubic-bezier(.55, 0, .9, .4) .36s both; } @keyframes ds-salir { from { opacity: 0; transform: translateX(-120px) rotate(-6deg); } } @keyframes ds-golpe { 40% { transform: rotate(1.5deg) translateY(3px); } } @keyframes ds-estampar { from { opacity: 0; transform: rotate(-12deg) scale(1.6); } } .ds-grande-foto { height: 270px; background: linear-gradient(#8aa6c9 55%, #6f8a52 55%); } .ds-grande-cuerpo { padding: 22px 26px 26px; border-top: 2px dashed #B9C4D8; } .ds-grande-cuerpo h2 { margin: 0; padding-right: 96px; font-weight: 900; font-stretch: 72%; font-variation-settings: 'wdth' 72; font-size: 46px; line-height: .98; text-transform: uppercase; } .ds-grande-cuerpo mark { background: none; color: #E0263A; } .ds-grande-desc { margin: 6px 0 0; font-weight: 700; font-size: 15px; color: #E0263A; } .ds-resumen { margin: 14px 0 0; line-height: 1.6; color: #33415E; } .ds-sello { position: absolute; right: 18px; top: 292px; padding: 4px 12px; border: 4px solid #E0263A; border-radius: 6px; color: #E0263A; font-weight: 900; font-stretch: 75%; font-variation-settings: 'wdth' 75; font-size: 26px; letter-spacing: .08em; text-transform: uppercase; transform: rotate(-12deg); } @media (prefers-reduced-motion: reduce) { .ds-mesa:hover .ds-grande, .ds-mesa:hover .ds-sello { animation: none; } }"
+    },
+    {
+      "name": "Aviso",
+      "kind": "card",
+      "refersTo": "aviso",
+      "description": "El aviso también es un billete: el texto a la izquierda y un talón anulado, rayado en rojo; el de error trae «Reintentar».",
+      "html": "<div class=\"ds-mesa-aviso\"><div class=\"ds-aviso ds-mal\" role=\"status\"><div class=\"ds-aviso-cuerpo\"><b>No se pudo llegar a Wikipedia</b><p>Revisa tu conexión e inténtalo otra vez.</p><button class=\"ds-boton\" type=\"button\">Reintentar</button></div><span class=\"ds-aviso-talon\" aria-hidden=\"true\">Sin señal</span></div></div>",
+      "css": ".ds-mesa-aviso { width: 640px; padding: 32px; background: #0E2A5C; font: 400 16px/1.5 'Archivo', system-ui, sans-serif; } .ds-aviso { display: grid; grid-template-columns: minmax(0, 1fr) 110px; border-radius: 10px; background: #FFFFFF; color: #0E2A5C; box-shadow: 0 14px 30px rgba(3, 12, 30, .45); transform: rotate(-1deg); overflow: hidden; } .ds-aviso-cuerpo { padding: 22px 24px; } .ds-aviso b { display: block; font-weight: 900; font-stretch: 75%; font-variation-settings: 'wdth' 75; font-size: 30px; line-height: 1; text-transform: uppercase; } .ds-aviso p { margin: 8px 0 0; color: #4B5C7C; } .ds-aviso-talon { display: grid; place-items: center; padding: 12px; border-left: 2px dashed #B9C4D8; background: repeating-linear-gradient(-45deg, rgba(224, 38, 58, .14) 0 6px, transparent 6px 12px); color: #E0263A; font-weight: 900; font-stretch: 75%; font-variation-settings: 'wdth' 75; font-size: 18px; letter-spacing: .06em; text-align: center; text-transform: uppercase; } .ds-mal .ds-aviso-talon { background-color: #FDE7EA; } .ds-boton { display: inline-flex; align-items: center; margin-top: 14px; min-height: 44px; padding: 8px 18px; border: 0; border-radius: 8px; background: #0E2A5C; color: #FFFFFF; font: 800 16px/1 'Archivo', system-ui, sans-serif; cursor: pointer; } .ds-boton:hover { background: #173E85; } .ds-boton:focus-visible { outline: 3px solid #FFD24D; outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El mostrador de embarque",
+    "overview": "Buscar es elegir a dónde viajar. La página es un mostrador de aerolínea de noche: un azul profundo con rutas de avión punteadas apenas visibles y un brillo más claro arriba a la derecha. Arriba a la izquierda, «VIAJA A UN ARTÍCULO» en Archivo negra y condensada, y la caja de búsqueda, grande y blanca. Debajo cae el mazo: cada resultado de Wikipedia es un billete blanco con la foto del artículo a la izquierda, «DESTINO» y su número en el talón, y el título en mayúsculas con la parte que coincide en rojo. Los billetes se montan unos sobre otros en abanico, cada uno un poco más a la derecha e inclinado al revés que el anterior. A la derecha, fijo mientras bajas, está el billete grande del elegido: la foto arriba, el título, el resumen, «Leer en Wikipedia» y el sello rojo «ELEGIDO», que cae de golpe.\n\nEs un mundo oscuro de papel impreso: el azul es el fondo y también la tinta de los billetes, el blanco es el papel, el rojo es la tinta del sello y el morado carbón numera los talones. La profundidad son sombras hondas y azuladas, como billetes sobre una mesa con poca luz. Una sola familia, Archivo variable, que se condensa por el eje `wdth` (72 a 75) en todo lo que se imprime grande y en mayúsculas, y se queda en ancho normal para leer.\n\nSe niega a la lista desplegable blanca del buscador de Wikipedia: los resultados son billetes con foto, no renglones. Es un producto aparte, con su propio mundo: no usa el pizarrón del curso ni los mundos de los proyectos 1 a 6. Se abre con doble clic (file://), sin librerías, con Archivo en `fuentes/`.",
+    "keyCharacteristics": [
+      "Fondo `azul` con rutas punteadas al 7 % de blanco; nunca un fondo claro.",
+      "Cada resultado es un billete: foto, cuerpo y talón separados por una línea de corte punteada con dos muescas redondas.",
+      "El mazo va en abanico: montado, corrido a la derecha y con giros alternos de ±1.2°.",
+      "Todo lo impreso grande va en Archivo 900, condensado (`wdth` 72–75) y en mayúsculas.",
+      "El rojo marca lo que coincide, la etiqueta «DESTINO», el talón del elegido y el sello.",
+      "Los billetes caen al llegar, el elegido sale del mazo y el sello se estampa; sin movimiento si la persona lo pidió."
+    ],
+    "rules": [
+      { "name": "The Tinta Roja Rule", "body": "El rojo es tinta de sello: marca lo que coincide, el destino elegido y lo que no sirve. No rellena botones ni fondos grandes; el único relleno rojo es el talón del billete elegido.", "section": "colors" },
+      { "name": "The Azul Es Tinta Rule", "body": "No hay negro. El texto de los billetes es el mismo azul del fondo, como un billete impreso con la tinta de la aerolínea.", "section": "colors" },
+      { "name": "The Condensada Impresa Rule", "body": "Lo que se imprime grande en el billete va en 900, en mayúsculas y condensado (`wdth` 72 en titulares y números, 75 en destinos, avisos y sello). Lo que se lee de corrido nunca se condensa.", "section": "typography" },
+      { "name": "The Una Familia Rule", "body": "Todo es Archivo. La jerarquía sale del peso y del ancho, no de otra letra.", "section": "typography" },
+      { "name": "The Mazo en Abanico Rule", "body": "Los billetes se montan: cada uno sube 10px sobre el anterior, se corre `min(i, 7)` × 12px a la derecha, gira −1.2° o 1.2° según su lugar y queda debajo del anterior (`z-index` que baja). El que pasa bajo el mouse sube al frente, se endereza y avanza 6px; el activo avanza 18px. Nunca una lista recta de renglones.", "section": "layout" },
+      { "name": "The Papel Sobre la Mesa Rule", "body": "Todo lo blanco es papel y lleva sombra honda azulada; nada flota sin sombra ni brilla. Los giros (±1.2° en el mazo, 1.5° el elegido, −1° el aviso) son parte de la profundidad.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do mostrar cada resultado como un billete con su foto, su cuerpo y su talón separado por la línea de corte y las muescas.",
+      "Do montar los billetes en abanico, con giros alternos de ±1.2° y corridos a la derecha.",
+      "Do imprimir lo grande en Archivo 900, condensado por `wdth` y en mayúsculas, declarando `font-stretch` y `font-variation-settings` a la vez.",
+      "Do marcar en `rojo` la parte que coincide, sin fondo.",
+      "Do usar el `azul` del fondo como tinta de los billetes y de los botones.",
+      "Do dibujar el foco como un anillo de 3px en `foco` separado 3px (4px en `rojo` en la caja).",
+      "Do contar los errores y la falta de resultados con un billete de talón anulado.",
+      "Do respetar `prefers-reduced-motion`: los billetes y el sello aparecen sin movimiento."
+    ],
+    "donts": [
+      "Don't volver los resultados una lista desplegable blanca de renglones.",
+      "Don't poner un fondo claro: el mostrador es azul de noche.",
+      "Don't rellenar botones o fondos grandes de `rojo`; es tinta de sello.",
+      "Don't condensar el texto que se lee de corrido.",
+      "Don't añadir una segunda familia tipográfica.",
+      "Don't usar emojis en los textos ni en la interfaz; las flechas ↑ ↓ del estado son texto, y los íconos son los `<symbol>` SVG."
+    ]
+  }
+}

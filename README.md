@@ -14,6 +14,7 @@ El HTML y el CSS de cada proyecto ya vienen hechos. Tú escribes el JavaScript p
 | 4 | [Relojes del mundo](04-relojes-del-mundo/) | Fácil | [Guía](https://domina-js.pages.dev/proyectos/relojes-del-mundo) | [Pruébalo](https://domina-js-proyectos.pages.dev/04-relojes-del-mundo/final/) |
 | 5 | [Tienda pequeña](05-tienda-pequena/) | Intermedio | [Guía](https://domina-js.pages.dev/proyectos/tienda-pequena) | [Pruébalo](https://domina-js-proyectos.pages.dev/05-tienda-pequena/final/) |
 | 6 | [Explorador con scroll infinito](06-explorador-de-arte/) | Intermedio | [Guía](https://domina-js.pages.dev/proyectos/explorador-de-arte) | [Pruébalo](https://domina-js-proyectos.pages.dev/06-explorador-de-arte/final/) |
+| 7 | [Buscador con autocompletado](07-autocompletado/) | Intermedio | [Guía](https://domina-js.pages.dev/proyectos/autocompletado) | [Pruébalo](https://domina-js-proyectos.pages.dev/07-autocompletado/final/) |
 
 Cada demo está en `domina-js-proyectos.pages.dev/<carpeta>/final/`. Los demás proyectos se publican de a uno. La lista completa está en [domina-js.pages.dev/proyectos](https://domina-js.pages.dev/proyectos).
 
